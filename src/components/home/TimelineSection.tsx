@@ -4,31 +4,33 @@ import { motion } from "framer-motion";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { TIMELINE_EVENTS } from "@/lib/constants";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Calendar } from "lucide-react";
 
 export default function TimelineSection() {
   const { ref, inView } = useScrollAnimation();
 
   return (
-    <section ref={ref} className="py-20 lg:py-28 bg-bg-secondary">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section ref={ref} className="py-24 lg:py-32 section-gradient-light relative overflow-hidden">
+      <div className="absolute inset-0 pattern-dots opacity-30" />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          className="text-center max-w-2xl mx-auto mb-14"
+          className="text-center max-w-2xl mx-auto mb-16"
         >
-          <p className="text-primary font-semibold text-sm uppercase tracking-wider mb-3">
+          <span className="inline-flex items-center gap-2 px-3 py-1 bg-primary/5 rounded-full text-primary text-xs font-semibold uppercase tracking-wider mb-4">
+            <Calendar size={12} />
             Our Journey
-          </p>
+          </span>
           <h2
-            className="text-3xl lg:text-4xl font-bold text-text-primary mb-4"
+            className="text-3xl lg:text-[42px] font-bold text-text-primary mb-5 leading-tight"
             style={{ fontFamily: "var(--font-playfair)" }}
           >
-            From Local Action to Global Impact
+            From Local Action to<br /><span className="gradient-text">Global Impact</span>
           </h2>
-          <p className="text-text-secondary leading-relaxed">
-            Since 2019, Haleyouth Foundation has grown from a vision into a
-            movement impacting thousands of lives across Nigeria.
+          <p className="text-text-secondary leading-relaxed text-[15px]">
+            Since 2019, Haleyouth Foundation has grown from a vision into a movement impacting thousands of lives.
           </p>
         </motion.div>
 
@@ -38,34 +40,37 @@ export default function TimelineSection() {
           <motion.div
             initial={{ scaleY: 0 }}
             animate={inView ? { scaleY: 1 } : {}}
-            transition={{ duration: 1, delay: 0.3 }}
-            className="absolute left-8 md:left-1/2 top-0 bottom-0 w-0.5 bg-primary/20 origin-top"
+            transition={{ duration: 1.2, delay: 0.3, ease: "easeOut" }}
+            className="absolute left-6 md:left-1/2 top-0 bottom-0 w-px origin-top"
+            style={{ background: 'linear-gradient(180deg, transparent 0%, #1565C030 10%, #1565C030 90%, transparent 100%)' }}
           />
 
           {TIMELINE_EVENTS.map((event, i) => (
             <motion.div
               key={event.year}
-              initial={{ opacity: 0, x: i % 2 === 0 ? -30 : 30 }}
+              initial={{ opacity: 0, x: i % 2 === 0 ? -40 : 40 }}
               animate={inView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.5, delay: 0.4 + i * 0.15 }}
-              className={`relative flex items-start mb-10 last:mb-0 ${
+              transition={{ duration: 0.6, delay: 0.4 + i * 0.15, ease: [0.25, 0.46, 0.45, 0.94] }}
+              className={`relative flex items-start mb-12 last:mb-0 ${
                 i % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
               }`}
             >
               {/* Dot */}
-              <div className="absolute left-8 md:left-1/2 -translate-x-1/2 w-4 h-4 bg-primary rounded-full border-4 border-bg-secondary z-10" />
+              <div className="absolute left-6 md:left-1/2 -translate-x-1/2 z-10">
+                <div className="w-3 h-3 bg-primary rounded-full ring-4 ring-bg-secondary" />
+              </div>
 
               {/* Content card */}
               <div
-                className={`ml-16 md:ml-0 md:w-[45%] ${
-                  i % 2 === 0 ? "md:mr-auto md:pr-8" : "md:ml-auto md:pl-8"
+                className={`ml-14 md:ml-0 md:w-[44%] ${
+                  i % 2 === 0 ? "md:mr-auto md:pr-10" : "md:ml-auto md:pl-10"
                 }`}
               >
-                <div className="bg-white rounded-xl p-5 shadow-sm card-hover">
-                  <span className="text-primary font-bold text-sm">
+                <div className="card-premium p-6">
+                  <span className="inline-block px-2.5 py-0.5 bg-primary/5 text-primary text-xs font-bold rounded-md mb-2">
                     {event.year}
                   </span>
-                  <h3 className="text-lg font-bold text-text-primary mt-1 mb-2">
+                  <h3 className="text-lg font-bold text-text-primary mb-2">
                     {event.title}
                   </h3>
                   <p className="text-text-secondary text-sm leading-relaxed">
@@ -80,12 +85,12 @@ export default function TimelineSection() {
         <motion.div
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
-          transition={{ delay: 1.2 }}
-          className="text-center mt-12"
+          transition={{ delay: 1.5 }}
+          className="text-center mt-14"
         >
           <Link
             href="/about/global-recognition"
-            className="inline-flex items-center gap-2 text-primary font-medium text-sm hover:gap-3 transition-all"
+            className="inline-flex items-center gap-2 text-primary font-semibold text-sm hover:gap-3 transition-all duration-300"
           >
             See Our Global Recognition <ArrowRight size={16} />
           </Link>

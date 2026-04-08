@@ -1,37 +1,36 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-primary: #1976D2;
+  --color-primary: #1565C0;
   --color-primary-dark: #0D47A1;
   --color-primary-light: #BBDEFB;
-  --color-secondary: #4CAF50;
-  --color-secondary-dark: #2E7D32;
+  --color-secondary: #2E7D32;
+  --color-secondary-dark: #1B5E20;
   --color-secondary-light: #C8E6C9;
-  --color-accent: #FF6D00;
+  --color-accent: #E65100;
   --color-accent-light: #FFE0B2;
-  --color-text-primary: #1A1A2E;
-  --color-text-secondary: #546E7A;
+  --color-text-primary: #0F172A;
+  --color-text-secondary: #475569;
   --color-bg-primary: #FFFFFF;
-  --color-bg-secondary: #F5F7FA;
-  --color-bg-dark: #0F172A;
+  --color-bg-secondary: #F8FAFC;
+  --color-bg-dark: #0B1120;
   --color-surface: #FFFFFF;
   --color-surface-dark: #1E293B;
   --color-border: #E2E8F0;
-  --color-success: #4CAF50;
-  --color-warning: #FFA726;
-  --color-error: #EF5350;
+  --color-success: #2E7D32;
+  --color-warning: #F57C00;
+  --color-error: #C62828;
+  --color-gold: #D4A843;
 
   --font-sans: var(--font-inter);
   --font-heading: var(--font-playfair);
-  --font-mono: var(--font-jetbrains-mono);
 }
 
 :root {
   --background: #ffffff;
-  --foreground: #1A1A2E;
+  --foreground: #0F172A;
 }
 
-/* Smooth scrolling */
 html {
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
@@ -41,95 +40,159 @@ html {
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-sans), system-ui, sans-serif;
+  font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
   overflow-x: hidden;
+  line-height: 1.7;
 }
 
-/* Selection */
 ::selection {
-  background-color: var(--color-primary-light);
-  color: var(--color-primary-dark);
+  background-color: #1565C020;
+  color: #0D47A1;
 }
 
-/* Scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-}
+/* ─── Premium Scrollbar ─── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #94a3b8; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #64748b; }
 
-::-webkit-scrollbar-track {
-  background: #f1f5f9;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #94a3b8;
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #64748b;
-}
-
-/* Navbar glassmorphism */
+/* ─── Glassmorphism Navbar ─── */
 .navbar-blur {
-  backdrop-filter: blur(12px) saturate(180%);
-  -webkit-backdrop-filter: blur(12px) saturate(180%);
-  background-color: rgba(255, 255, 255, 0.85);
-  border-bottom: 1px solid rgba(226, 232, 240, 0.6);
+  backdrop-filter: blur(20px) saturate(200%);
+  -webkit-backdrop-filter: blur(20px) saturate(200%);
+  background-color: rgba(255, 255, 255, 0.88);
+  border-bottom: 1px solid rgba(226, 232, 240, 0.5);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
 }
 
-.navbar-blur.scrolled {
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
-}
-
-/* Hero overlay */
+/* ─── Hero Overlays ─── */
 .hero-overlay {
-  background: linear-gradient(135deg, rgba(15, 23, 42, 0.75) 0%, rgba(25, 118, 210, 0.45) 100%);
+  background: linear-gradient(
+    160deg,
+    rgba(11, 17, 32, 0.82) 0%,
+    rgba(21, 101, 192, 0.55) 50%,
+    rgba(46, 125, 50, 0.35) 100%
+  );
 }
 
-/* Partner scroll animation */
+/* ─── Premium Section Backgrounds ─── */
+.section-gradient-light {
+  background: linear-gradient(180deg, #F8FAFC 0%, #FFFFFF 100%);
+}
+
+.section-gradient-blue {
+  background: linear-gradient(135deg, #0D47A1 0%, #1565C0 40%, #1976D2 100%);
+}
+
+.section-gradient-dark {
+  background: linear-gradient(180deg, #0B1120 0%, #131C30 100%);
+}
+
+/* ─── Premium Card Effects ─── */
+.card-premium {
+  background: #FFFFFF;
+  border: 1px solid rgba(226, 232, 240, 0.7);
+  border-radius: 16px;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.02);
+}
+
+.card-premium:hover {
+  transform: translateY(-6px);
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.08),
+    0 8px 16px rgba(0, 0, 0, 0.04),
+    0 0 0 1px rgba(21, 101, 192, 0.08);
+  border-color: rgba(21, 101, 192, 0.15);
+}
+
+.card-glow:hover {
+  box-shadow:
+    0 20px 40px rgba(21, 101, 192, 0.12),
+    0 8px 16px rgba(0, 0, 0, 0.04);
+}
+
+/* ─── Partner Infinite Scroll ─── */
 @keyframes partner-scroll {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
 }
 
 .partner-scroll {
-  animation: partner-scroll 30s linear infinite;
+  animation: partner-scroll 40s linear infinite;
 }
 
 .partner-scroll:hover {
   animation-play-state: paused;
 }
 
-/* Counter animation font */
-.counter-number {
-  font-variant-numeric: tabular-nums;
-}
-
-/* Section divider */
-.section-divider {
-  background: linear-gradient(90deg, transparent, var(--color-primary), transparent);
-  height: 2px;
-}
-
-/* Gradient text */
+/* ─── Gradient Text ─── */
 .gradient-text {
-  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+  background: linear-gradient(135deg, #1565C0 0%, #2E7D32 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-/* Card hover effect */
-.card-hover {
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+.gradient-text-gold {
+  background: linear-gradient(135deg, #D4A843 0%, #B8860B 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
-.card-hover:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+/* ─── Counter Numbers ─── */
+.counter-number {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
 }
 
-/* Animated underline */
+/* ─── Section Dividers ─── */
+.divider-gradient {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #1565C030, transparent);
+}
+
+/* ─── Premium Buttons ─── */
+.btn-primary {
+  background: linear-gradient(135deg, #1565C0 0%, #0D47A1 100%);
+  color: white;
+  font-weight: 600;
+  border-radius: 12px;
+  padding: 12px 28px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 14px rgba(21, 101, 192, 0.3);
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(21, 101, 192, 0.4);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-accent {
+  background: linear-gradient(135deg, #E65100 0%, #BF360C 100%);
+  color: white;
+  font-weight: 700;
+  border-radius: 12px;
+  padding: 14px 32px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 14px rgba(230, 81, 0, 0.35);
+}
+
+.btn-accent:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(230, 81, 0, 0.45);
+}
+
+.btn-accent:active {
+  transform: translateY(0);
+}
+
+/* ─── Animated Underline ─── */
 .animated-underline {
   position: relative;
 }
@@ -141,7 +204,7 @@ body {
   height: 2px;
   bottom: -2px;
   left: 0;
-  background-color: var(--color-primary);
+  background: linear-gradient(90deg, #1565C0, #2E7D32);
   transition: width 0.3s ease;
 }
 
@@ -149,7 +212,13 @@ body {
   width: 100%;
 }
 
-/* Skip to content */
+/* ─── Decorative Pattern ─── */
+.pattern-dots {
+  background-image: radial-gradient(circle, #1565C010 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* ─── Skip to Content ─── */
 .skip-to-content {
   position: absolute;
   top: -100%;
@@ -163,4 +232,51 @@ body {
 
 .skip-to-content:focus {
   top: 0;
+}
+
+/* ─── Image Shine Effect ─── */
+.shine-effect {
+  position: relative;
+  overflow: hidden;
+}
+
+.shine-effect::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(255,255,255,0.15) 50%,
+    transparent 100%
+  );
+  transform: skewX(-25deg);
+  transition: left 0.6s ease;
+}
+
+.shine-effect:hover::after {
+  left: 125%;
+}
+
+/* ─── Floating Animation ─── */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* ─── Pulse Glow ─── */
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(21, 101, 192, 0.3); }
+  50% { box-shadow: 0 0 20px 5px rgba(21, 101, 192, 0.15); }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 3s ease-in-out infinite;
 }

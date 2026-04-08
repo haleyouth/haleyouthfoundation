@@ -3,7 +3,7 @@
 import { useState } from "react";
 import PageHeader from "@/components/ui/PageHeader";
 import { SITE_CONFIG } from "@/lib/constants";
-import { MapPin, Phone, Mail, Send, CheckCircle } from "lucide-react";
+import { MapPin, Mail, Send, CheckCircle } from "lucide-react";
 import { FacebookIcon, XTwitterIcon, LinkedInIcon, InstagramIcon } from "@/components/ui/SocialIcons";
 
 export default function ContactPage() {
@@ -75,13 +75,6 @@ export default function ContactPage() {
                     <div>
                       <p className="font-medium text-text-primary text-sm">Address</p>
                       <p className="text-text-secondary text-sm">{SITE_CONFIG.address}</p>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <Phone size={18} className="text-primary mt-0.5 shrink-0" />
-                    <div>
-                      <p className="font-medium text-text-primary text-sm">Phone</p>
-                      <a href={`tel:${SITE_CONFIG.phone}`} className="text-text-secondary text-sm hover:text-primary transition-colors">{SITE_CONFIG.phone}</a>
                     </div>
                   </div>
                   <div className="flex items-start gap-3">

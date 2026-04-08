@@ -4,41 +4,37 @@ import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, Heart } from "lucide-react";
 import { HERO_SLIDES } from "@/lib/constants";
 
 export default function HeroSlider() {
   const [current, setCurrent] = useState(0);
-  const [direction, setDirection] = useState(0);
 
   const next = useCallback(() => {
-    setDirection(1);
     setCurrent((prev) => (prev + 1) % HERO_SLIDES.length);
   }, []);
 
   const prev = useCallback(() => {
-    setDirection(-1);
     setCurrent((prev) => (prev - 1 + HERO_SLIDES.length) % HERO_SLIDES.length);
   }, []);
 
   useEffect(() => {
-    const timer = setInterval(next, 6000);
+    const timer = setInterval(next, 7000);
     return () => clearInterval(timer);
   }, [next]);
 
   const slide = HERO_SLIDES[current];
 
   return (
-    <section className="relative h-screen min-h-[600px] max-h-[900px] overflow-hidden">
-      {/* Background images */}
-      <AnimatePresence initial={false} custom={direction}>
+    <section className="relative h-screen min-h-[700px] max-h-[1000px] overflow-hidden bg-bg-dark">
+      {/* Background images with Ken Burns effect */}
+      <AnimatePresence initial={false}>
         <motion.div
           key={current}
-          custom={direction}
-          initial={{ opacity: 0, scale: 1.1 }}
-          animate={{ opacity: 1, scale: 1 }}
+          initial={{ opacity: 0, scale: 1.15 }}
+          animate={{ opacity: 1, scale: 1.0 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 1, ease: "easeInOut" }}
+          transition={{ duration: 1.5, ease: [0.25, 0.46, 0.45, 0.94] }}
           className="absolute inset-0"
         >
           <Image
@@ -53,102 +49,140 @@ export default function HeroSlider() {
         </motion.div>
       </AnimatePresence>
 
+      {/* Decorative elements */}
+      <div className="absolute inset-0 z-[5] pointer-events-none">
+        <div className="absolute top-20 right-20 w-72 h-72 rounded-full bg-white/[0.03] blur-3xl" />
+        <div className="absolute bottom-20 left-20 w-96 h-96 rounded-full bg-primary/[0.05] blur-3xl" />
+      </div>
+
       {/* Content */}
       <div className="relative z-10 h-full flex items-center">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={current}
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="max-w-3xl"
-            >
+          <div className="max-w-3xl">
+            {/* Badge */}
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={`badge-${current}`}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+              >
+                <span className="inline-flex items-center gap-2 px-4 py-1.5 bg-white/10 backdrop-blur-md border border-white/15 rounded-full text-white/80 text-xs font-medium tracking-wider uppercase mb-6">
+                  <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
+                  Haleyouth Foundation
+                </span>
+              </motion.div>
+            </AnimatePresence>
+
+            {/* Headline */}
+            <AnimatePresence mode="wait">
               <motion.h1
-                className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-white leading-tight"
+                key={`title-${current}`}
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.7, delay: 0.2 }}
+                className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-white leading-[1.1] tracking-tight"
                 style={{ fontFamily: "var(--font-playfair)" }}
               >
                 {slide.headline}
               </motion.h1>
+            </AnimatePresence>
+
+            {/* Subtitle */}
+            <AnimatePresence mode="wait">
               <motion.p
+                key={`sub-${current}`}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.6, delay: 0.4 }}
-                className="mt-6 text-lg sm:text-xl text-white/85 leading-relaxed max-w-2xl"
+                className="mt-6 text-base sm:text-lg lg:text-xl text-white/75 leading-relaxed max-w-2xl font-light"
               >
                 {slide.subtitle}
               </motion.p>
+            </AnimatePresence>
+
+            {/* CTAs */}
+            <AnimatePresence mode="wait">
               <motion.div
+                key={`cta-${current}`}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.6, delay: 0.6 }}
-                className="mt-8 flex flex-wrap gap-4"
+                className="mt-10 flex flex-wrap gap-4"
               >
-                <Link
-                  href="/get-involved/donate"
-                  className="px-8 py-3.5 bg-accent text-white rounded-lg font-semibold text-base hover:bg-accent/90 transition-all shadow-lg hover:shadow-xl hover:scale-[1.02] active:scale-[0.98]"
-                >
+                <Link href="/get-involved/donate" className="btn-accent inline-flex items-center gap-2 text-base">
+                  <Heart size={18} />
                   Donate Now
                 </Link>
                 <Link
                   href={slide.cta.href}
-                  className="px-8 py-3.5 bg-white/15 backdrop-blur-sm text-white rounded-lg font-semibold text-base border border-white/30 hover:bg-white/25 transition-all"
+                  className="px-7 py-3.5 bg-white/10 backdrop-blur-md text-white rounded-xl font-semibold text-base border border-white/20 hover:bg-white/20 hover:border-white/30 transition-all duration-300"
                 >
                   {slide.cta.text}
                 </Link>
               </motion.div>
-            </motion.div>
-          </AnimatePresence>
+            </AnimatePresence>
+          </div>
         </div>
       </div>
 
-      {/* Navigation arrows */}
-      <div className="absolute bottom-8 right-8 z-20 flex items-center gap-3">
-        <button
-          onClick={prev}
-          aria-label="Previous slide"
-          className="w-10 h-10 rounded-full bg-white/15 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white hover:bg-white/25 transition-colors"
-        >
-          <ChevronLeft size={18} />
-        </button>
+      {/* Bottom bar with navigation */}
+      <div className="absolute bottom-0 left-0 right-0 z-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between py-6 border-t border-white/10">
+            {/* Slide indicators */}
+            <div className="flex items-center gap-4">
+              <span className="text-white/40 text-sm font-mono">
+                {String(current + 1).padStart(2, "0")} / {String(HERO_SLIDES.length).padStart(2, "0")}
+              </span>
+              <div className="flex gap-2">
+                {HERO_SLIDES.map((_, i) => (
+                  <button
+                    key={i}
+                    onClick={() => setCurrent(i)}
+                    aria-label={`Go to slide ${i + 1}`}
+                    className="relative h-1 rounded-full overflow-hidden transition-all duration-500"
+                    style={{ width: i === current ? 48 : 16 }}
+                  >
+                    <div className="absolute inset-0 bg-white/20" />
+                    {i === current && (
+                      <motion.div
+                        initial={{ width: "0%" }}
+                        animate={{ width: "100%" }}
+                        transition={{ duration: 7, ease: "linear" }}
+                        key={`progress-${current}`}
+                        className="absolute inset-0 bg-white rounded-full"
+                      />
+                    )}
+                  </button>
+                ))}
+              </div>
+            </div>
 
-        {/* Slide indicators */}
-        <div className="flex gap-2">
-          {HERO_SLIDES.map((_, i) => (
-            <button
-              key={i}
-              onClick={() => {
-                setDirection(i > current ? 1 : -1);
-                setCurrent(i);
-              }}
-              aria-label={`Go to slide ${i + 1}`}
-              className={`h-2 rounded-full transition-all duration-300 ${
-                i === current ? "w-8 bg-white" : "w-2 bg-white/40 hover:bg-white/60"
-              }`}
-            />
-          ))}
+            {/* Arrow navigation */}
+            <div className="flex items-center gap-2">
+              <button
+                onClick={prev}
+                aria-label="Previous slide"
+                className="w-11 h-11 rounded-full bg-white/10 backdrop-blur-sm border border-white/15 flex items-center justify-center text-white/70 hover:bg-white/20 hover:text-white transition-all duration-300"
+              >
+                <ChevronLeft size={18} />
+              </button>
+              <button
+                onClick={next}
+                aria-label="Next slide"
+                className="w-11 h-11 rounded-full bg-white/10 backdrop-blur-sm border border-white/15 flex items-center justify-center text-white/70 hover:bg-white/20 hover:text-white transition-all duration-300"
+              >
+                <ChevronRight size={18} />
+              </button>
+            </div>
+          </div>
         </div>
-
-        <button
-          onClick={next}
-          aria-label="Next slide"
-          className="w-10 h-10 rounded-full bg-white/15 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white hover:bg-white/25 transition-colors"
-        >
-          <ChevronRight size={18} />
-        </button>
       </div>
-
-      {/* Scroll indicator */}
-      <motion.div
-        animate={{ y: [0, 8, 0] }}
-        transition={{ duration: 2, repeat: Infinity }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20"
-      >
-        <div className="w-6 h-10 rounded-full border-2 border-white/40 flex justify-center pt-2">
-          <div className="w-1 h-2.5 rounded-full bg-white/70" />
-        </div>
-      </motion.div>
     </section>
   );
 }

@@ -4,8 +4,8 @@ export const SITE_CONFIG = {
   description:
     "Haleyouth Foundation is a registered non-profit empowering youth through mentorship, advancing STEM education, and fostering community development in Nigeria and across Africa.",
   url: "https://haleyouthfoundation.org",
-  email: "haleyouthfoundation@gmail.com",
-  phone: "+234 813 660 5722",
+  email: "info@haleyouthfoundation.org",
+  phone: "",
   address: "Ateba Agassa-Okene, Kogi State, Nigeria",
   registration: "CAC/IT/NO 154820",
   founded: 2019,
