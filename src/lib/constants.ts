@@ -30,18 +30,18 @@ export const NAV_ITEMS = [
 
 export const HERO_SLIDES = [
   {
-    image: "/images/events/UNGA80_a.jpg",
-    headline: "Empowering Youth. Transforming Communities.",
-    subtitle:
-      "From grassroots Nigeria to the United Nations — building peace, justice, and sustainable development through youth leadership.",
-    cta: { text: "Our Programs", href: "/programs" },
-  },
-  {
     image: "/images/events/Garki_IMG_0011.jpg",
     headline: "Keeping Girls in School with Dignity",
     subtitle:
-      "Through the Pad-a-Girl initiative, we've distributed 500+ reusable pad kits, empowering girls to stay in school and thrive.",
+      "Through the Pad-a-Girl initiative, we've distributed 1,000+ reusable pad kits, empowering girls to stay in school and thrive.",
     cta: { text: "Learn More", href: "/programs/pad-a-girl" },
+  },
+  {
+    image: "/images/events/karimo_img.jpg",
+    headline: "Climate Action Starts in Communities",
+    subtitle:
+      "Our Pad-a-Girl Climate Action project brings menstrual health education and sustainable solutions to schools across Northern Nigeria.",
+    cta: { text: "Our Programs", href: "/programs" },
   },
   {
     image: "/images/events/Back2School.jpg",
@@ -51,11 +51,18 @@ export const HERO_SLIDES = [
     cta: { text: "Support Education", href: "/get-involved/donate" },
   },
   {
-    image: "/images/events/JabiAK ADAAVA 37.jpg",
-    headline: "Community Transformation Powered by Youth",
+    image: "/images/events/Jabi_AK ADAAVA 9.jpg",
+    headline: "Empowering Youth. Transforming Communities.",
     subtitle:
       "We equip young people with skills, mentorship, and resources to become agents of positive change in their communities.",
     cta: { text: "Get Involved", href: "/get-involved" },
+  },
+  {
+    image: "/images/events/Garki_IMG_0015.jpg",
+    headline: "Community Transformation Powered by Youth",
+    subtitle:
+      "From digital skills training to STEM workshops, we build capacity for the next generation of African leaders.",
+    cta: { text: "View Impact", href: "/impact" },
   },
   {
     image: "/images/events/DSC04757.jpg",
