@@ -28,7 +28,7 @@ export default function ProgramsShowcase() {
   const others = PROGRAMS.filter((p) => !p.featured).slice(0, 6);
 
   return (
-    <section ref={ref} className="py-28 lg:py-36 section-gradient-light relative overflow-hidden">
+    <section ref={ref} className="py-16 sm:py-28 lg:py-36 section-gradient-light relative overflow-hidden">
       {/* Decorative */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] rounded-full bg-primary/[0.02] blur-[120px] pointer-events-none" />
 
@@ -45,7 +45,7 @@ export default function ProgramsShowcase() {
             What We Do
           </span>
           <h2
-            className="text-4xl lg:text-5xl font-bold text-text-primary mb-5 leading-[1.1] tracking-tight"
+            className="text-2xl sm:text-4xl lg:text-5xl font-bold text-text-primary mb-5 leading-[1.1] tracking-tight"
             style={{ fontFamily: "var(--font-playfair)" }}
           >
             Programs That <span className="gradient-text">Transform Lives</span>
@@ -57,7 +57,7 @@ export default function ProgramsShowcase() {
         </motion.div>
 
         {/* Featured Programs - Premium Cards with Stats */}
-        <div className="grid md:grid-cols-3 gap-7 mb-12">
+        <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-5 sm:gap-7 mb-12">
           {featured.map((program, i) => {
             const Icon = iconMap[program.icon] || Heart;
             return (
@@ -168,7 +168,7 @@ export default function ProgramsShowcase() {
         </div>
 
         {/* Other Programs - Compact Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-14">
+        <div className="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4 mb-14">
           {others.map((program, i) => {
             const Icon = iconMap[program.icon] || Heart;
             return (

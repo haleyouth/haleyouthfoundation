@@ -34,17 +34,18 @@ function StatCard({
       }}
       className="group"
     >
-      <div className="glass-card rounded-2xl p-7 text-center transition-all duration-500 hover:-translate-y-2">
-        <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-gold/25 to-gold/5 border border-gold/20 flex items-center justify-center mx-auto mb-5 group-hover:scale-110 group-hover:from-gold/35 transition-all duration-500">
-          <Icon size={28} className="text-gold" />
+      <div className="glass-card rounded-2xl p-4 sm:p-7 text-center transition-all duration-500 hover:-translate-y-2">
+        <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-xl sm:rounded-2xl bg-gradient-to-br from-gold/25 to-gold/5 border border-gold/20 flex items-center justify-center mx-auto mb-3 sm:mb-5 group-hover:scale-110 group-hover:from-gold/35 transition-all duration-500">
+          <Icon size={22} className="text-gold sm:hidden" />
+          <Icon size={28} className="text-gold hidden sm:block" />
         </div>
-        <div className="mb-2">
-          <span className="text-3xl lg:text-4xl font-extrabold text-white counter-number leading-none">
+        <div className="mb-1 sm:mb-2">
+          <span className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white counter-number leading-none">
             {stat.prefix || ""}{count}
           </span>
-          <span className="text-2xl lg:text-3xl font-bold text-gold">{stat.suffix}</span>
+          <span className="text-lg sm:text-2xl lg:text-3xl font-bold text-gold">{stat.suffix}</span>
         </div>
-        <p className="text-white/40 text-sm font-medium tracking-wide uppercase">{stat.label}</p>
+        <p className="text-white/40 text-[10px] sm:text-sm font-medium tracking-wide uppercase">{stat.label}</p>
       </div>
     </motion.div>
   );
@@ -56,7 +57,7 @@ export default function ImpactStats() {
   return (
     <section
       ref={ref}
-      className="py-32 lg:py-40 section-gradient-blue relative overflow-hidden"
+      className="py-16 sm:py-32 lg:py-40 section-gradient-blue relative overflow-hidden"
     >
       {/* Ambient light effects */}
       <div className="absolute inset-0 pointer-events-none">
@@ -85,7 +86,7 @@ export default function ImpactStats() {
             </span>
           </motion.div>
           <h2
-            className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6 leading-[1.05] tracking-tight"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-[1.05] tracking-tight"
             style={{ fontFamily: "var(--font-playfair)" }}
           >
             Real Impact,<br />
@@ -97,7 +98,7 @@ export default function ImpactStats() {
         </motion.div>
 
         {/* Stats Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-5">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-5">
           {IMPACT_STATS.map((stat, i) => (
             <StatCard key={stat.label} stat={stat} index={i} inView={inView} />
           ))}
@@ -120,7 +121,8 @@ export default function ImpactStats() {
           <p className="text-white/35 text-sm mb-8 max-w-lg mx-auto">
             Our programs proudly support global efforts in the SDGs
           </p>
-          <SDGRow goals={[1, 2, 3, 4, 6, 10, 12, 13, 16]} size="lg" />
+          <div className="sm:hidden"><SDGRow goals={[1, 2, 3, 4, 6, 10, 12, 13, 16]} size="sm" /></div>
+          <div className="hidden sm:block"><SDGRow goals={[1, 2, 3, 4, 6, 10, 12, 13, 16]} size="lg" /></div>
         </motion.div>
       </div>
     </section>

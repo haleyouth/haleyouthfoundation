@@ -10,12 +10,12 @@ export default function AboutPreview() {
   const { ref, inView } = useScrollAnimation();
 
   return (
-    <section ref={ref} className="py-24 lg:py-32 bg-bg-primary relative overflow-hidden">
+    <section ref={ref} className="py-16 sm:py-24 lg:py-32 bg-bg-primary relative overflow-hidden">
       {/* Subtle background pattern */}
       <div className="absolute inset-0 pattern-dots opacity-40" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-        <div className="grid lg:grid-cols-2 gap-16 lg:gap-20 items-center">
+        <div className="grid lg:grid-cols-2 gap-10 sm:gap-16 lg:gap-20 items-center">
           {/* Image Collage */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
@@ -71,7 +71,7 @@ export default function AboutPreview() {
               About Us
             </span>
             <h2
-              className="text-3xl lg:text-[40px] font-bold text-text-primary leading-[1.15] mb-6"
+              className="text-2xl sm:text-3xl lg:text-[40px] font-bold text-text-primary leading-[1.15] mb-6"
               style={{ fontFamily: "var(--font-playfair)" }}
             >
               Empowering Youth,<br />
@@ -99,7 +99,7 @@ export default function AboutPreview() {
             </div>
 
             {/* Mini stats */}
-            <div className="flex gap-8 mb-8">
+            <div className="flex flex-wrap gap-6 sm:gap-8 mb-8">
               {[
                 { icon: Award, value: "2019", label: "Founded" },
                 { icon: Users, value: "2K+", label: "Youth" },

@@ -10,7 +10,7 @@ export default function TimelineSection() {
   const { ref, inView } = useScrollAnimation();
 
   return (
-    <section ref={ref} className="py-24 lg:py-32 section-gradient-light relative overflow-hidden">
+    <section ref={ref} className="py-16 sm:py-24 lg:py-32 section-gradient-light relative overflow-hidden">
       <div className="absolute inset-0 pattern-dots opacity-30" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">

@@ -15,7 +15,7 @@ export default function DonationCTA() {
   const { ref, inView } = useScrollAnimation();
 
   return (
-    <section ref={ref} className="py-24 lg:py-32 bg-bg-primary relative overflow-hidden">
+    <section ref={ref} className="py-16 sm:py-24 lg:py-32 bg-bg-primary relative overflow-hidden">
       {/* Decorative background */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-0 right-0 w-[600px] h-[600px] rounded-full bg-accent/[0.03] blur-[120px]" />
@@ -35,7 +35,7 @@ export default function DonationCTA() {
               Make a Difference
             </span>
             <h2
-              className="text-3xl lg:text-[42px] font-bold text-text-primary mb-5 leading-tight"
+              className="text-2xl sm:text-3xl lg:text-[42px] font-bold text-text-primary mb-5 leading-tight"
               style={{ fontFamily: "var(--font-playfair)" }}
             >
               Every Contribution Builds<br />

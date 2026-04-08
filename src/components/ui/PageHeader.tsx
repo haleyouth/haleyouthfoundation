@@ -10,7 +10,7 @@ interface PageHeaderProps {
 
 export default function PageHeader({ title, subtitle, badge }: PageHeaderProps) {
   return (
-    <section className="pt-32 pb-20 section-gradient-blue relative overflow-hidden">
+    <section className="pt-24 sm:pt-32 pb-14 sm:pb-20 section-gradient-blue relative overflow-hidden">
       {/* Decorative elements */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute -top-20 -right-20 w-80 h-80 rounded-full bg-white/[0.04] blur-3xl" />
@@ -31,7 +31,7 @@ export default function PageHeader({ title, subtitle, badge }: PageHeaderProps) 
             </span>
           )}
           <h1
-            className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight tracking-tight"
+            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight tracking-tight"
             style={{ fontFamily: "var(--font-playfair)" }}
           >
             {title}

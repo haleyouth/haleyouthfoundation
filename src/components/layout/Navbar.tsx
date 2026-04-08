@@ -45,7 +45,7 @@ export default function Navbar() {
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={false}
-          animate={{ height: scrolled ? 64 : 80 }}
+          animate={{ height: scrolled ? 56 : 72 }}
           transition={{ duration: 0.3, ease: "easeInOut" }}
           className="flex items-center justify-between"
         >

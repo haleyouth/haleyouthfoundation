@@ -26,7 +26,7 @@ export default function HeroSlider() {
   const slide = HERO_SLIDES[current];
 
   return (
-    <section className="relative h-screen min-h-[700px] max-h-[1000px] overflow-hidden bg-bg-dark">
+    <section className="relative h-[100svh] min-h-[550px] sm:min-h-[650px] max-h-[1000px] overflow-hidden bg-bg-dark">
       {/* Background images with Ken Burns effect */}
       <AnimatePresence initial={false}>
         <motion.div
@@ -83,7 +83,7 @@ export default function HeroSlider() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.7, delay: 0.2 }}
-                className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-white leading-[1.1] tracking-tight"
+                className="text-[28px] sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white leading-[1.1] tracking-tight"
                 style={{ fontFamily: "var(--font-playfair)" }}
               >
                 {slide.headline}
@@ -98,7 +98,7 @@ export default function HeroSlider() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.6, delay: 0.4 }}
-                className="mt-6 text-base sm:text-lg lg:text-xl text-white/75 leading-relaxed max-w-2xl font-light"
+                className="mt-4 sm:mt-6 text-sm sm:text-base lg:text-lg text-white/75 leading-relaxed max-w-2xl font-light"
               >
                 {slide.subtitle}
               </motion.p>
@@ -112,15 +112,15 @@ export default function HeroSlider() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.6, delay: 0.6 }}
-                className="mt-10 flex flex-wrap gap-4"
+                className="mt-6 sm:mt-10 flex flex-wrap gap-3 sm:gap-4"
               >
-                <Link href="/get-involved/donate" className="btn-accent inline-flex items-center gap-2 text-base">
-                  <Heart size={18} />
+                <Link href="/get-involved/donate" className="btn-accent inline-flex items-center gap-2 text-sm sm:text-base !py-3 sm:!py-3.5 !px-6 sm:!px-8">
+                  <Heart size={16} />
                   Donate Now
                 </Link>
                 <Link
                   href={slide.cta.href}
-                  className="px-7 py-3.5 bg-white/10 backdrop-blur-md text-white rounded-xl font-semibold text-base border border-white/20 hover:bg-white/20 hover:border-white/30 transition-all duration-300"
+                  className="px-5 sm:px-7 py-3 sm:py-3.5 bg-white/10 backdrop-blur-md text-white rounded-xl font-semibold text-sm sm:text-base border border-white/20 hover:bg-white/20 hover:border-white/30 transition-all duration-300"
                 >
                   {slide.cta.text}
                 </Link>
@@ -133,20 +133,20 @@ export default function HeroSlider() {
       {/* Bottom bar with navigation */}
       <div className="absolute bottom-0 left-0 right-0 z-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between py-6 border-t border-white/10">
+          <div className="flex items-center justify-between py-4 sm:py-6 border-t border-white/10">
             {/* Slide indicators */}
-            <div className="flex items-center gap-4">
-              <span className="text-white/40 text-sm font-mono">
+            <div className="flex items-center gap-2 sm:gap-4">
+              <span className="text-white/40 text-xs sm:text-sm font-mono hidden sm:inline">
                 {String(current + 1).padStart(2, "0")} / {String(HERO_SLIDES.length).padStart(2, "0")}
               </span>
-              <div className="flex gap-2">
+              <div className="flex gap-1.5 sm:gap-2">
                 {HERO_SLIDES.map((_, i) => (
                   <button
                     key={i}
                     onClick={() => setCurrent(i)}
                     aria-label={`Go to slide ${i + 1}`}
                     className="relative h-1 rounded-full overflow-hidden transition-all duration-500"
-                    style={{ width: i === current ? 48 : 16 }}
+                    style={{ width: i === current ? 36 : 12 }}
                   >
                     <div className="absolute inset-0 bg-white/20" />
                     {i === current && (

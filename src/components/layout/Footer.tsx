@@ -41,7 +41,7 @@ export default function Footer() {
       {/* CTA Banner */}
       <div className="border-b border-white/[0.06]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6 bg-white/[0.04] rounded-2xl p-8 border border-white/[0.06]">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-5 bg-white/[0.04] rounded-2xl p-6 sm:p-8 border border-white/[0.06]">
             <div>
               <h3 className="text-xl font-bold text-white mb-1" style={{ fontFamily: "var(--font-playfair)" }}>
                 Ready to Make a Difference?
@@ -62,9 +62,9 @@ export default function Footer() {
 
       {/* Main Footer */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12">
+        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-12 gap-8 sm:gap-12">
           {/* Brand Column */}
-          <div className="lg:col-span-4">
+          <div className="col-span-2 lg:col-span-4">
             <Link href="/" className="flex items-center gap-3 mb-5">
               <Image
                 src="/images/logo_s.png"
@@ -167,8 +167,8 @@ export default function Footer() {
 
       {/* Bottom Bar */}
       <div className="border-t border-white/[0.06]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex items-center justify-between">
-          <p className="text-white/30 text-xs">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
+          <p className="text-white/30 text-[10px] sm:text-xs text-center sm:text-left">
             &copy; {new Date().getFullYear()} {SITE_CONFIG.name}. All rights reserved. | {SITE_CONFIG.registration}
           </p>
           <Link
@@ -179,7 +179,7 @@ export default function Footer() {
           >
             <Shield size={12} />
           </Link>
-          <p className="text-white/30 text-xs flex items-center gap-1">
+          <p className="text-white/30 text-[10px] sm:text-xs flex items-center gap-1">
             Built with <Heart size={10} className="text-accent" /> for community impact
           </p>
         </div>

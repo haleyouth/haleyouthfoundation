@@ -21,10 +21,10 @@ export default function ProgramsPage() {
     <>
       <PageHeader title="Our Programs" subtitle="Impactful programs addressing real challenges facing young people in Nigeria and Africa." badge="What We Do" />
 
-      <section className="py-24 bg-bg-primary">
+      <section className="py-12 sm:py-24 bg-bg-primary">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Category filter */}
-          <div className="flex flex-wrap gap-2 justify-center mb-14">
+          <div className="flex flex-wrap gap-2 justify-center mb-8 sm:mb-14">
             {PROGRAM_CATEGORIES.map((cat) => (
               <button
                 key={cat}
@@ -48,7 +48,7 @@ export default function ProgramsPage() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.3 }}
-              className="grid md:grid-cols-2 lg:grid-cols-3 gap-7"
+              className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-7"
             >
               {filtered.map((program, i) => {
                 const Icon = iconMap[program.icon] || Heart;
