@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
 import {
   LayoutDashboard, FileText, ImageIcon, Target, Handshake, Users,
@@ -23,11 +23,48 @@ const sidebarItems = [
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
+  const router = useRouter();
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [authenticated, setAuthenticated] = useState(false);
+  const [checking, setChecking] = useState(true);
 
+  useEffect(() => {
+    if (pathname === "/admin/login") {
+      setChecking(false);
+      return;
+    }
+    const auth = localStorage.getItem("hyf-admin-auth");
+    if (auth === "true") {
+      setAuthenticated(true);
+    } else {
+      router.push("/admin/login");
+    }
+    setChecking(false);
+  }, [pathname, router]);
+
+  // Login page renders without shell
   if (pathname === "/admin/login") {
     return <>{children}</>;
   }
+
+  // Loading state
+  if (checking) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <div className="w-8 h-8 border-3 border-primary/20 border-t-primary rounded-full animate-spin" />
+      </div>
+    );
+  }
+
+  // Not authenticated
+  if (!authenticated) {
+    return null;
+  }
+
+  const handleLogout = () => {
+    localStorage.removeItem("hyf-admin-auth");
+    router.push("/admin/login");
+  };
 
   return (
     <div className="min-h-screen bg-gray-50 flex pt-0">
@@ -67,11 +104,18 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             </Link>
           ))}
         </nav>
-        <div className="absolute bottom-0 w-full p-3 border-t border-white/10">
+        <div className="absolute bottom-0 w-full p-3 border-t border-white/10 space-y-1">
           <Link href="/" className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-white/60 hover:text-white hover:bg-white/5 transition-colors">
-            <LogOut size={18} />
+            <LogOut size={18} className="rotate-180" />
             Back to Site
           </Link>
+          <button
+            onClick={handleLogout}
+            className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-red-400/70 hover:text-red-400 hover:bg-red-500/10 transition-colors w-full"
+          >
+            <LogOut size={18} />
+            Logout
+          </button>
         </div>
       </aside>
 
