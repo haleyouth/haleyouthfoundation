@@ -292,7 +292,7 @@ export const IMPACT_STATS = [
   { label: "Girls Supported", value: 1000, suffix: "+", icon: "Heart" },
   { label: "Rural Students", value: 200, suffix: "+", icon: "BookOpen" },
   { label: "Families Supported", value: 100, suffix: "+", icon: "Home" },
-  { label: "Scholarship Value", value: 100, suffix: "K+", prefix: "$", icon: "GraduationCap" },
+  { label: "Scholarship Value", value: 250, suffix: "K+", prefix: "$", icon: "GraduationCap" },
   { label: "Global Partners", value: 9, suffix: "+", icon: "Handshake" },
 ];
 

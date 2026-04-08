@@ -39,10 +39,10 @@ function StatCard({
           <Icon size={28} className="text-gold" />
         </div>
         <div className="mb-2">
-          <span className="text-5xl lg:text-[56px] font-extrabold text-white counter-number leading-none">
+          <span className="text-3xl lg:text-4xl font-extrabold text-white counter-number leading-none">
             {stat.prefix || ""}{count}
           </span>
-          <span className="text-3xl lg:text-4xl font-bold text-gold">{stat.suffix}</span>
+          <span className="text-2xl lg:text-3xl font-bold text-gold">{stat.suffix}</span>
         </div>
         <p className="text-white/40 text-sm font-medium tracking-wide uppercase">{stat.label}</p>
       </div>
