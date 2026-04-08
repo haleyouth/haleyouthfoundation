@@ -42,7 +42,9 @@ export default function AdminLoginPage() {
 
       <div className="bg-white rounded-2xl shadow-2xl w-full max-w-md p-8 lg:p-10 relative z-10">
         <div className="text-center mb-8">
-          <Image src="/images/logo_s.png" alt="Haleyouth" width={56} height={56} className="mx-auto mb-5" />
+          <a href="/" title="Back to Haleyouth Foundation">
+            <Image src="/images/logo_s.png" alt="Haleyouth" width={56} height={56} className="mx-auto mb-5 hover:scale-105 transition-transform" />
+          </a>
           <h1 className="text-2xl font-bold text-gray-900" style={{ fontFamily: "var(--font-playfair)" }}>
             Admin Panel
           </h1>
