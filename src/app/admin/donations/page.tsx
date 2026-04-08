@@ -164,6 +164,12 @@ export default function AdminDonationsPage() {
                         <p className="text-gray-400 text-xs uppercase tracking-wider mb-0.5">Amount</p>
                         <p className="text-gray-800 font-bold">{sym}{donation.amount.toLocaleString()} ({donation.currency.toUpperCase()})</p>
                       </div>
+                      {donation.phone && (
+                        <div>
+                          <p className="text-gray-400 text-xs uppercase tracking-wider mb-0.5">Phone</p>
+                          <p className="text-gray-800">{donation.phone}</p>
+                        </div>
+                      )}
                       <div>
                         <p className="text-gray-400 text-xs uppercase tracking-wider mb-0.5">Program</p>
                         <p className="text-gray-800">{donation.program}</p>
@@ -171,6 +177,10 @@ export default function AdminDonationsPage() {
                       <div>
                         <p className="text-gray-400 text-xs uppercase tracking-wider mb-0.5">Payment Method</p>
                         <p className="text-gray-800 capitalize">{donation.method.replace("_", " ")}</p>
+                      </div>
+                      <div>
+                        <p className="text-gray-400 text-xs uppercase tracking-wider mb-0.5">Anonymous</p>
+                        <p className="text-gray-800">{donation.anonymous ? "Yes — hidden from public" : "No"}</p>
                       </div>
                       <div>
                         <p className="text-gray-400 text-xs uppercase tracking-wider mb-0.5">Date</p>

@@ -92,11 +92,13 @@ export interface DonationSubmission {
   id?: string;
   name: string;
   email: string;
+  phone: string;
   amount: number;
   currency: "usd" | "ngn";
   program: string;
   message: string;
   method: string;
+  anonymous: boolean;
   status: "pending" | "confirmed" | "completed";
   createdAt: Timestamp | null;
 }

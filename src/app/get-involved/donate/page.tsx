@@ -36,9 +36,11 @@ export default function DonatePage() {
   const [currency, setCurrency] = useState<"usd" | "ngn">("usd");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
   const [program, setProgram] = useState("General Fund");
   const [message, setMessage] = useState("");
   const [method, setMethod] = useState("online");
+  const [anonymous, setAnonymous] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -58,11 +60,13 @@ export default function DonatePage() {
       await submitDonation({
         name,
         email,
+        phone,
         amount: effectiveAmount,
         currency,
         program,
         message,
         method,
+        anonymous,
       });
       setSubmitted(true);
     } catch {
@@ -190,6 +194,14 @@ export default function DonatePage() {
                 </div>
               </div>
 
+              <div className="mb-5">
+                <label className="block text-sm font-medium text-text-primary mb-2">Phone Number with Country Code *</label>
+                <div className="relative">
+                  <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-sm">📞</span>
+                  <input type="tel" required value={phone} onChange={(e) => setPhone(e.target.value)} className={`${inputClass} !pl-11`} placeholder="+234 801 234 5678" />
+                </div>
+              </div>
+
               <div className="grid sm:grid-cols-2 gap-5 mb-5">
                 <div>
                   <label className="block text-sm font-medium text-text-primary mb-2">Allocate to Program</label>
@@ -214,6 +226,20 @@ export default function DonatePage() {
                   <textarea value={message} onChange={(e) => setMessage(e.target.value)} rows={3} className={`${inputClass} !pl-11 resize-none`} placeholder="Any message or notes for your donation..." />
                 </div>
               </div>
+
+              {/* Anonymous checkbox */}
+              <label className="flex items-start gap-3 mt-5 cursor-pointer group">
+                <input
+                  type="checkbox"
+                  checked={anonymous}
+                  onChange={(e) => setAnonymous(e.target.checked)}
+                  className="mt-0.5 w-5 h-5 rounded border-gray-300 text-primary focus:ring-primary/30 cursor-pointer"
+                />
+                <div>
+                  <p className="text-sm font-medium text-text-primary group-hover:text-primary transition-colors">Hide my donation information from public</p>
+                  <p className="text-xs text-text-secondary mt-0.5">Your details will only be visible to the Haleyouth Foundation admin team.</p>
+                </div>
+              </label>
             </div>
 
             {/* Submit */}
