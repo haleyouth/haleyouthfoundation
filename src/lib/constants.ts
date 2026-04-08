@@ -288,9 +288,37 @@ export const PARTNERS = [
   {
     name: "UNGA SDGs Conference",
     logo: "/images/partners/sdgs-conference-logo.png",
-    tier: "event" as const,
+    tier: "knowledge" as const,
     website: "https://unga-conference.org/",
     description: "United Nations General Assembly SDGs platform",
+  },
+  {
+    name: "Zoom",
+    logo: "/images/partners/zoom.png",
+    tier: "support" as const,
+    website: "https://zoom.us/",
+    description: "Trust and support in our journey to impact local communities",
+  },
+  {
+    name: "Claude AI",
+    logo: "/images/partners/claude.png",
+    tier: "support" as const,
+    website: "https://claude.ai/",
+    description: "Trust and support in our journey to impact local communities",
+  },
+  {
+    name: "Brilliant",
+    logo: "/images/partners/brilliant.png",
+    tier: "support" as const,
+    website: "https://brilliant.org/",
+    description: "Learning by Doing — trust and support in our journey to impact",
+  },
+  {
+    name: "Google for Nonprofits",
+    logo: "/images/partners/google-nonprofits.jpg",
+    tier: "support" as const,
+    website: "https://www.google.com/nonprofits/",
+    description: "Trust and support in our journey to impact local communities",
   },
 ];
 

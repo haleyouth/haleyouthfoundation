@@ -11,7 +11,7 @@ const tiers = [
   { key: "strategic", label: "Strategic Partners", description: "Long-term institutional partners supporting our mission at scale." },
   { key: "program", label: "Program Partners", description: "Organizations collaborating on specific programs and initiatives." },
   { key: "knowledge", label: "Knowledge Partners", description: "Institutions providing expertise, platforms, and advocacy support." },
-  { key: "event", label: "Event Partners", description: "Organizations co-hosting events and conferences with us." },
+  { key: "support", label: "Trust & Support", description: "For their trust and support in our journey to impact local communities." },
 ];
 
 export default function PartnersPage() {

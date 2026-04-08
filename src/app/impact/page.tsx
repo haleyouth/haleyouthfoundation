@@ -76,25 +76,15 @@ export default function ImpactPage() {
           </div>
 
           {/* SDG Alignment */}
-          <div className="bg-primary/5 rounded-2xl p-8 text-center">
-            <h3 className="text-xl font-bold text-text-primary mb-4">SDG Alignment</h3>
-            <p className="text-text-secondary text-sm mb-6 max-w-2xl mx-auto">
-              Our programs contribute to 7 of the 17 Sustainable Development Goals.
+          <div className="bg-gradient-to-br from-primary/5 via-bg-secondary to-secondary/5 rounded-2xl p-8 sm:p-12 text-center">
+            <h3 className="text-2xl font-bold text-text-primary mb-2" style={{ fontFamily: "var(--font-playfair)" }}>SDG Alignment</h3>
+            <p className="text-text-secondary text-sm mb-8 max-w-xl mx-auto">
+              Our programs proudly support global efforts in the SDGs
             </p>
-            <div className="flex flex-wrap justify-center gap-3">
-              {[
-                { num: 1, title: "No Poverty" },
-                { num: 2, title: "Zero Hunger" },
-                { num: 3, title: "Good Health" },
-                { num: 4, title: "Quality Education" },
-                { num: 6, title: "Clean Water" },
-                { num: 10, title: "Reduced Inequalities" },
-                { num: 13, title: "Climate Action" },
-                { num: 16, title: "Peace & Justice" },
-              ].map((sdg) => (
-                <div key={sdg.num} className="bg-white px-4 py-2 rounded-lg shadow-sm">
-                  <span className="text-primary font-bold">SDG {sdg.num}</span>
-                  <span className="text-text-secondary text-xs block">{sdg.title}</span>
+            <div className="flex flex-wrap justify-center gap-3 sm:gap-4">
+              {[1, 2, 3, 4, 6, 10, 12, 13, 16].map((num) => (
+                <div key={num} className="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 rounded-xl overflow-hidden shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300 cursor-default">
+                  <img src={`/images/sdgs/sdg-${num}.png`} alt={`SDG ${num}`} className="w-full h-full object-cover" />
                 </div>
               ))}
             </div>

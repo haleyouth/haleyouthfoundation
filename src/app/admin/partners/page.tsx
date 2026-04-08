@@ -40,6 +40,7 @@ export default function AdminPartnersPage() {
                     partner.tier === "strategic" ? "bg-blue-100 text-blue-700" :
                     partner.tier === "program" ? "bg-green-100 text-green-700" :
                     partner.tier === "knowledge" ? "bg-purple-100 text-purple-700" :
+                    partner.tier === "support" ? "bg-orange-100 text-orange-700" :
                     "bg-gray-100 text-gray-700"
                   }`}>
                     {partner.tier}
