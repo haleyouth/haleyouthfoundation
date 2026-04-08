@@ -118,7 +118,7 @@ export default function ImpactStats() {
           className="text-center"
         >
           <p className="text-white/35 text-sm mb-8 max-w-lg mx-auto">
-            We are proud to have supported 9 of the 17 UN Sustainable Development Goals
+            Our programs proudly support global efforts in the SDGs
           </p>
           <SDGRow goals={[1, 2, 3, 4, 6, 10, 12, 13, 16]} size="lg" />
         </motion.div>

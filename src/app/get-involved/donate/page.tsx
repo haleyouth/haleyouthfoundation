@@ -5,10 +5,16 @@ import PageHeader from "@/components/ui/PageHeader";
 import { Heart, BookOpen, Shirt, Shield, CreditCard, Building2 } from "lucide-react";
 import { SITE_CONFIG } from "@/lib/constants";
 
-const amounts = [
+const usdAmounts = [
   { value: 25, impact: "Provides learning materials for 5 students", icon: BookOpen },
   { value: 50, impact: "Supplies reusable pad kits for 10 girls", icon: Heart },
   { value: 100, impact: "Sponsors a child's school term", icon: Shirt },
+];
+
+const ngnAmounts = [
+  { value: 5000, impact: "Provides school supplies for a student", icon: BookOpen },
+  { value: 10000, impact: "Supplies reusable pad kits for girls", icon: Heart },
+  { value: 50000, impact: "Sponsors a child's school term", icon: Shirt },
 ];
 
 export default function DonatePage() {
@@ -16,6 +22,7 @@ export default function DonatePage() {
   const [custom, setCustom] = useState("");
   const [currency, setCurrency] = useState<"usd" | "ngn">("usd");
 
+  const amounts = currency === "usd" ? usdAmounts : ngnAmounts;
   const effectiveAmount = selected ?? (custom ? Number(custom) : 0);
 
   return (
@@ -27,13 +34,19 @@ export default function DonatePage() {
           <div className="bg-white rounded-2xl shadow-sm p-8 lg:p-12">
             {/* Currency selector */}
             <div className="flex gap-2 mb-8">
-              <button onClick={() => setCurrency("usd")} className={`flex-1 py-3 rounded-lg font-medium text-sm transition-all ${currency === "usd" ? "bg-primary text-white" : "bg-bg-secondary text-text-secondary hover:bg-primary/10"}`}>
+              <button onClick={() => { setCurrency("usd"); setSelected(50); setCustom(""); }} className={`flex-1 py-3 rounded-lg font-medium text-sm transition-all ${currency === "usd" ? "bg-primary text-white" : "bg-bg-secondary text-text-secondary hover:bg-primary/10"}`}>
                 <CreditCard size={16} className="inline mr-2" /> International (USD)
               </button>
-              <button onClick={() => setCurrency("ngn")} className={`flex-1 py-3 rounded-lg font-medium text-sm transition-all ${currency === "ngn" ? "bg-primary text-white" : "bg-bg-secondary text-text-secondary hover:bg-primary/10"}`}>
+              <button onClick={() => { setCurrency("ngn"); setSelected(10000); setCustom(""); }} className={`flex-1 py-3 rounded-lg font-medium text-sm transition-all ${currency === "ngn" ? "bg-primary text-white" : "bg-bg-secondary text-text-secondary hover:bg-primary/10"}`}>
                 <Building2 size={16} className="inline mr-2" /> Nigeria (NGN)
               </button>
             </div>
+
+            {currency === "ngn" && (
+              <div className="bg-secondary/5 border border-secondary/20 rounded-xl p-4 mb-6 text-center">
+                <p className="text-secondary font-medium text-sm">We accept and appreciate all donation efforts</p>
+              </div>
+            )}
 
             {/* Amount selection */}
             <h3 className="font-bold text-text-primary mb-4">Select Amount ({currency === "usd" ? "$" : "₦"})</h3>
@@ -47,7 +60,7 @@ export default function DonatePage() {
                   }`}
                 >
                   <a.icon size={20} className="text-accent mx-auto mb-2" />
-                  <p className="text-xl font-bold text-text-primary">{currency === "usd" ? "$" : "₦"}{a.value}</p>
+                  <p className="text-xl font-bold text-text-primary">{currency === "usd" ? "$" : "₦"}{a.value.toLocaleString()}</p>
                   <p className="text-text-secondary text-xs mt-1">{a.impact}</p>
                 </button>
               ))}
