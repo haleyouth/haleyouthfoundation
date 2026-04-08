@@ -24,7 +24,7 @@ export default function AdminLoginPage() {
     setTimeout(() => {
       if (email === ADMIN_EMAIL && password === ADMIN_PASS) {
         localStorage.setItem("hyf-admin-auth", "true");
-        router.push("/admin");
+        window.location.href = "/admin/";
       } else {
         setError("Invalid email or password. Please try again.");
         setLoading(false);

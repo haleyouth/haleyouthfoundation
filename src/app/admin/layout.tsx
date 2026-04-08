@@ -21,53 +21,62 @@ const sidebarItems = [
   { icon: Settings, label: "Settings", href: "/admin/settings" },
 ];
 
+function isLoginPage(path: string) {
+  return path === "/admin/login" || path === "/admin/login/";
+}
+
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const router = useRouter();
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [ready, setReady] = useState(false);
   const [authenticated, setAuthenticated] = useState(false);
-  const [checking, setChecking] = useState(true);
 
   useEffect(() => {
-    if (pathname === "/admin/login") {
-      setChecking(false);
+    // Login page — always render immediately, no auth check
+    if (isLoginPage(pathname)) {
+      setReady(true);
       return;
     }
-    const auth = localStorage.getItem("hyf-admin-auth");
-    if (auth === "true") {
-      setAuthenticated(true);
-    } else {
-      router.push("/admin/login");
-    }
-    setChecking(false);
-  }, [pathname, router]);
 
-  // Login page renders without shell
-  if (pathname === "/admin/login") {
+    // All other admin pages — check auth
+    try {
+      const auth = localStorage.getItem("hyf-admin-auth");
+      if (auth === "true") {
+        setAuthenticated(true);
+        setReady(true);
+      } else {
+        window.location.href = "/admin/login/";
+      }
+    } catch {
+      window.location.href = "/admin/login/";
+    }
+  }, [pathname]);
+
+  // Login page — render children directly, no admin shell
+  if (isLoginPage(pathname)) {
     return <>{children}</>;
   }
 
-  // Loading state
-  if (checking) {
+  // Loading
+  if (!ready) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
-        <div className="w-8 h-8 border-3 border-primary/20 border-t-primary rounded-full animate-spin" />
+        <div className="w-8 h-8 border-[3px] border-primary/20 border-t-primary rounded-full animate-spin" />
       </div>
     );
   }
 
-  // Not authenticated
-  if (!authenticated) {
-    return null;
-  }
+  // Not authenticated (shouldn't reach here, but safety)
+  if (!authenticated) return null;
 
   const handleLogout = () => {
     localStorage.removeItem("hyf-admin-auth");
-    router.push("/admin/login");
+    window.location.href = "/admin/login/";
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex pt-0">
+    <div className="min-h-screen bg-gray-50 flex">
       {/* Sidebar overlay (mobile) */}
       {sidebarOpen && (
         <div className="fixed inset-0 bg-black/30 z-40 lg:hidden" onClick={() => setSidebarOpen(false)} />
@@ -87,22 +96,25 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           </button>
         </div>
         <nav className="p-3 space-y-1 mt-2">
-          {sidebarItems.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              onClick={() => setSidebarOpen(false)}
-              className={cn(
-                "flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors",
-                pathname === item.href
-                  ? "bg-white/10 text-white"
-                  : "text-white/60 hover:text-white hover:bg-white/5"
-              )}
-            >
-              <item.icon size={18} />
-              {item.label}
-            </Link>
-          ))}
+          {sidebarItems.map((item) => {
+            const active = pathname === item.href || pathname === item.href + "/";
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                onClick={() => setSidebarOpen(false)}
+                className={cn(
+                  "flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors",
+                  active
+                    ? "bg-white/10 text-white"
+                    : "text-white/60 hover:text-white hover:bg-white/5"
+                )}
+              >
+                <item.icon size={18} />
+                {item.label}
+              </Link>
+            );
+          })}
         </nav>
         <div className="absolute bottom-0 w-full p-3 border-t border-white/10 space-y-1">
           <Link href="/" className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-white/60 hover:text-white hover:bg-white/5 transition-colors">
@@ -121,17 +133,14 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
       {/* Main content */}
       <div className="flex-1 flex flex-col min-h-screen">
-        {/* Top bar */}
         <header className="h-16 bg-white border-b border-gray-200 flex items-center px-4 gap-4 shrink-0">
           <button onClick={() => setSidebarOpen(true)} className="lg:hidden text-gray-500 hover:text-gray-700">
             <Menu size={22} />
           </button>
           <h1 className="text-lg font-semibold text-gray-900">
-            {sidebarItems.find((i) => i.href === pathname)?.label || "Admin Panel"}
+            {sidebarItems.find((i) => pathname === i.href || pathname === i.href + "/")?.label || "Admin Panel"}
           </h1>
         </header>
-
-        {/* Page content */}
         <div className="flex-1 p-4 lg:p-6 overflow-auto">
           {children}
         </div>
