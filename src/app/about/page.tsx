@@ -123,7 +123,7 @@ export default function AboutPage() {
       <section className="py-12 bg-primary/5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <p className="text-text-secondary text-sm">
-            Haleyouth Foundation is a registered non-profit organization — <strong>CAC/IT/NO 154820</strong> — fully compliant and tax-registered in Nigeria.
+            Haleyouth Foundation is a registered non-profit organization — <strong>CAC RC - 138260</strong> — fully compliant and tax-registered in Nigeria.
           </p>
         </div>
       </section>

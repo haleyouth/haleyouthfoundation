@@ -7,7 +7,7 @@ export const SITE_CONFIG = {
   email: "info@haleyouthfoundation.org",
   phone: "",
   address: "Ateba Agassa-Okene, Kogi State, Nigeria",
-  registration: "CAC/IT/NO 154820",
+  registration: "CAC RC - 138260",
   founded: 2019,
   social: {
     facebook: "https://www.facebook.com/haleyouthfoundation/",
