@@ -9,7 +9,7 @@ export const metadata: Metadata = { title: "News & Updates" };
 const posts = [
   {
     slug: "unga-sdgs-roundtable-2025",
-    title: "Dr. Ismaila Speaks at UNGA SDGs Roundtable in New York",
+    title: "Haleyouth Foundation at UNGA SDGs Roundtable in New York",
     excerpt: "Our Chairman was invited to share insights on youth-led initiatives that build peace and social cohesion at the United Nations General Assembly.",
     image: "/images/events/UNGA80_a.jpg",
     date: "September 2025",

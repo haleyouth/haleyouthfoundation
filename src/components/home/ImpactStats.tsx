@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { useCountUp } from "@/hooks/useCountUp";
 import { IMPACT_STATS } from "@/lib/constants";
+import { SDGRow } from "@/components/ui/SDGIcons";
 import { Users, Heart, BookOpen, Home, GraduationCap, Handshake } from "lucide-react";
 
 const iconMap: Record<string, React.ComponentType<{ size?: number; className?: string }>> = {
@@ -24,92 +25,102 @@ function StatCard({
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 40 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.6, delay: index * 0.1, ease: [0.25, 0.46, 0.45, 0.94] }}
-      className="text-center relative group"
+      initial={{ opacity: 0, y: 50, scale: 0.9 }}
+      animate={inView ? { opacity: 1, y: 0, scale: 1 } : {}}
+      transition={{
+        duration: 0.7,
+        delay: index * 0.12,
+        ease: [0.25, 0.46, 0.45, 0.94],
+      }}
+      className="relative group"
     >
-      <div className="w-16 h-16 rounded-2xl bg-white/[0.08] backdrop-blur-sm border border-white/[0.08] flex items-center justify-center mx-auto mb-5 group-hover:bg-white/[0.12] transition-all duration-300">
-        <Icon size={26} className="text-gold" />
+      <div className="bg-white/[0.07] backdrop-blur-md border border-white/[0.1] rounded-2xl p-6 text-center hover:bg-white/[0.12] hover:border-white/[0.18] transition-all duration-500 hover:transform hover:-translate-y-1">
+        {/* Glow effect on hover */}
+        <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-b from-white/[0.05] to-transparent pointer-events-none" />
+
+        <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-gold/20 to-gold/5 border border-gold/20 flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-500">
+          <Icon size={24} className="text-gold" />
+        </div>
+        <p className="text-4xl lg:text-[44px] font-bold text-white counter-number mb-1 tracking-tight leading-none">
+          {stat.prefix || ""}
+          {count}
+          <span className="text-gold">{stat.suffix}</span>
+        </p>
+        <p className="text-white/45 text-[13px] font-medium tracking-wide mt-2">{stat.label}</p>
       </div>
-      <p className="text-4xl lg:text-5xl font-bold text-white counter-number mb-1.5 tracking-tight">
-        {stat.prefix || ""}
-        {count}
-        <span className="text-gold">{stat.suffix}</span>
-      </p>
-      <p className="text-white/50 text-sm font-medium tracking-wide">{stat.label}</p>
     </motion.div>
   );
 }
 
 export default function ImpactStats() {
-  const { ref, inView } = useScrollAnimation(0.15);
+  const { ref, inView } = useScrollAnimation(0.1);
 
   return (
     <section
       ref={ref}
-      className="py-24 lg:py-32 section-gradient-blue relative overflow-hidden"
+      className="py-28 lg:py-36 section-gradient-blue relative overflow-hidden"
     >
-      {/* Premium background effects */}
+      {/* Premium background */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 left-1/4 w-[500px] h-[500px] rounded-full bg-white/[0.03] blur-[100px]" />
-        <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] rounded-full bg-white/[0.02] blur-[80px]" />
-        {/* Grid pattern */}
-        <div className="absolute inset-0" style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px)', backgroundSize: '60px 60px' }} />
+        <div className="absolute top-0 left-1/4 w-[600px] h-[600px] rounded-full bg-white/[0.02] blur-[120px]" />
+        <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] rounded-full bg-white/[0.015] blur-[100px]" />
+        <div
+          className="absolute inset-0 opacity-30"
+          style={{
+            backgroundImage:
+              "radial-gradient(circle, rgba(255,255,255,0.03) 1px, transparent 1px)",
+            backgroundSize: "40px 40px",
+          }}
+        />
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          className="text-center max-w-2xl mx-auto mb-16"
+          transition={{ duration: 0.7 }}
+          className="text-center max-w-2xl mx-auto mb-20"
         >
-          <span className="inline-flex items-center gap-2 px-3 py-1 bg-white/10 rounded-full text-gold text-xs font-semibold uppercase tracking-wider mb-4">
-            <span className="w-1.5 h-1.5 rounded-full bg-gold" />
-            Our Impact
-          </span>
+          <motion.span
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={inView ? { opacity: 1, scale: 1 } : {}}
+            transition={{ delay: 0.1, duration: 0.5 }}
+            className="inline-flex items-center gap-2 px-4 py-1.5 bg-white/10 backdrop-blur-sm rounded-full text-gold text-xs font-semibold uppercase tracking-[0.15em] mb-5 border border-white/10"
+          >
+            <span className="w-2 h-2 rounded-full bg-gold animate-pulse" />
+            Measuring What Matters
+          </motion.span>
           <h2
-            className="text-3xl lg:text-[42px] font-bold text-white mb-5 leading-tight"
+            className="text-4xl lg:text-5xl font-bold text-white mb-5 leading-[1.1] tracking-tight"
             style={{ fontFamily: "var(--font-playfair)" }}
           >
-            Measuring What Matters
+            Real Impact,<br />Real Numbers
           </h2>
-          <p className="text-white/60 leading-relaxed text-[15px]">
+          <p className="text-white/55 leading-relaxed text-base">
             Every number represents a life touched, a community transformed, and a step toward a more equitable future.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 lg:gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 lg:gap-5">
           {IMPACT_STATS.map((stat, i) => (
             <StatCard key={stat.label} stat={stat} index={i} inView={inView} />
           ))}
         </div>
 
-        {/* SDG alignment */}
+        {/* SDG Section */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 1.0 }}
-          className="mt-20 text-center"
+          transition={{ delay: 1.2, duration: 0.6 }}
+          className="mt-24 text-center"
         >
-          <p className="text-white/30 text-xs uppercase tracking-[0.2em] mb-4">
-            Contributing to UN Sustainable Development Goals
-          </p>
-          <div className="flex flex-wrap justify-center gap-2">
-            {[
-              { n: 1, c: "#E5243B" }, { n: 2, c: "#DDA63A" }, { n: 3, c: "#4C9F38" },
-              { n: 4, c: "#C5192D" }, { n: 5, c: "#FF3A21" }, { n: 10, c: "#DD1367" },
-              { n: 12, c: "#BF8B2E" }, { n: 13, c: "#3F7E44" }, { n: 16, c: "#00689D" },
-            ].map((sdg) => (
-              <span
-                key={sdg.n}
-                className="w-9 h-9 rounded-lg flex items-center justify-center text-xs font-bold text-white"
-                style={{ backgroundColor: sdg.c + "CC" }}
-              >
-                {sdg.n}
-              </span>
-            ))}
+          <div className="inline-block mb-6">
+            <div className="h-px w-20 bg-gradient-to-r from-transparent via-white/20 to-transparent mx-auto mb-6" />
+            <p className="text-white/30 text-xs uppercase tracking-[0.25em] font-medium">
+              Contributing to UN Sustainable Development Goals
+            </p>
           </div>
+          <SDGRow goals={[1, 2, 3, 4, 5, 10, 12, 13, 16]} size="md" />
         </motion.div>
       </div>
     </section>

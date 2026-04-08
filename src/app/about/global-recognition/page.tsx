@@ -10,7 +10,7 @@ const recognitions = [
     icon: Mic,
     title: "UNGA SDGs Roundtable Discussion 2025",
     org: "Journalists and Writers Foundation, New York",
-    description: 'Dr. Ismaila was invited to speak on "Youth-Led Initiatives That Build Peace & Social Cohesion" at the SDGs Roundtable in the margins of the United Nations General Assembly. This milestone amplified African youth voices on a global stage.',
+    description: 'Our Chairman was invited to speak on "Youth-Led Initiatives That Build Peace & Social Cohesion" at the SDGs Roundtable in the margins of the United Nations General Assembly. This milestone amplified African youth voices on a global stage.',
     image: "/images/events/DSC04757.jpg",
   },
   {
@@ -24,7 +24,7 @@ const recognitions = [
     icon: BookOpen,
     title: "MICCAI 2025 Oral Presentation",
     org: "Medical Image Computing and Computer Assisted Intervention Society",
-    description: "The AfriBiobank project, a pan-African medical-imagery biobank conceived by Dr. Ismaila, was selected for oral presentation at MICCAI 2025 — positioning Africa as a healthcare innovation hub powered by local data.",
+    description: "The AfriBiobank project, a pan-African medical-imagery biobank conceived by our team, was selected for oral presentation at MICCAI 2025 — positioning Africa as a healthcare innovation hub powered by local data.",
   },
   {
     icon: Globe,
@@ -44,7 +44,7 @@ export default function GlobalRecognitionPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center mb-20">
             <div className="relative aspect-[16/10] rounded-2xl overflow-hidden shadow-2xl">
-              <Image src="/images/events/UNGA80_a.jpg" alt="Dr. Ismaila at UNGA" fill className="object-cover" sizes="(max-width: 1024px) 100vw, 50vw" />
+              <Image src="/images/events/UNGA80_a.jpg" alt="Haleyouth Foundation at UNGA" fill className="object-cover" sizes="(max-width: 1024px) 100vw, 50vw" />
             </div>
             <div>
               <span className="text-accent font-semibold text-sm uppercase tracking-wider">Highlight</span>
@@ -52,17 +52,17 @@ export default function GlobalRecognitionPage() {
                 Speaking at the United Nations
               </h2>
               <p className="text-text-secondary leading-relaxed mb-4">
-                In September 2025, our Chairman Dr. Lukman Enegi Ismaila was invited to speak at the SDGs Roundtable Discussion in the margins of the United Nations General Assembly in New York, hosted by the Journalists and Writers Foundation.
+                In September 2025, our Chairman was invited to speak at the SDGs Roundtable Discussion in the margins of the United Nations General Assembly in New York, hosted by the Journalists and Writers Foundation.
               </p>
               <p className="text-text-secondary leading-relaxed mb-6">
-                His talk on &ldquo;Youth-Led Initiatives That Build Peace &amp; Social Cohesion&rdquo; drew from grassroots experiences at Haleyouth Foundation — demonstrating how local action can drive peace, justice, and sustainable development on a global stage.
+                The talk on &ldquo;Youth-Led Initiatives That Build Peace &amp; Social Cohesion&rdquo; drew from grassroots experiences at Haleyouth Foundation — demonstrating how local action can drive peace, justice, and sustainable development on a global stage.
               </p>
               <div className="grid grid-cols-2 gap-4">
                 <div className="relative aspect-[4/3] rounded-lg overflow-hidden">
                   <Image src="/images/events/UNGA80_b.jpg" alt="UNGA SDGs group photo" fill className="object-cover" sizes="200px" />
                 </div>
                 <div className="relative aspect-[4/3] rounded-lg overflow-hidden">
-                  <Image src="/images/events/Unga80_c.jpg" alt="Dr. Ismaila receiving plaque" fill className="object-cover" sizes="200px" />
+                  <Image src="/images/events/Unga80_c.jpg" alt="Receiving recognition plaque" fill className="object-cover" sizes="200px" />
                 </div>
               </div>
             </div>

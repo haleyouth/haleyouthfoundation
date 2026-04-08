@@ -49,13 +49,13 @@ export default function PartnersCarousel() {
         <div className="flex partner-scroll items-center">
           {doubled.map((partner, i) => {
             const inner = (
-              <div className="flex items-center justify-center w-40 h-20 px-4 grayscale hover:grayscale-0 opacity-40 hover:opacity-100 transition-all duration-500">
+              <div className="flex items-center justify-center w-52 h-28 px-5 grayscale hover:grayscale-0 opacity-40 hover:opacity-100 transition-all duration-500">
                 <Image
                   src={partner.logo}
                   alt={partner.name}
-                  width={140}
-                  height={60}
-                  className="object-contain max-h-14 w-auto"
+                  width={200}
+                  height={90}
+                  className="object-contain max-h-20 w-auto"
                 />
               </div>
             );

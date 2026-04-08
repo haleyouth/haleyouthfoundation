@@ -13,10 +13,10 @@ export default function OurStoryPage() {
       <section className="py-20 bg-bg-primary">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 prose prose-lg max-w-none">
           <p className="text-text-secondary leading-relaxed text-lg">
-            Haleyouth Foundation was born from a deeply personal journey. Our founder, <strong>Dr. Lukman Enegi Ismaila</strong>, grew up in Nigeria and benefited from scholarships and support from institutions like the First Surat Group, African Development Bank, Nile University of Nigeria, African University of Science and Technology, and the Petroleum Technology Development Fund (PTDF).
+            Haleyouth Foundation was born from a deeply personal journey. Our founding team grew up in Nigeria and benefited from scholarships and support from institutions like the First Surat Group, African Development Bank, Nile University of Nigeria, African University of Science and Technology, and the Petroleum Technology Development Fund (PTDF).
           </p>
           <p className="text-text-secondary leading-relaxed">
-            &ldquo;Their belief in me carved my path and guided my motivation to give back,&rdquo; Dr. Ismaila reflects. After completing his PhD and moving to Johns Hopkins University School of Medicine as a Postdoctoral Research Fellow, that motivation became something tangible.
+            &ldquo;Their belief in us carved our path and guided our motivation to give back.&rdquo; That collective motivation became something tangible.
           </p>
           <p className="text-text-secondary leading-relaxed">
             In 2019, Haleyouth Foundation was established — a non-profit committed to empowering youth through mentorship, advancing STEM education, and fostering community development. The name &ldquo;Haleyouth&rdquo; embodies the spirit of strengthening young potentials.

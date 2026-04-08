@@ -78,7 +78,7 @@ export default function AboutPreview() {
               <span className="gradient-text">Building Peace</span>
             </h2>
             <p className="text-text-secondary leading-relaxed mb-4 text-[15px]">
-              Founded in 2019 by <strong className="text-text-primary">Dr. Lukman Enegi Ismaila</strong>, Haleyouth Foundation
+              Founded in 2019 by passionate young professionals with a hunger for change, Haleyouth Foundation
               operates at the intersection of youth empowerment, girl-child education, gender equity, and climate action.
             </p>
             <p className="text-text-secondary leading-relaxed mb-8 text-[15px]">
@@ -94,7 +94,7 @@ export default function AboutPreview() {
                 &ldquo;When we succeed in our plan, lives change, and communities experience true peace and progress.&rdquo;
               </p>
               <cite className="text-sm text-text-secondary mt-2 block not-italic font-medium">
-                Dr. Lukman Enegi Ismaila — <span className="text-primary">Founder &amp; Chairman</span>
+                — <span className="text-primary">Haleyouth Foundation</span>
               </cite>
             </div>
 

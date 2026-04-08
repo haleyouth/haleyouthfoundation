@@ -175,14 +175,13 @@ export default function Footer() {
             <p className="text-white/30 text-xs flex items-center gap-1">
               Built with <Heart size={10} className="text-accent" /> for community impact
             </p>
-            {/* Admin Panel Link */}
             <Link
               href="/admin/login"
-              className="flex items-center gap-1.5 text-white/20 hover:text-white/50 transition-colors text-xs"
+              className="text-white/15 hover:text-white/40 transition-colors"
               title="Admin Panel"
+              aria-label="Admin Panel"
             >
-              <Shield size={12} />
-              <span className="hidden sm:inline">Admin</span>
+              <Shield size={13} />
             </Link>
           </div>
         </div>

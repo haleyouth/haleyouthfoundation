@@ -61,7 +61,7 @@ export const HERO_SLIDES = [
     image: "/images/events/DSC04757.jpg",
     headline: "From Local Action to Global Impact",
     subtitle:
-      "Our Chairman, Dr. Lukman Ismaila, speaking at the UN General Assembly SDGs Roundtable Discussion in New York.",
+      "Haleyouth Foundation represented at the UN General Assembly SDGs Roundtable Discussion in New York.",
     cta: { text: "Our Story", href: "/about/our-story" },
   },
 ];
@@ -301,7 +301,7 @@ export const TIMELINE_EVENTS = [
     year: "2019",
     title: "Foundation Established",
     description:
-      "Haleyouth Foundation was founded by Dr. Lukman Enegi Ismaila with a mission to empower youth through mentorship, education, and community development.",
+      "Haleyouth Foundation was founded by passionate young professionals with a mission to empower youth through mentorship, education, and community development.",
   },
   {
     year: "2020-2022",
@@ -387,7 +387,7 @@ export const GALLERY_IMAGES = [
   {
     src: "/images/events/UNGA80_a.jpg",
     caption:
-      "Dr. Lukman Ismaila at the SDGs Roundtable Discussion, UNGA 2025, New York",
+      "Haleyouth Foundation at the SDGs Roundtable Discussion, UNGA 2025, New York",
     category: "UNGA & International",
   },
   {
@@ -398,7 +398,7 @@ export const GALLERY_IMAGES = [
   {
     src: "/images/events/Unga80_c.jpg",
     caption:
-      "Dr. Ismaila receiving recognition plaque at the SDGs Roundtable Discussion",
+      "Receiving recognition plaque at the SDGs Roundtable Discussion",
     category: "UNGA & International",
   },
   {

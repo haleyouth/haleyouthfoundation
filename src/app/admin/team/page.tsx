@@ -3,7 +3,7 @@
 import { Plus, Edit, Trash2 } from "lucide-react";
 
 const team = [
-  { name: "Dr. Lukman Enegi Ismaila", role: "Founder & Chairman", status: "Active" },
+  { name: "Chairman", role: "Founder & Chairman", status: "Active" },
   { name: "Hamida", role: "Project Volunteer", status: "Active" },
   { name: "Hadiza", role: "Project Volunteer", status: "Active" },
   { name: "Shamsiyya", role: "Project Volunteer", status: "Active" },

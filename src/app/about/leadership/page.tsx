@@ -26,7 +26,7 @@ export default function LeadershipPage() {
                   Postdoctoral Research Fellow, Johns Hopkins University School of Medicine
                 </p>
                 <p className="text-text-secondary leading-relaxed mb-4">
-                  Dr. Ismaila works at the intersection of healthcare and computer science. His passion for impact has been firmly rooted in education and community development. He benefited from scholarships and support from several institutions, which guided his motivation to give back.
+                  The Chairman works at the intersection of healthcare and computer science. His passion for impact has been firmly rooted in education and community development. He benefited from scholarships and support from several institutions, which guided his motivation to give back.
                 </p>
                 <p className="text-text-secondary leading-relaxed mb-4">
                   He is also a Fellow of the Datasphere Institute and the architect behind AfriBiobank, a pan-African medical-imagery biobank selected for oral presentation at MICCAI 2025. In 2025, he was invited to speak at the SDGs Roundtable Discussion at the United Nations General Assembly in New York.

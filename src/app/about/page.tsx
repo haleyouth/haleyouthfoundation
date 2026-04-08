@@ -33,10 +33,10 @@ export default function AboutPage() {
                 Our Story
               </h2>
               <p className="text-text-secondary leading-relaxed mb-4">
-                Haleyouth Foundation was founded in 2019 by <strong>Dr. Lukman Enegi Ismaila</strong>, a Postdoctoral Research Fellow at Johns Hopkins University School of Medicine. Growing up, Dr. Ismaila benefited from scholarships and support from institutions like the African Development Bank, Nile University of Nigeria, and the Petroleum Technology Development Fund (PTDF).
+                Haleyouth Foundation was founded in 2019 by passionate young professionals driven by a hunger for change. Our team comprises individuals who benefited from scholarships and institutional support, which guided their motivation to give back to their communities.
               </p>
               <p className="text-text-secondary leading-relaxed mb-4">
-                That investment in his education carved his path and guided his motivation to give back. In 2019, that motivation became the Haleyouth Foundation — a non-profit committed to empowering youth through mentorship, advancing STEM education, and fostering community development.
+                That collective investment in education carved a path and inspired the creation of the Haleyouth Foundation — a non-profit committed to empowering youth through mentorship, advancing STEM education, and fostering community development.
               </p>
               <p className="text-text-secondary leading-relaxed mb-6">
                 Through various programmes, the foundation has reached thousands of young people and women in Nigeria, creating opportunities for growth, resilience, and leadership aligned with the Sustainable Development Goals.
@@ -47,7 +47,7 @@ export default function AboutPage() {
                   &ldquo;Start local. Pick a problem you can see and touch. Define clear goals. Onboard fellow changemakers. Define your impact plan. Review and adapt.&rdquo;
                 </p>
                 <cite className="text-sm text-text-secondary mt-2 block not-italic font-medium">
-                  — Dr. Lukman E. Ismaila, UNGA SDGs Roundtable 2025
+                  — Haleyouth Foundation, UNGA SDGs Roundtable 2025
                 </cite>
               </blockquote>
 
