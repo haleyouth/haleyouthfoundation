@@ -161,7 +161,7 @@ export const PROGRAMS = [
     category: "Community Development",
     sdgs: [1, 2],
     stats: [{ label: "Families Supported", value: "100+" }],
-    image: "/images/events/FoodDrive.jpg",
+    image: "/images/events/fooddrive2.jpeg",
   },
   {
     slug: "peace-ambassadors",
@@ -412,8 +412,13 @@ export const GALLERY_IMAGES = [
     category: "UNGA & International",
   },
   {
-    src: "/images/events/FoodDrive.jpg",
-    caption: "Food drive — providing essential supplies to families in need",
+    src: "/images/events/fooddrive1.jpeg",
+    caption: "Food drive — bulk supplies prepared for distribution to families in need",
+    category: "Community Outreach",
+  },
+  {
+    src: "/images/events/fooddrive2.jpeg",
+    caption: "Food drive — packaged food parcels ready for community distribution",
     category: "Community Outreach",
   },
 ];
