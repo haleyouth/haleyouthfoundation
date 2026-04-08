@@ -167,23 +167,21 @@ export default function Footer() {
 
       {/* Bottom Bar */}
       <div className="border-t border-white/[0.06]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex flex-col items-center gap-3">
-          <div className="flex items-center gap-4 w-full justify-center">
-            <p className="text-white/30 text-xs">
-              &copy; {new Date().getFullYear()} {SITE_CONFIG.name}. All rights reserved.
-            </p>
-            <Link
-              href="/admin/login"
-              className="text-white/15 hover:text-white/40 transition-colors"
-              title="Admin Panel"
-              aria-label="Admin Panel"
-            >
-              <Shield size={12} />
-            </Link>
-            <p className="text-white/30 text-xs">
-              {SITE_CONFIG.registration}
-            </p>
-          </div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex items-center justify-between">
+          <p className="text-white/30 text-xs">
+            &copy; {new Date().getFullYear()} {SITE_CONFIG.name}. All rights reserved. | {SITE_CONFIG.registration}
+          </p>
+          <Link
+            href="/admin/login"
+            className="text-white/15 hover:text-white/40 transition-colors"
+            title="Admin Panel"
+            aria-label="Admin Panel"
+          >
+            <Shield size={12} />
+          </Link>
+          <p className="text-white/30 text-xs flex items-center gap-1">
+            Built with <Heart size={10} className="text-accent" /> for community impact
+          </p>
         </div>
       </div>
     </footer>
