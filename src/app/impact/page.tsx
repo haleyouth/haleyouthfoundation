@@ -87,7 +87,7 @@ export default function ImpactPage() {
                 { num: 2, title: "Zero Hunger" },
                 { num: 3, title: "Good Health" },
                 { num: 4, title: "Quality Education" },
-                { num: 5, title: "Gender Equality" },
+                { num: 6, title: "Clean Water" },
                 { num: 10, title: "Reduced Inequalities" },
                 { num: 13, title: "Climate Action" },
                 { num: 16, title: "Peace & Justice" },

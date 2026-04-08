@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Plus, Edit, Trash2, Eye, Search } from "lucide-react";
 
 const mockPosts = [
-  { id: "1", title: "Dr. Ismaila Speaks at UNGA SDGs Roundtable", category: "Events", status: "Published", date: "Sep 2025" },
+  { id: "1", title: "Haleyouth Foundation at UNGA SDGs Roundtable", category: "Events", status: "Published", date: "Sep 2025" },
   { id: "2", title: "Pad-a-Girl Climate Action Project Completed", category: "Programs", status: "Published", date: "Dec 2025" },
   { id: "3", title: "Back-to-School Project Reaches 200+ Students", category: "Programs", status: "Draft", date: "2024" },
 ];

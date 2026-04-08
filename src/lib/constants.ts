@@ -76,7 +76,7 @@ export const PROGRAMS = [
     icon: "Heart",
     category: "Health & Wellness",
     featured: true,
-    sdgs: [3, 4, 5, 12, 13],
+    sdgs: [3, 4, 12, 13],
     stats: [
       { label: "Pad Kits Distributed", value: "500+" },
       { label: "Instruction Cards", value: "700+" },
@@ -126,7 +126,7 @@ export const PROGRAMS = [
       "Hands-on science, technology, engineering, and mathematics workshops designed for girls, connecting environmental problem-solving with practical skills.",
     icon: "Microscope",
     category: "Education & Scholarships",
-    sdgs: [4, 5],
+    sdgs: [4, 6],
     image: "/images/events/Jabi_AK ADAAVA 9.jpg",
   },
   {
@@ -137,7 +137,7 @@ export const PROGRAMS = [
       "Digital literacy training for girls and young women with little or no prior exposure to technology, supported by the Commonwealth Network.",
     icon: "Laptop",
     category: "Skills & Empowerment",
-    sdgs: [4, 5, 10],
+    sdgs: [4, 6, 10],
     image: "/images/events/Garki_IMG_0015.jpg",
   },
   {

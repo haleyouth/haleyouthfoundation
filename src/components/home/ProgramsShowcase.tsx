@@ -143,7 +143,7 @@ export default function ProgramsShowcase() {
                               backgroundColor:
                                 sdg === 3 ? "#4C9F38" :
                                 sdg === 4 ? "#C5192D" :
-                                sdg === 5 ? "#FF3A21" :
+                                sdg === 6 ? "#26BDE2" :
                                 sdg === 12 ? "#BF8B2E" :
                                 sdg === 13 ? "#3F7E44" :
                                 sdg === 1 ? "#E5243B" :
