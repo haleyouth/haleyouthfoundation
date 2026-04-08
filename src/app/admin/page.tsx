@@ -13,26 +13,29 @@ const quickActions = [
 ];
 
 export default function AdminDashboard() {
-  const [counts, setCounts] = useState({ contact: 0, volunteer: 0, partner: 0, newsletter: 0, contactNew: 0, volunteerNew: 0, partnerNew: 0 });
+  const [counts, setCounts] = useState({ contact: 0, volunteer: 0, partner: 0, newsletter: 0, donations: 0, contactNew: 0, volunteerNew: 0, partnerNew: 0, donationsPending: 0 });
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function load() {
       try {
-        const [contact, volunteer, partner, newsletter] = await Promise.all([
+        const [contact, volunteer, partner, newsletter, donations] = await Promise.all([
           fetchSubmissions("submissions_contact"),
           fetchSubmissions("submissions_volunteer"),
           fetchSubmissions("submissions_partner"),
           fetchSubmissions("submissions_newsletter"),
+          fetchSubmissions("submissions_donations"),
         ]);
         setCounts({
           contact: contact.length,
           volunteer: volunteer.length,
           partner: partner.length,
           newsletter: newsletter.length,
+          donations: donations.length,
           contactNew: contact.filter((c: Record<string, unknown>) => c.status === "new").length,
           volunteerNew: volunteer.filter((v: Record<string, unknown>) => v.status === "new").length,
           partnerNew: partner.filter((p: Record<string, unknown>) => p.status === "new").length,
+          donationsPending: donations.filter((d: Record<string, unknown>) => d.status === "pending").length,
         });
       } catch (err) {
         console.error("Failed to load counts:", err);
@@ -65,6 +68,7 @@ export default function AdminDashboard() {
           { label: "Contact Messages", value: counts.contact, newCount: counts.contactNew, icon: Mail, color: "text-blue-600", bg: "bg-blue-50" },
           { label: "Volunteer Apps", value: counts.volunteer, newCount: counts.volunteerNew, icon: Users, color: "text-green-600", bg: "bg-green-50" },
           { label: "Partner Inquiries", value: counts.partner, newCount: counts.partnerNew, icon: Handshake, color: "text-purple-600", bg: "bg-purple-50" },
+          { label: "Donations", value: counts.donations, newCount: counts.donationsPending, icon: Heart, color: "text-red-600", bg: "bg-red-50" },
           { label: "Newsletter Subs", value: counts.newsletter, newCount: 0, icon: Newspaper, color: "text-orange-600", bg: "bg-orange-50" },
         ].map((s) => (
           <div key={s.label} className="bg-white rounded-xl p-5 shadow-sm border border-gray-100">

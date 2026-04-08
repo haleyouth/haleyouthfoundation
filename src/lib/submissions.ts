@@ -87,6 +87,28 @@ export async function submitNewsletter(email: string) {
   });
 }
 
+// Donation submission
+export interface DonationSubmission {
+  id?: string;
+  name: string;
+  email: string;
+  amount: number;
+  currency: "usd" | "ngn";
+  program: string;
+  message: string;
+  method: string;
+  status: "pending" | "confirmed" | "completed";
+  createdAt: Timestamp | null;
+}
+
+export async function submitDonation(data: Omit<DonationSubmission, "id" | "status" | "createdAt">) {
+  return addDoc(collection(db, "submissions_donations"), {
+    ...data,
+    status: "pending",
+    createdAt: serverTimestamp(),
+  });
+}
+
 // Fetch functions (admin)
 export async function fetchSubmissions<T extends { id?: string }>(
   collectionName: string
