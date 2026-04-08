@@ -120,10 +120,10 @@ export const PROGRAMS = [
   },
   {
     slug: "stem-camp",
-    title: "STEM Camp for Girls",
-    tagline: "Inspiring the next generation of women in STEM",
+    title: "STEM Camp",
+    tagline: "Inspiring the next generation of innovators in STEM",
     description:
-      "Hands-on science, technology, engineering, and mathematics workshops designed for girls, connecting environmental problem-solving with practical skills.",
+      "Hands-on science, technology, engineering, and mathematics workshops for young people, connecting environmental problem-solving with practical skills.",
     icon: "Microscope",
     category: "Education & Scholarships",
     sdgs: [4, 6],
