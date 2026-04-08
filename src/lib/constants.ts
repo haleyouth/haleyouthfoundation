@@ -289,7 +289,7 @@ export const PARTNERS = [
 
 export const IMPACT_STATS = [
   { label: "Youth Reached", value: 2000, suffix: "+", icon: "Users" },
-  { label: "Girls Supported", value: 500, suffix: "+", icon: "Heart" },
+  { label: "Girls Supported", value: 1000, suffix: "+", icon: "Heart" },
   { label: "Rural Students", value: 200, suffix: "+", icon: "BookOpen" },
   { label: "Families Supported", value: 100, suffix: "+", icon: "Home" },
   { label: "Scholarship Value", value: 100, suffix: "K+", prefix: "$", icon: "GraduationCap" },
