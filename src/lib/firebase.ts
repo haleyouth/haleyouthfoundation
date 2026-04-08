@@ -1,27 +1,22 @@
-// Firebase configuration placeholder
-// To activate Firebase, replace the config below with your Firebase project credentials
-// and uncomment the initialization code.
+import { initializeApp, getApps } from "firebase/app";
+import { getFirestore } from "firebase/firestore";
+import { getAuth } from "firebase/auth";
+import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
-  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY || "",
-  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN || "",
-  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID || "",
-  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET || "",
-  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID || "",
-  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID || "",
-  measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID || "",
+  apiKey: "AIzaSyC7EFrN_fTqv2NJGyevoLZXg1KRWiwrJ0g",
+  authDomain: "haleyouth-foundation.firebaseapp.com",
+  projectId: "haleyouth-foundation",
+  storageBucket: "haleyouth-foundation.firebasestorage.app",
+  messagingSenderId: "372768047425",
+  appId: "1:372768047425:web:fa8668544510593167e1c0",
+  measurementId: "G-5RFZTEGFB9",
 };
 
-// Uncomment below when Firebase project is created:
-//
-// import { initializeApp } from "firebase/app";
-// import { getFirestore } from "firebase/firestore";
-// import { getAuth } from "firebase/auth";
-// import { getStorage } from "firebase/storage";
-//
-// const app = initializeApp(firebaseConfig);
-// export const db = getFirestore(app);
-// export const auth = getAuth(app);
-// export const storage = getStorage(app);
+// Initialize Firebase (prevent duplicate initialization)
+const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
 
-export default firebaseConfig;
+export const db = getFirestore(app);
+export const auth = getAuth(app);
+export const storage = getStorage(app);
+export default app;
