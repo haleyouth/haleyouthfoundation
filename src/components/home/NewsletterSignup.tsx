@@ -4,15 +4,19 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { Send, CheckCircle, Mail } from "lucide-react";
+import { submitNewsletter } from "@/lib/submissions";
 
 export default function NewsletterSignup() {
   const { ref, inView } = useScrollAnimation();
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (email) {
+      try {
+        await submitNewsletter(email);
+      } catch {}
       setSubmitted(true);
       setEmail("");
     }
