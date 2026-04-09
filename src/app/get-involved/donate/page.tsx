@@ -125,7 +125,7 @@ export default function DonatePage() {
 
   return (
     <>
-      <PageHeader title="Make a Pledge" subtitle="Every contribution builds a brighter tomorrow for young people across Nigeria." badge="Support Our Mission" />
+      <PageHeader title="Donate" subtitle="Every contribution builds a brighter tomorrow for young people across Nigeria." badge="Support Our Mission" />
 
       <section className="py-16 sm:py-24 bg-bg-primary">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -201,6 +201,7 @@ export default function DonatePage() {
             )}
 
             {/* Amount selection */}
+            <h2 className="text-xl font-bold text-text-primary mb-6" style={{ fontFamily: "var(--font-playfair)" }}>Make a Pledge</h2>
             <h3 className="font-bold text-text-primary mb-4">Select Amount ({symbol})</h3>
             <div className="grid grid-cols-3 gap-3 sm:gap-4 mb-4">
               {amounts.map((a) => (
