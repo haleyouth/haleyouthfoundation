@@ -76,7 +76,7 @@ export default function ProgramsShowcase() {
                   className="group block card-premium overflow-hidden h-full"
                 >
                   {/* Image */}
-                  <div className="relative h-56 overflow-hidden">
+                  <div className="relative h-44 sm:h-56 overflow-hidden">
                     <Image
                       src={program.image}
                       alt={program.title}
@@ -98,17 +98,17 @@ export default function ProgramsShowcase() {
 
                     {/* Stats overlay at bottom of image */}
                     {program.stats && (
-                      <div className="absolute bottom-0 left-0 right-0 p-4">
-                        <div className="flex gap-3">
+                      <div className="absolute bottom-0 left-0 right-0 p-2 sm:p-4">
+                        <div className="flex gap-1.5 sm:gap-3">
                           {program.stats.slice(0, 2).map((stat) => (
                             <div
                               key={stat.label}
-                              className="bg-white/15 backdrop-blur-md rounded-lg px-3 py-2 border border-white/10"
+                              className="bg-white/15 backdrop-blur-md rounded-lg px-2 py-1.5 sm:px-3 sm:py-2 border border-white/10 min-w-0 flex-1"
                             >
-                              <p className="text-white font-bold text-lg leading-none">
+                              <p className="text-white font-bold text-xs sm:text-base leading-none truncate">
                                 <AnimatedStat value={stat.value} inView={inView} />
                               </p>
-                              <p className="text-white/70 text-[10px] mt-0.5">{stat.label}</p>
+                              <p className="text-white/70 text-[8px] sm:text-[10px] mt-0.5 truncate">{stat.label}</p>
                             </div>
                           ))}
                         </div>

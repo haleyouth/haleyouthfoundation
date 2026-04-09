@@ -26,49 +26,36 @@ export default function HeroSlider() {
   const slide = HERO_SLIDES[current];
 
   return (
-    <section className="relative h-[100svh] min-h-[550px] sm:min-h-[650px] max-h-[1000px] overflow-hidden bg-bg-dark">
-      {/* Background images with Ken Burns effect */}
+    <section className="relative h-[100svh] min-h-[500px] max-h-[900px] overflow-hidden bg-bg-dark">
+      {/* Background */}
       <AnimatePresence initial={false}>
         <motion.div
           key={current}
-          initial={{ opacity: 0, scale: 1.15 }}
+          initial={{ opacity: 0, scale: 1.1 }}
           animate={{ opacity: 1, scale: 1.0 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 1.5, ease: [0.25, 0.46, 0.45, 0.94] }}
+          transition={{ duration: 1.2, ease: "easeInOut" }}
           className="absolute inset-0"
         >
-          <Image
-            src={slide.image}
-            alt={slide.headline}
-            fill
-            className="object-cover"
-            priority={current === 0}
-            sizes="100vw"
-          />
+          <Image src={slide.image} alt={slide.headline} fill className="object-cover" priority={current === 0} sizes="100vw" />
           <div className="hero-overlay absolute inset-0" />
         </motion.div>
       </AnimatePresence>
 
-      {/* Decorative elements */}
-      <div className="absolute inset-0 z-[5] pointer-events-none">
-        <div className="absolute top-20 right-20 w-72 h-72 rounded-full bg-white/[0.03] blur-3xl" />
-        <div className="absolute bottom-20 left-20 w-96 h-96 rounded-full bg-primary/[0.05] blur-3xl" />
-      </div>
-
       {/* Content */}
       <div className="relative z-10 h-full flex items-center">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-          <div className="max-w-3xl">
+        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-2xl lg:max-w-3xl">
             {/* Badge */}
             <AnimatePresence mode="wait">
               <motion.div
                 key={`badge-${current}`}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.5, delay: 0.1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.4, delay: 0.1 }}
               >
-                <span className="inline-flex items-center gap-2 px-4 py-1.5 bg-white/10 backdrop-blur-md border border-white/15 rounded-full text-white/80 text-xs font-medium tracking-wider uppercase mb-6">
+                <span className="inline-flex items-center gap-2 px-3 py-1 bg-white/10 backdrop-blur-sm border border-white/15 rounded-full text-white/80 text-[10px] sm:text-xs font-medium tracking-wider uppercase mb-4 sm:mb-6">
                   <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
                   Haleyouth Foundation
                 </span>
@@ -79,11 +66,11 @@ export default function HeroSlider() {
             <AnimatePresence mode="wait">
               <motion.h1
                 key={`title-${current}`}
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.7, delay: 0.2 }}
-                className="text-[28px] sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white leading-[1.1] tracking-tight"
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+                className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-[1.15] tracking-tight"
                 style={{ fontFamily: "var(--font-playfair)" }}
               >
                 {slide.headline}
@@ -94,11 +81,11 @@ export default function HeroSlider() {
             <AnimatePresence mode="wait">
               <motion.p
                 key={`sub-${current}`}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.6, delay: 0.4 }}
-                className="mt-4 sm:mt-6 text-sm sm:text-base lg:text-lg text-white/75 leading-relaxed max-w-2xl font-light"
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.4, delay: 0.35 }}
+                className="mt-3 sm:mt-5 text-sm sm:text-base lg:text-lg text-white/70 leading-relaxed max-w-xl lg:max-w-2xl"
               >
                 {slide.subtitle}
               </motion.p>
@@ -108,20 +95,16 @@ export default function HeroSlider() {
             <AnimatePresence mode="wait">
               <motion.div
                 key={`cta-${current}`}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.6, delay: 0.6 }}
-                className="mt-6 sm:mt-10 flex flex-wrap gap-3 sm:gap-4"
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.4, delay: 0.5 }}
+                className="mt-5 sm:mt-8 flex flex-col sm:flex-row gap-3"
               >
-                <Link href="/get-involved/donate" className="btn-accent inline-flex items-center gap-2 text-sm sm:text-base !py-3 sm:!py-3.5 !px-6 sm:!px-8">
-                  <Heart size={16} />
-                  Donate Now
+                <Link href="/get-involved/donate" className="btn-accent inline-flex items-center justify-center gap-2 !text-sm !py-3 !px-6">
+                  <Heart size={15} className="fill-white" /> Donate Now
                 </Link>
-                <Link
-                  href={slide.cta.href}
-                  className="px-5 sm:px-7 py-3 sm:py-3.5 bg-white/10 backdrop-blur-md text-white rounded-xl font-semibold text-sm sm:text-base border border-white/20 hover:bg-white/20 hover:border-white/30 transition-all duration-300"
-                >
+                <Link href={slide.cta.href} className="px-6 py-3 bg-white/10 backdrop-blur-sm text-white rounded-xl font-semibold text-sm border border-white/20 hover:bg-white/20 transition-all text-center">
                   {slide.cta.text}
                 </Link>
               </motion.div>
@@ -130,54 +113,36 @@ export default function HeroSlider() {
         </div>
       </div>
 
-      {/* Bottom bar with navigation */}
+      {/* Bottom navigation */}
       <div className="absolute bottom-0 left-0 right-0 z-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between py-4 sm:py-6 border-t border-white/10">
-            {/* Slide indicators */}
-            <div className="flex items-center gap-2 sm:gap-4">
-              <span className="text-white/40 text-xs sm:text-sm font-mono hidden sm:inline">
+          <div className="flex items-center justify-between py-3 sm:py-5 border-t border-white/10">
+            {/* Indicators */}
+            <div className="flex items-center gap-2 sm:gap-3">
+              <span className="text-white/40 text-xs font-mono hidden sm:inline">
                 {String(current + 1).padStart(2, "0")} / {String(HERO_SLIDES.length).padStart(2, "0")}
               </span>
-              <div className="flex gap-1.5 sm:gap-2">
+              <div className="flex gap-1.5">
                 {HERO_SLIDES.map((_, i) => (
                   <button
                     key={i}
                     onClick={() => setCurrent(i)}
-                    aria-label={`Go to slide ${i + 1}`}
-                    className="relative h-1 rounded-full overflow-hidden transition-all duration-500"
-                    style={{ width: i === current ? 36 : 12 }}
-                  >
-                    <div className="absolute inset-0 bg-white/20" />
-                    {i === current && (
-                      <motion.div
-                        initial={{ width: "0%" }}
-                        animate={{ width: "100%" }}
-                        transition={{ duration: 7, ease: "linear" }}
-                        key={`progress-${current}`}
-                        className="absolute inset-0 bg-white rounded-full"
-                      />
-                    )}
-                  </button>
+                    aria-label={`Slide ${i + 1}`}
+                    className={`h-1 rounded-full transition-all duration-500 ${
+                      i === current ? "w-8 sm:w-10 bg-white" : "w-3 bg-white/30"
+                    }`}
+                  />
                 ))}
               </div>
             </div>
 
-            {/* Arrow navigation */}
-            <div className="flex items-center gap-2">
-              <button
-                onClick={prev}
-                aria-label="Previous slide"
-                className="w-11 h-11 rounded-full bg-white/10 backdrop-blur-sm border border-white/15 flex items-center justify-center text-white/70 hover:bg-white/20 hover:text-white transition-all duration-300"
-              >
-                <ChevronLeft size={18} />
+            {/* Arrows */}
+            <div className="flex gap-2">
+              <button onClick={prev} aria-label="Previous" className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white/10 flex items-center justify-center text-white/70 hover:bg-white/20 transition-colors">
+                <ChevronLeft size={16} />
               </button>
-              <button
-                onClick={next}
-                aria-label="Next slide"
-                className="w-11 h-11 rounded-full bg-white/10 backdrop-blur-sm border border-white/15 flex items-center justify-center text-white/70 hover:bg-white/20 hover:text-white transition-all duration-300"
-              >
-                <ChevronRight size={18} />
+              <button onClick={next} aria-label="Next" className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white/10 flex items-center justify-center text-white/70 hover:bg-white/20 transition-colors">
+                <ChevronRight size={16} />
               </button>
             </div>
           </div>

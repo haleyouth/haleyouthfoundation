@@ -10,7 +10,7 @@ interface PageHeaderProps {
 
 export default function PageHeader({ title, subtitle, badge }: PageHeaderProps) {
   return (
-    <section className="pt-24 sm:pt-32 pb-14 sm:pb-20 section-gradient-blue relative overflow-hidden">
+    <section className="pt-20 sm:pt-28 md:pt-32 pb-10 sm:pb-16 md:pb-20 section-gradient-blue relative overflow-hidden">
       {/* Decorative elements */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute -top-20 -right-20 w-80 h-80 rounded-full bg-white/[0.04] blur-3xl" />

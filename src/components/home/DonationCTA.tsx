@@ -48,7 +48,7 @@ export default function DonationCTA() {
           </motion.div>
 
           {/* Amount Cards */}
-          <div className="grid sm:grid-cols-3 gap-5 mb-12">
+          <div className="grid grid-cols-3 gap-2 sm:gap-5 mb-10 sm:mb-12">
             {amounts.map((item, i) => (
               <motion.div
                 key={item.amount}
@@ -57,13 +57,14 @@ export default function DonationCTA() {
                 transition={{ duration: 0.5, delay: 0.2 + i * 0.12 }}
                 className={`card-premium p-7 text-center bg-gradient-to-br ${item.color} border-0`}
               >
-                <div className="w-14 h-14 rounded-2xl bg-white shadow-sm flex items-center justify-center mx-auto mb-4">
-                  <item.icon size={24} className="text-accent" />
+                <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl bg-white shadow-sm flex items-center justify-center mx-auto mb-2 sm:mb-4">
+                  <item.icon size={18} className="text-accent sm:hidden" />
+                  <item.icon size={24} className="text-accent hidden sm:block" />
                 </div>
-                <p className="text-3xl font-bold text-text-primary mb-2 tracking-tight">
+                <p className="text-lg sm:text-3xl font-bold text-text-primary mb-1 sm:mb-2 tracking-tight">
                   {item.amount}
                 </p>
-                <p className="text-text-secondary text-sm leading-relaxed">{item.impact}</p>
+                <p className="text-text-secondary text-[10px] sm:text-sm leading-relaxed line-clamp-3">{item.impact}</p>
               </motion.div>
             ))}
           </div>

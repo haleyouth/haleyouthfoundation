@@ -44,6 +44,31 @@ body {
   overflow-x: hidden;
   line-height: 1.7;
   letter-spacing: -0.01em;
+  -webkit-text-size-adjust: 100%;
+}
+
+/* ══════════════════════════════════════
+   GLOBAL OVERFLOW PREVENTION
+   ══════════════════════════════════════ */
+html, body {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+img, video, iframe {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Prevent text from breaking out of containers */
+h1, h2, h3, h4, h5, h6, p, a, span, li {
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+/* Mobile-first section padding */
+section {
+  overflow-x: hidden;
 }
 
 ::selection {
@@ -100,11 +125,12 @@ body {
 .card-premium {
   background: #FFFFFF;
   border: 1px solid rgba(226, 232, 240, 0.8);
-  border-radius: 20px;
+  border-radius: 16px;
   transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   box-shadow:
     0 1px 3px rgba(0,0,0,0.03),
     0 4px 12px rgba(0,0,0,0.02);
+  overflow: hidden;
 }
 
 .card-premium:hover {

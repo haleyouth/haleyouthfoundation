@@ -61,7 +61,7 @@ export default function Footer() {
       </div>
 
       {/* Main Footer */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16">
         <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-12 gap-8 sm:gap-12">
           {/* Brand Column */}
           <div className="col-span-2 lg:col-span-4">
@@ -147,7 +147,7 @@ export default function Footer() {
           </div>
 
           {/* Contact */}
-          <div className="lg:col-span-2">
+          <div className="col-span-2 sm:col-span-1 lg:col-span-2">
             <h4 className="text-xs font-semibold uppercase tracking-widest text-white/30 mb-5">Contact</h4>
             <div className="space-y-4">
               <div className="flex items-start gap-3">

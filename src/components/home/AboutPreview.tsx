@@ -71,17 +71,17 @@ export default function AboutPreview() {
               About Us
             </span>
             <h2
-              className="text-2xl sm:text-3xl lg:text-[40px] font-bold text-text-primary leading-[1.15] mb-6"
+              className="text-xl sm:text-2xl md:text-3xl lg:text-[40px] font-bold text-text-primary leading-[1.15] mb-4 sm:mb-6"
               style={{ fontFamily: "var(--font-playfair)" }}
             >
               Empowering Youth,<br />
               <span className="gradient-text">Building Peace</span>
             </h2>
-            <p className="text-text-secondary leading-relaxed mb-4 text-[15px]">
+            <p className="text-text-secondary leading-relaxed mb-3 sm:mb-4 text-sm sm:text-[15px]">
               Founded in 2019 by passionate young professionals with a hunger for change, Haleyouth Foundation
               operates at the intersection of youth empowerment, girl-child education, gender equity, and climate action.
             </p>
-            <p className="text-text-secondary leading-relaxed mb-8 text-[15px]">
+            <p className="text-text-secondary leading-relaxed mb-6 sm:mb-8 text-sm sm:text-[15px]">
               From distributing reusable menstrual pads in Northern Nigeria to speaking at the United Nations General Assembly in New York — we believe that <em>local action sparks global change</em>.
             </p>
 

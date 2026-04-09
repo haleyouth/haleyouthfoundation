@@ -34,18 +34,18 @@ function StatCard({
       }}
       className="group"
     >
-      <div className="glass-card rounded-2xl p-4 sm:p-7 text-center transition-all duration-500 hover:-translate-y-2">
-        <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-xl sm:rounded-2xl bg-gradient-to-br from-gold/25 to-gold/5 border border-gold/20 flex items-center justify-center mx-auto mb-3 sm:mb-5 group-hover:scale-110 group-hover:from-gold/35 transition-all duration-500">
-          <Icon size={22} className="text-gold sm:hidden" />
-          <Icon size={28} className="text-gold hidden sm:block" />
+      <div className="glass-card rounded-xl sm:rounded-2xl p-3 sm:p-5 lg:p-6 text-center transition-all duration-500 hover:-translate-y-1">
+        <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-lg sm:rounded-xl bg-gradient-to-br from-gold/25 to-gold/5 border border-gold/20 flex items-center justify-center mx-auto mb-2 sm:mb-4">
+          <Icon size={18} className="text-gold sm:hidden" />
+          <Icon size={24} className="text-gold hidden sm:block" />
         </div>
-        <div className="mb-1 sm:mb-2">
-          <span className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white counter-number leading-none">
+        <div className="mb-1">
+          <span className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-white counter-number leading-none">
             {stat.prefix || ""}{count}
           </span>
-          <span className="text-lg sm:text-2xl lg:text-3xl font-bold text-gold">{stat.suffix}</span>
+          <span className="text-sm sm:text-lg lg:text-2xl font-bold text-gold">{stat.suffix}</span>
         </div>
-        <p className="text-white/40 text-[10px] sm:text-sm font-medium tracking-wide uppercase">{stat.label}</p>
+        <p className="text-white/40 text-[9px] sm:text-xs font-medium tracking-wide uppercase truncate">{stat.label}</p>
       </div>
     </motion.div>
   );
@@ -86,7 +86,7 @@ export default function ImpactStats() {
             </span>
           </motion.div>
           <h2
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-[1.05] tracking-tight"
+            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-5 leading-[1.1] tracking-tight"
             style={{ fontFamily: "var(--font-playfair)" }}
           >
             Real Impact,<br />
