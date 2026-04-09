@@ -30,7 +30,7 @@ export default function PartnersCarousel() {
             Trusted By <span className="gradient-text">Leading Organizations</span>
           </h2>
           <p className="text-text-secondary leading-relaxed text-[15px]">
-            We collaborate with international organizations, foundations, and institutions that share our vision.
+            We collaborate with local and international organizations, foundations, and institutions that share our vision.
           </p>
         </motion.div>
       </div>

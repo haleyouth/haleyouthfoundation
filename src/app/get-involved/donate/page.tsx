@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import PageHeader from "@/components/ui/PageHeader";
 import { submitDonation } from "@/lib/submissions";
 import { SITE_CONFIG } from "@/lib/constants";
-import { Heart, BookOpen, Shirt, Shield, CreditCard, Building2, CheckCircle, AlertCircle, Loader2, User, Mail, MessageSquare } from "lucide-react";
+import { Heart, BookOpen, Shirt, Shield, CreditCard, Building2, CheckCircle, AlertCircle, Loader2, User, Mail, MessageSquare, Copy, Check, Phone } from "lucide-react";
 
 const usdAmounts = [
   { value: 25, impact: "Provides learning materials for 5 students", icon: BookOpen },
@@ -19,16 +19,42 @@ const ngnAmounts = [
   { value: 50000, impact: "Sponsors a child's school term", icon: Shirt },
 ];
 
-const programs = [
-  "General Fund",
-  "Pad-a-Girl",
-  "Back to School",
-  "Scholars of Change",
-  "STEM Camp",
-  "Digital Skills",
-  "Humanitarian Projects",
-  "Community Healthcare",
+const ngnBankDetails = {
+  accountName: "Haleyouth Foundation",
+  bank: "Guaranty Trust Bank",
+  accountNumber: "0617009307",
+  currency: "NGN",
+};
+
+const domAccounts = [
+  { accountNumber: "0617009307", currency: "NGN", bank: "Guaranty Trust Bank" },
+  { accountNumber: "3002372479", currency: "GBP", bank: "Guaranty Trust Bank" },
+  { accountNumber: "3002372486", currency: "EUR", bank: "Guaranty Trust Bank" },
+  { accountNumber: "3002372493", currency: "USD", bank: "Guaranty Trust Bank" },
 ];
+
+const programs = [
+  "General Fund", "Pad-a-Girl", "Back to School", "Scholars of Change",
+  "STEM Camp", "Digital Skills", "Humanitarian Projects", "Community Healthcare",
+];
+
+function CopyButton({ text }: { text: string }) {
+  const [copied, setCopied] = useState(false);
+  const handleCopy = () => {
+    navigator.clipboard.writeText(text);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+  return (
+    <button
+      onClick={handleCopy}
+      className="p-1.5 rounded-lg hover:bg-gray-100 text-gray-400 hover:text-primary transition-all"
+      title="Copy to clipboard"
+    >
+      {copied ? <Check size={14} className="text-secondary" /> : <Copy size={14} />}
+    </button>
+  );
+}
 
 export default function DonatePage() {
   const [selected, setSelected] = useState<number | null>(50);
@@ -53,21 +79,11 @@ export default function DonatePage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!effectiveAmount || !name || !email) return;
+    if (!effectiveAmount || !name || !email || !phone) return;
     setLoading(true);
     setError("");
     try {
-      await submitDonation({
-        name,
-        email,
-        phone,
-        amount: effectiveAmount,
-        currency,
-        program,
-        message,
-        method,
-        anonymous,
-      });
+      await submitDonation({ name, email, phone, amount: effectiveAmount, currency, program, message, method, anonymous });
       setSubmitted(true);
     } catch {
       setError("Something went wrong. Please try again or contact us directly.");
@@ -86,20 +102,18 @@ export default function DonatePage() {
               <div className="w-20 h-20 rounded-full bg-secondary/10 flex items-center justify-center mx-auto mb-6">
                 <CheckCircle size={40} className="text-secondary" />
               </div>
-              <h2 className="text-2xl font-bold text-text-primary mb-3" style={{ fontFamily: "var(--font-playfair)" }}>
-                Donation Pledge Received!
-              </h2>
+              <h2 className="text-2xl font-bold text-text-primary mb-3" style={{ fontFamily: "var(--font-playfair)" }}>Donation Pledge Received!</h2>
               <p className="text-text-secondary mb-2">
                 Thank you, <strong>{name}</strong>. Your pledge of <strong>{symbol}{effectiveAmount.toLocaleString()}</strong> for <strong>{program}</strong> has been recorded.
               </p>
               <p className="text-text-secondary text-sm mb-6">
-                Our team will reach out to you at <strong>{email}</strong> with payment instructions to complete your donation.
+                Our team will reach out to you at <strong>{email}</strong> with confirmation.
               </p>
               <div className="bg-primary/5 rounded-xl p-4 text-left text-sm">
                 <p className="font-semibold text-text-primary mb-2">What happens next?</p>
                 <ul className="text-text-secondary space-y-1 text-xs">
                   <li>1. You&apos;ll receive a confirmation email shortly</li>
-                  <li>2. Our team will share payment details (bank transfer or online)</li>
+                  <li>2. If paying via bank transfer, use the account details provided</li>
                   <li>3. Once payment is confirmed, you&apos;ll receive a receipt</li>
                 </ul>
               </div>
@@ -114,9 +128,9 @@ export default function DonatePage() {
     <>
       <PageHeader title="Donate" subtitle="Every contribution builds a brighter tomorrow for young people across Nigeria." badge="Support Our Mission" />
 
-      <section className="py-24 bg-bg-primary">
+      <section className="py-16 sm:py-24 bg-bg-primary">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <form onSubmit={handleSubmit} className="card-premium p-8 lg:p-12">
+          <form onSubmit={handleSubmit} className="card-premium p-6 sm:p-8 lg:p-12">
             {/* Currency selector */}
             <div className="flex gap-2 mb-8">
               <button type="button" onClick={() => { setCurrency("usd"); setSelected(50); setCustom(""); }} className={`flex-1 py-3.5 rounded-xl font-medium text-sm transition-all ${currency === "usd" ? "btn-primary !shadow-md" : "bg-bg-secondary text-text-secondary hover:bg-primary/5 border border-gray-200"}`}>
@@ -139,21 +153,67 @@ export default function DonatePage() {
               </div>
             )}
 
+            {/* Bank Account Details */}
+            {currency === "ngn" ? (
+              <div className="bg-blue-50/70 border border-blue-100 rounded-xl p-5 mb-8">
+                <h3 className="font-bold text-text-primary mb-3 flex items-center gap-2">
+                  <Building2 size={16} className="text-primary" /> Bank Account Details (Naira)
+                </h3>
+                <div className="bg-white rounded-lg p-4 space-y-2.5">
+                  <div className="flex items-center justify-between">
+                    <div><span className="text-xs text-gray-400">Account Name</span><p className="text-sm font-semibold text-text-primary">{ngnBankDetails.accountName}</p></div>
+                    <CopyButton text={ngnBankDetails.accountName} />
+                  </div>
+                  <div className="h-px bg-gray-100" />
+                  <div className="flex items-center justify-between">
+                    <div><span className="text-xs text-gray-400">Bank</span><p className="text-sm font-semibold text-text-primary">{ngnBankDetails.bank}</p></div>
+                    <CopyButton text={ngnBankDetails.bank} />
+                  </div>
+                  <div className="h-px bg-gray-100" />
+                  <div className="flex items-center justify-between">
+                    <div><span className="text-xs text-gray-400">Account Number</span><p className="text-sm font-bold text-primary tracking-wider">{ngnBankDetails.accountNumber}</p></div>
+                    <CopyButton text={ngnBankDetails.accountNumber} />
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <div className="bg-blue-50/70 border border-blue-100 rounded-xl p-5 mb-8">
+                <h3 className="font-bold text-text-primary mb-3 flex items-center gap-2">
+                  <CreditCard size={16} className="text-primary" /> Domiciliary Account Details (International)
+                </h3>
+                <p className="text-xs text-text-secondary mb-3">Guaranty Trust Bank — Haleyouth Foundation</p>
+                <div className="space-y-2">
+                  {domAccounts.map((acc) => (
+                    <div key={acc.currency} className="bg-white rounded-lg p-3 flex items-center justify-between">
+                      <div className="flex items-center gap-4">
+                        <span className="w-10 h-10 rounded-lg bg-primary/5 flex items-center justify-center text-xs font-bold text-primary">{acc.currency}</span>
+                        <div>
+                          <p className="text-sm font-bold text-text-primary tracking-wider">{acc.accountNumber}</p>
+                          <p className="text-[11px] text-gray-400">{acc.bank}</p>
+                        </div>
+                      </div>
+                      <CopyButton text={acc.accountNumber} />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
             {/* Amount selection */}
             <h3 className="font-bold text-text-primary mb-4">Select Amount ({symbol})</h3>
-            <div className="grid grid-cols-3 gap-4 mb-4">
+            <div className="grid grid-cols-3 gap-3 sm:gap-4 mb-4">
               {amounts.map((a) => (
                 <button
                   key={a.value}
                   type="button"
                   onClick={() => { setSelected(a.value); setCustom(""); }}
-                  className={`p-5 rounded-xl text-center transition-all border-2 ${
+                  className={`p-4 sm:p-5 rounded-xl text-center transition-all border-2 ${
                     selected === a.value ? "border-accent bg-accent/5 shadow-md shadow-accent/10" : "border-gray-200 hover:border-accent/40"
                   }`}
                 >
-                  <a.icon size={22} className="text-accent mx-auto mb-2" />
-                  <p className="text-xl font-bold text-text-primary">{symbol}{a.value.toLocaleString()}</p>
-                  <p className="text-text-secondary text-xs mt-1">{a.impact}</p>
+                  <a.icon size={20} className="text-accent mx-auto mb-2" />
+                  <p className="text-lg sm:text-xl font-bold text-text-primary">{symbol}{a.value.toLocaleString()}</p>
+                  <p className="text-text-secondary text-[10px] sm:text-xs mt-1">{a.impact}</p>
                 </button>
               ))}
             </div>
@@ -163,14 +223,7 @@ export default function DonatePage() {
               <label className="block text-sm font-medium text-text-primary mb-2">Or enter a custom amount</label>
               <div className="relative">
                 <span className="absolute left-4 top-1/2 -translate-y-1/2 text-text-secondary font-medium">{symbol}</span>
-                <input
-                  type="number"
-                  min="1"
-                  value={custom}
-                  onChange={(e) => { setCustom(e.target.value); setSelected(null); }}
-                  placeholder="Enter amount"
-                  className={`${inputClass} !pl-10`}
-                />
+                <input type="number" min="1" value={custom} onChange={(e) => { setCustom(e.target.value); setSelected(null); }} placeholder="Enter amount" className={`${inputClass} !pl-10`} />
               </div>
             </div>
 
@@ -197,7 +250,7 @@ export default function DonatePage() {
               <div className="mb-5">
                 <label className="block text-sm font-medium text-text-primary mb-2">Phone Number with Country Code *</label>
                 <div className="relative">
-                  <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-sm">📞</span>
+                  <Phone size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" />
                   <input type="tel" required value={phone} onChange={(e) => setPhone(e.target.value)} className={`${inputClass} !pl-11`} placeholder="+234 801 234 5678" />
                 </div>
               </div>
@@ -229,12 +282,7 @@ export default function DonatePage() {
 
               {/* Anonymous checkbox */}
               <label className="flex items-start gap-3 mt-5 cursor-pointer group">
-                <input
-                  type="checkbox"
-                  checked={anonymous}
-                  onChange={(e) => setAnonymous(e.target.checked)}
-                  className="mt-0.5 w-5 h-5 rounded border-gray-300 text-primary focus:ring-primary/30 cursor-pointer"
-                />
+                <input type="checkbox" checked={anonymous} onChange={(e) => setAnonymous(e.target.checked)} className="mt-0.5 w-5 h-5 rounded border-gray-300 text-primary focus:ring-primary/30 cursor-pointer" />
                 <div>
                   <p className="text-sm font-medium text-text-primary group-hover:text-primary transition-colors">Hide my donation information from public</p>
                   <p className="text-xs text-text-secondary mt-0.5">Your details will only be visible to the Haleyouth Foundation admin team.</p>
@@ -245,30 +293,18 @@ export default function DonatePage() {
             {/* Submit */}
             <button
               type="submit"
-              disabled={!effectiveAmount || !name || !email || loading}
+              disabled={!effectiveAmount || !name || !email || !phone || loading}
               className="w-full py-4 btn-accent flex items-center justify-center gap-2 !text-lg !rounded-xl disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {loading ? (
-                <Loader2 size={20} className="animate-spin" />
-              ) : (
-                <Heart size={20} className="fill-white" />
-              )}
+              {loading ? <Loader2 size={20} className="animate-spin" /> : <Heart size={20} className="fill-white" />}
               {loading ? "Processing..." : `Donate ${effectiveAmount ? `${symbol}${effectiveAmount.toLocaleString()}` : ""}`}
             </button>
 
             {/* Trust signals */}
-            <div className="mt-6 flex items-center justify-center gap-6 text-text-secondary text-xs">
+            <div className="mt-6 flex items-center justify-center gap-4 sm:gap-6 text-text-secondary text-xs flex-wrap">
               <span className="flex items-center gap-1"><Shield size={14} /> Secure</span>
               <span>{SITE_CONFIG.registration}</span>
               <span className="flex items-center gap-1"><Heart size={12} className="text-accent" /> Tax-deductible</span>
-            </div>
-
-            {/* Bank transfer */}
-            <div className="mt-8 pt-8 border-t border-gray-100">
-              <h4 className="font-bold text-text-primary mb-3 text-sm">Direct Bank Transfer</h4>
-              <p className="text-text-secondary text-sm">
-                For bank transfers, please complete this form and select &quot;Bank Transfer&quot; as payment method. Our team will share account details via email.
-              </p>
             </div>
           </form>
         </div>
