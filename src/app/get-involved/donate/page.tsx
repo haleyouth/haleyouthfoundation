@@ -27,10 +27,10 @@ const ngnBankDetails = {
 };
 
 const domAccounts = [
-  { accountNumber: "0617009307", currency: "NGN", bank: "Guaranty Trust Bank" },
-  { accountNumber: "3002372479", currency: "GBP", bank: "Guaranty Trust Bank" },
-  { accountNumber: "3002372486", currency: "EUR", bank: "Guaranty Trust Bank" },
-  { accountNumber: "3002372493", currency: "USD", bank: "Guaranty Trust Bank" },
+  { accountNumber: "0617009307", currency: "NGN", currencyFull: "Nigerian Naira (₦)", bank: "Guaranty Trust Bank" },
+  { accountNumber: "3002372479", currency: "GBP", currencyFull: "British Pound Sterling (£)", bank: "Guaranty Trust Bank" },
+  { accountNumber: "3002372486", currency: "EUR", currencyFull: "Euro (€)", bank: "Guaranty Trust Bank" },
+  { accountNumber: "3002372493", currency: "USD", currencyFull: "United States Dollar ($)", bank: "Guaranty Trust Bank" },
 ];
 
 const programs = [
@@ -184,10 +184,11 @@ export default function DonatePage() {
                 <p className="text-xs text-text-secondary mb-3">Guaranty Trust Bank — Haleyouth Foundation</p>
                 <div className="space-y-2">
                   {domAccounts.map((acc) => (
-                    <div key={acc.currency} className="bg-white rounded-lg p-3 flex items-center justify-between">
-                      <div className="flex items-center gap-4">
-                        <span className="w-10 h-10 rounded-lg bg-primary/5 flex items-center justify-center text-xs font-bold text-primary">{acc.currency}</span>
+                    <div key={acc.currency} className="bg-white rounded-lg p-3 sm:p-4 flex items-center justify-between">
+                      <div className="flex items-center gap-3 sm:gap-4">
+                        <span className="w-10 h-10 rounded-lg bg-primary/5 flex items-center justify-center text-xs font-bold text-primary shrink-0">{acc.currency}</span>
                         <div>
+                          <p className="text-xs text-gray-500 mb-0.5">{acc.currencyFull}</p>
                           <p className="text-sm font-bold text-text-primary tracking-wider">{acc.accountNumber}</p>
                           <p className="text-[11px] text-gray-400">{acc.bank}</p>
                         </div>
