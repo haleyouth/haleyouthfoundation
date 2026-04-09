@@ -27,7 +27,6 @@ const ngnBankDetails = {
 };
 
 const domAccounts = [
-  { accountNumber: "0617009307", currency: "NGN", currencyFull: "Nigerian Naira (₦)", bank: "Guaranty Trust Bank" },
   { accountNumber: "3002372479", currency: "GBP", currencyFull: "British Pound Sterling (£)", bank: "Guaranty Trust Bank" },
   { accountNumber: "3002372486", currency: "EUR", currencyFull: "Euro (€)", bank: "Guaranty Trust Bank" },
   { accountNumber: "3002372493", currency: "USD", currencyFull: "United States Dollar ($)", bank: "Guaranty Trust Bank" },
@@ -126,26 +125,24 @@ export default function DonatePage() {
 
   return (
     <>
-      <PageHeader title="Donate" subtitle="Every contribution builds a brighter tomorrow for young people across Nigeria." badge="Support Our Mission" />
+      <PageHeader title="Make a Pledge" subtitle="Every contribution builds a brighter tomorrow for young people across Nigeria." badge="Support Our Mission" />
 
       <section className="py-16 sm:py-24 bg-bg-primary">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <form onSubmit={handleSubmit} className="card-premium p-6 sm:p-8 lg:p-12">
             {/* Currency selector */}
             <div className="flex gap-2 mb-8">
-              <button type="button" onClick={() => { setCurrency("usd"); setSelected(50); setCustom(""); }} className={`flex-1 py-3.5 rounded-xl font-medium text-sm transition-all ${currency === "usd" ? "btn-primary !shadow-md" : "bg-bg-secondary text-text-secondary hover:bg-primary/5 border border-gray-200"}`}>
-                <CreditCard size={16} className="inline mr-2" /> International (USD)
-              </button>
               <button type="button" onClick={() => { setCurrency("ngn"); setSelected(10000); setCustom(""); }} className={`flex-1 py-3.5 rounded-xl font-medium text-sm transition-all ${currency === "ngn" ? "btn-primary !shadow-md" : "bg-bg-secondary text-text-secondary hover:bg-primary/5 border border-gray-200"}`}>
                 <Building2 size={16} className="inline mr-2" /> Nigeria (NGN)
               </button>
+              <button type="button" onClick={() => { setCurrency("usd"); setSelected(50); setCustom(""); }} className={`flex-1 py-3.5 rounded-xl font-medium text-sm transition-all ${currency === "usd" ? "btn-primary !shadow-md" : "bg-bg-secondary text-text-secondary hover:bg-primary/5 border border-gray-200"}`}>
+                <CreditCard size={16} className="inline mr-2" /> International Currency
+              </button>
             </div>
 
-            {currency === "ngn" && (
-              <div className="bg-secondary/5 border border-secondary/20 rounded-xl p-4 mb-6 text-center">
-                <p className="text-secondary font-medium text-sm">We accept and appreciate all donation efforts</p>
-              </div>
-            )}
+            <div className="bg-secondary/5 border border-secondary/20 rounded-xl p-4 mb-6 text-center">
+              <p className="text-secondary font-medium text-sm">We accept and appreciate all donation efforts</p>
+            </div>
 
             {error && (
               <div className="flex items-center gap-2 bg-red-50 text-red-600 text-sm p-3 rounded-xl mb-6 border border-red-100">
@@ -156,23 +153,26 @@ export default function DonatePage() {
             {/* Bank Account Details */}
             {currency === "ngn" ? (
               <div className="bg-blue-50/70 border border-blue-100 rounded-xl p-5 mb-8">
-                <h3 className="font-bold text-text-primary mb-3 flex items-center gap-2">
-                  <Building2 size={16} className="text-primary" /> Bank Account Details (Naira)
-                </h3>
+                <div className="flex items-center justify-between mb-3">
+                  <h3 className="font-bold text-text-primary flex items-center gap-2">
+                    <Building2 size={16} className="text-primary" /> Bank Account Details (Naira)
+                  </h3>
+                  <CopyButton text={`${ngnBankDetails.accountName}\n${ngnBankDetails.bank}\n${ngnBankDetails.accountNumber}`} />
+                </div>
                 <div className="bg-white rounded-lg p-4 space-y-2.5">
-                  <div className="flex items-center justify-between">
-                    <div><span className="text-xs text-gray-400">Account Name</span><p className="text-sm font-semibold text-text-primary">{ngnBankDetails.accountName}</p></div>
-                    <CopyButton text={ngnBankDetails.accountName} />
+                  <div>
+                    <span className="text-xs text-gray-400">Account Name</span>
+                    <p className="text-sm font-semibold text-text-primary">{ngnBankDetails.accountName}</p>
                   </div>
                   <div className="h-px bg-gray-100" />
-                  <div className="flex items-center justify-between">
-                    <div><span className="text-xs text-gray-400">Bank</span><p className="text-sm font-semibold text-text-primary">{ngnBankDetails.bank}</p></div>
-                    <CopyButton text={ngnBankDetails.bank} />
+                  <div>
+                    <span className="text-xs text-gray-400">Bank</span>
+                    <p className="text-sm font-semibold text-text-primary">{ngnBankDetails.bank}</p>
                   </div>
                   <div className="h-px bg-gray-100" />
-                  <div className="flex items-center justify-between">
-                    <div><span className="text-xs text-gray-400">Account Number</span><p className="text-sm font-bold text-primary tracking-wider">{ngnBankDetails.accountNumber}</p></div>
-                    <CopyButton text={ngnBankDetails.accountNumber} />
+                  <div>
+                    <span className="text-xs text-gray-400">Account Number</span>
+                    <p className="text-sm font-bold text-primary tracking-wider">{ngnBankDetails.accountNumber}</p>
                   </div>
                 </div>
               </div>
@@ -190,10 +190,10 @@ export default function DonatePage() {
                         <div>
                           <p className="text-xs text-gray-500 mb-0.5">{acc.currencyFull}</p>
                           <p className="text-sm font-bold text-text-primary tracking-wider">{acc.accountNumber}</p>
-                          <p className="text-[11px] text-gray-400">{acc.bank}</p>
+                          <p className="text-[11px] text-gray-400">{acc.bank} — Haleyouth Foundation</p>
                         </div>
                       </div>
-                      <CopyButton text={acc.accountNumber} />
+                      <CopyButton text={`${acc.currencyFull}\nHaleyouth Foundation\n${acc.bank}\n${acc.accountNumber}`} />
                     </div>
                   ))}
                 </div>
