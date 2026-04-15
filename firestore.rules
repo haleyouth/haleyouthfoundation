@@ -32,6 +32,13 @@ service cloud.firestore {
       allow read, update, delete: if true;
     }
 
+    // Admin-managed content
+    match /admin_programs/{doc} { allow read, write: if true; }
+    match /admin_partners/{doc} { allow read, write: if true; }
+    match /admin_team/{doc} { allow read, write: if true; }
+    match /admin_gallery/{doc} { allow read, write: if true; }
+    match /admin_posts/{doc} { allow read, write: if true; }
+
     // Default deny
     match /{document=**} {
       allow read, write: if false;
