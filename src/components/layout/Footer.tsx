@@ -7,10 +7,10 @@ import { SITE_CONFIG } from "@/lib/constants";
 const programLinks = [
   { label: "Pad-a-Girl", href: "/programs/pad-a-girl" },
   { label: "Back to School", href: "/programs/back-to-school" },
-  { label: "Scholars of Change", href: "/programs/scholars-of-change" },
-  { label: "STEM Camp", href: "/programs/stem-camp" },
+  { label: "STEM Training", href: "/programs/stem-training" },
   { label: "Digital Skills", href: "/programs/digital-skills" },
-  { label: "Career Advisory", href: "/programs/career-advisory" },
+  { label: "Career & Mentorship", href: "/programs/career-and-mentorship" },
+  { label: "Language and Culture", href: "/programs/language-and-culture" },
 ];
 
 const quickLinks = [

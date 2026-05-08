@@ -110,22 +110,6 @@ export const PROGRAMS = [
     image: "/images/events/Back2School.jpg",
   },
   {
-    slug: "scholars-of-change",
-    title: "Scholars of Change",
-    tagline: "Scholarships and mentorship for tomorrow's leaders",
-    description:
-      "A comprehensive scholarship program with mentorship, career guidance, and academic support for deserving students from underserved backgrounds.",
-    icon: "GraduationCap",
-    category: "Education & Scholarships",
-    featured: true,
-    sdgs: [4, 10],
-    stats: [
-      { label: "Scholarship Value Mentored", value: "$100K+" },
-      { label: "Countries", value: "5+" },
-    ],
-    image: "/images/events/Back2School2.jpg",
-  },
-  {
     slug: "stem-training",
     title: "STEM Training",
     tagline: "Inspiring the next generation of innovators in STEM",
@@ -182,14 +166,19 @@ export const PROGRAMS = [
     image: "/images/events/UNGA80_b.jpg",
   },
   {
-    slug: "career-advisory",
-    title: "Career Advisory",
-    tagline: "Mentoring youth to access global opportunities",
+    slug: "career-and-mentorship",
+    title: "Career & Mentorship",
+    tagline: "Scholarships, mentorship, and global career pathways",
     description:
-      "Mentoring graduate students to access scholarships and career opportunities worldwide — with a cumulative worth of over $100,000 across France, Germany, UK, and Malaysia.",
-    icon: "Compass",
-    category: "Skills & Empowerment",
-    sdgs: [4, 8],
+      "Mentoring students and graduates to access scholarships and career opportunities worldwide — with a cumulative worth of over $100,000 across France, Germany, UK, and Malaysia. Includes academic support and career guidance for deserving students from underserved backgrounds.",
+    icon: "GraduationCap",
+    category: "Education & Scholarships",
+    featured: true,
+    sdgs: [4, 8, 10],
+    stats: [
+      { label: "Scholarship Value Mentored", value: "$100K+" },
+      { label: "Countries", value: "5+" },
+    ],
     image: "/images/events/Unga80_c.jpg",
   },
   {

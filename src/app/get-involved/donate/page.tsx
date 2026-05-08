@@ -33,8 +33,8 @@ const domAccounts = [
 ];
 
 const programs = [
-  "General Fund", "Pad-a-Girl", "Back to School", "Scholars of Change",
-  "STEM Camp", "Digital Skills", "Humanitarian Projects", "Community Healthcare",
+  "General Fund", "Pad-a-Girl", "Back to School", "Career & Mentorship",
+  "STEM Training", "Digital Skills", "Humanitarian Projects", "Community Healthcare",
 ];
 
 function CopyButton({ text }: { text: string }) {

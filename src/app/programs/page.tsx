@@ -4,7 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, Heart, BookOpen, GraduationCap, Microscope, Laptop, Stethoscope, HandHeart, Handshake, Compass, TreePine, Wrench, Globe, Sparkles } from "lucide-react";
+import { ArrowRight, Heart, BookOpen, GraduationCap, Microscope, Laptop, Stethoscope, HandHeart, Handshake, Compass, TreePine, Wrench, Globe, Languages, Sparkles } from "lucide-react";
 import PageHeader from "@/components/ui/PageHeader";
 import { PROGRAMS, PROGRAM_CATEGORIES } from "@/lib/constants";
 import { SDGBadge } from "@/components/ui/SDGIcons";
@@ -12,6 +12,13 @@ import { SDGBadge } from "@/components/ui/SDGIcons";
 const iconMap: Record<string, React.ComponentType<{ size?: number; className?: string }>> = {
   Heart, BookOpen, GraduationCap, Microscope, Laptop, Stethoscope, HandHeart, Handshake, Compass, TreePine, Wrench, Globe,
 };
+
+const FOCUSED_PROGRAMS: { title: string; tagline: string; Icon: React.ComponentType<{ size?: number; className?: string }> }[] = [
+  { title: "STEM Training", tagline: "Hands-on science, technology, engineering, and mathematics for young innovators.", Icon: Microscope },
+  { title: "Humanitarian Projects", tagline: "Food drives, emergency support, and social assistance for families in need.", Icon: HandHeart },
+  { title: "Language and Heritage", tagline: "Reviving Nigerian languages and celebrating cultural heritage.", Icon: Languages },
+  { title: "Youth Skill Acquisition", tagline: "Practical, marketable skills for economic independence.", Icon: Wrench },
+];
 
 export default function ProgramsPage() {
   const [activeCategory, setActiveCategory] = useState("All");
@@ -23,38 +30,34 @@ export default function ProgramsPage() {
 
       <section className="py-12 sm:py-20 bg-bg-primary">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Focused Programs strip - all 12 compact cards with lightning */}
+          {/* Focused Programs - standalone strategic priorities */}
           <div className="text-center mb-6">
             <h2 className="text-xl sm:text-2xl font-bold text-text-primary" style={{ fontFamily: "var(--font-playfair)" }}>
               Focused Programs
             </h2>
-            <p className="text-text-secondary/80 text-sm mt-2">The full set of initiatives Haleyouth Foundation runs.</p>
+            <p className="text-text-secondary/80 text-sm mt-2">Our core areas of strategic focus.</p>
           </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-5 mb-14 sm:mb-20">
-            {PROGRAMS.map((program, i) => {
-              const Icon = iconMap[program.icon] || Heart;
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6 mb-14 sm:mb-20">
+            {FOCUSED_PROGRAMS.map((item, i) => {
+              const Icon = item.Icon;
               return (
                 <motion.div
-                  key={program.slug}
-                  initial={{ opacity: 0, y: 25, scale: 0.95 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  transition={{ duration: 0.45, delay: i * 0.05 }}
+                  key={item.title}
+                  initial={{ opacity: 0, y: 25 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: i * 0.08 }}
                 >
-                  <Link
-                    href={`/programs/${program.slug}`}
-                    title={program.title}
-                    className="group block card-premium card-lightning p-5 text-center h-full"
-                  >
-                    <div className="w-[52px] h-[52px] rounded-2xl bg-gradient-to-br from-primary/10 to-primary/5 flex items-center justify-center mx-auto mb-3 group-hover:scale-110 group-hover:from-primary/20 group-hover:to-primary/10 transition-all duration-500">
-                      <Icon size={22} className="text-primary" />
+                  <div className="card-premium card-lightning p-7 text-center h-full">
+                    <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary/10 to-primary/5 flex items-center justify-center mx-auto mb-4 transition-all duration-500">
+                      <Icon size={26} className="text-primary" />
                     </div>
-                    <h3 className="text-[13px] font-bold text-text-primary group-hover:text-primary transition-colors duration-300 mb-1 leading-tight">
-                      {program.title}
+                    <h3 className="text-base font-bold text-text-primary mb-2 leading-tight">
+                      {item.title}
                     </h3>
-                    <p className="text-[11px] text-text-secondary/70 line-clamp-2 leading-relaxed">
-                      {program.tagline}
+                    <p className="text-text-secondary text-[13px] leading-relaxed">
+                      {item.tagline}
                     </p>
-                  </Link>
+                  </div>
                 </motion.div>
               );
             })}

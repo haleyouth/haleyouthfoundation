@@ -5,7 +5,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { useCountUp } from "@/hooks/useCountUp";
-import { ArrowRight, Heart, BookOpen, GraduationCap, Microscope, Laptop, Stethoscope, HandHeart, Handshake, Compass, TreePine, Wrench, Globe } from "lucide-react";
+import { ArrowRight, Heart, BookOpen, GraduationCap, Microscope, Laptop, Stethoscope, HandHeart, Handshake, Compass, TreePine, Wrench, Globe, Languages } from "lucide-react";
 import { PROGRAMS } from "@/lib/constants";
 
 const iconMap: Record<string, React.ComponentType<{ size?: number; className?: string }>> = {
@@ -22,13 +22,16 @@ function AnimatedStat({ value, inView }: { value: string; inView: boolean }) {
   return <><span className="counter-number">{count}</span>{suffix}</>;
 }
 
+const FOCUSED_PROGRAMS: { title: string; tagline: string; Icon: React.ComponentType<{ size?: number; className?: string }> }[] = [
+  { title: "STEM Training", tagline: "Hands-on science, technology, engineering, and mathematics for young innovators.", Icon: Microscope },
+  { title: "Humanitarian Projects", tagline: "Food drives, emergency support, and social assistance for families in need.", Icon: HandHeart },
+  { title: "Language and Heritage", tagline: "Reviving Nigerian languages and celebrating cultural heritage.", Icon: Languages },
+  { title: "Youth Skill Acquisition", tagline: "Practical, marketable skills for economic independence.", Icon: Wrench },
+];
+
 export default function ProgramsShowcase() {
   const { ref, inView } = useScrollAnimation();
   const featured = PROGRAMS.filter((p) => p.featured);
-  const focusedSlugs = ["stem-training", "humanitarian-projects", "language-and-culture", "youth-skill-acquisition"];
-  const focused = focusedSlugs
-    .map((slug) => PROGRAMS.find((p) => p.slug === slug))
-    .filter((p): p is (typeof PROGRAMS)[number] => Boolean(p));
 
   return (
     <section ref={ref} className="py-16 sm:py-28 lg:py-36 section-gradient-light relative overflow-hidden">
@@ -59,52 +62,32 @@ export default function ProgramsShowcase() {
           </p>
         </motion.div>
 
-        {/* Focused Programs - 4 detailed cards */}
+        {/* Focused Programs - standalone strategic priorities */}
         <div className="text-center mb-8">
           <h3 className="text-sm font-semibold uppercase tracking-[0.18em] text-primary">Focused Programs</h3>
-          <p className="text-text-secondary/80 text-sm mt-2">Four priority initiatives shaping our current impact.</p>
+          <p className="text-text-secondary/80 text-sm mt-2">Our core areas of strategic focus.</p>
         </div>
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6 mb-12">
-          {focused.map((program, i) => {
-            const Icon = iconMap[program.icon] || Heart;
+          {FOCUSED_PROGRAMS.map((item, i) => {
+            const Icon = item.Icon;
             return (
               <motion.div
-                key={program.slug}
+                key={item.title}
                 initial={{ opacity: 0, y: 30 }}
                 animate={inView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: 0.1 + i * 0.1 }}
               >
-                <Link
-                  href={`/programs/${program.slug}`}
-                  className="group block card-premium card-lightning overflow-hidden h-full"
-                >
-                  <div className="relative h-40 overflow-hidden">
-                    <Image
-                      src={program.image}
-                      alt={program.title}
-                      fill
-                      className="object-cover group-hover:scale-110 transition-transform duration-[800ms] ease-out"
-                      sizes="(max-width: 768px) 100vw, 25vw"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-                    <span className="absolute top-3 left-3 px-2.5 py-1 bg-white/95 backdrop-blur-sm text-[10px] font-semibold text-primary rounded-md shadow-sm">
-                      {program.category}
-                    </span>
+                <div className="card-premium card-lightning p-7 text-center h-full">
+                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary/10 to-primary/5 flex items-center justify-center mx-auto mb-4 transition-all duration-500">
+                    <Icon size={26} className="text-primary" />
                   </div>
-                  <div className="p-5">
-                    <div className="flex items-center gap-3 mb-2">
-                      <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-primary/10 to-primary/5 flex items-center justify-center shrink-0 group-hover:from-primary/20 group-hover:to-primary/10 transition-all duration-300">
-                        <Icon size={18} className="text-primary" />
-                      </div>
-                      <h3 className="text-base font-bold text-text-primary group-hover:text-primary transition-colors duration-300 leading-tight">
-                        {program.title}
-                      </h3>
-                    </div>
-                    <p className="text-text-secondary text-[13px] leading-relaxed line-clamp-2">
-                      {program.tagline}
-                    </p>
-                  </div>
-                </Link>
+                  <h3 className="text-base font-bold text-text-primary mb-2 leading-tight">
+                    {item.title}
+                  </h3>
+                  <p className="text-text-secondary text-[13px] leading-relaxed">
+                    {item.tagline}
+                  </p>
+                </div>
               </motion.div>
             );
           })}
