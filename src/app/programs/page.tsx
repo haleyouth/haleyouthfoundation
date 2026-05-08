@@ -4,7 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, Heart, BookOpen, GraduationCap, Microscope, Laptop, Stethoscope, HandHeart, Handshake, Compass, TreePine, Wrench, Globe, Languages, Sparkles } from "lucide-react";
+import { ArrowRight, Heart, BookOpen, GraduationCap, Microscope, Laptop, Stethoscope, HandHeart, Handshake, Compass, TreePine, Wrench, Globe, Atom, Amphora, Sparkles } from "lucide-react";
 import PageHeader from "@/components/ui/PageHeader";
 import { PROGRAMS, PROGRAM_CATEGORIES } from "@/lib/constants";
 import { SDGBadge } from "@/components/ui/SDGIcons";
@@ -14,10 +14,14 @@ const iconMap: Record<string, React.ComponentType<{ size?: number; className?: s
 };
 
 const FOCUSED_PROGRAMS: { title: string; tagline: string; Icon: React.ComponentType<{ size?: number; className?: string }> }[] = [
-  { title: "STEM Training", tagline: "Hands-on science, technology, engineering, and mathematics for young innovators.", Icon: Microscope },
+  { title: "STEM Training", tagline: "Hands-on science, technology, engineering, mathematics, and coding for young innovators.", Icon: Atom },
   { title: "Humanitarian Projects", tagline: "Food drives, emergency support, and social assistance for families in need.", Icon: HandHeart },
-  { title: "Language and Heritage", tagline: "Reviving Nigerian languages and celebrating cultural heritage.", Icon: Languages },
+  { title: "Language and Heritage", tagline: "Reviving endangered African languages and celebrating cultural heritage across the continent.", Icon: Amphora },
   { title: "Youth Skill Acquisition", tagline: "Practical, marketable skills for economic independence.", Icon: Wrench },
+  { title: "Career & Mentorship", tagline: "Mentoring youth into scholarships and global career pathways.", Icon: GraduationCap },
+  { title: "Peace Ambassadors", tagline: "Youth-led initiatives for peace, dialogue, and social cohesion.", Icon: Handshake },
+  { title: "Environmental Protection", tagline: "Climate action and sustainability rooted in community engagement.", Icon: TreePine },
+  { title: "Community Healthcare", tagline: "Healthcare access and education for underserved communities.", Icon: Stethoscope },
 ];
 
 export default function ProgramsPage() {

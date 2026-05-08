@@ -5,7 +5,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { useCountUp } from "@/hooks/useCountUp";
-import { ArrowRight, Heart, BookOpen, GraduationCap, Microscope, Laptop, Stethoscope, HandHeart, Handshake, Compass, TreePine, Wrench, Globe, Languages } from "lucide-react";
+import { ArrowRight, Heart, BookOpen, GraduationCap, Microscope, Laptop, Stethoscope, HandHeart, Handshake, Compass, TreePine, Wrench, Globe, Atom, Amphora } from "lucide-react";
 import { PROGRAMS } from "@/lib/constants";
 
 const iconMap: Record<string, React.ComponentType<{ size?: number; className?: string }>> = {
@@ -23,9 +23,9 @@ function AnimatedStat({ value, inView }: { value: string; inView: boolean }) {
 }
 
 const FOCUSED_PROGRAMS: { title: string; tagline: string; Icon: React.ComponentType<{ size?: number; className?: string }> }[] = [
-  { title: "STEM Training", tagline: "Hands-on science, technology, engineering, and mathematics for young innovators.", Icon: Microscope },
+  { title: "STEM Training", tagline: "Hands-on science, technology, engineering, mathematics, and coding for young innovators.", Icon: Atom },
   { title: "Humanitarian Projects", tagline: "Food drives, emergency support, and social assistance for families in need.", Icon: HandHeart },
-  { title: "Language and Heritage", tagline: "Reviving Nigerian languages and celebrating cultural heritage.", Icon: Languages },
+  { title: "Language and Heritage", tagline: "Reviving endangered African languages and celebrating cultural heritage across the continent.", Icon: Amphora },
   { title: "Youth Skill Acquisition", tagline: "Practical, marketable skills for economic independence.", Icon: Wrench },
 ];
 

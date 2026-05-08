@@ -206,9 +206,9 @@ export const PROGRAMS = [
   {
     slug: "language-and-culture",
     title: "Language and Culture",
-    tagline: "Reviving Nigeria's endangered languages and heritage",
+    tagline: "Reviving endangered African languages and heritage",
     description:
-      "Documenting, teaching, and celebrating Nigerian languages — with special emphasis on endangered languages — alongside community events that preserve cultural heritage for future generations.",
+      "Documenting, teaching, and celebrating African languages — with special emphasis on endangered languages across Nigeria and the continent — alongside community events that preserve cultural heritage for future generations.",
     icon: "Globe",
     category: "Community Development",
     sdgs: [4, 11],
