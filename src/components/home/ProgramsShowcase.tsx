@@ -25,7 +25,10 @@ function AnimatedStat({ value, inView }: { value: string; inView: boolean }) {
 export default function ProgramsShowcase() {
   const { ref, inView } = useScrollAnimation();
   const featured = PROGRAMS.filter((p) => p.featured);
-  const focused = PROGRAMS;
+  const focusedSlugs = ["stem-training", "humanitarian-projects", "language-and-culture", "youth-skill-acquisition"];
+  const focused = focusedSlugs
+    .map((slug) => PROGRAMS.find((p) => p.slug === slug))
+    .filter((p): p is (typeof PROGRAMS)[number] => Boolean(p));
 
   return (
     <section ref={ref} className="py-16 sm:py-28 lg:py-36 section-gradient-light relative overflow-hidden">
@@ -56,32 +59,51 @@ export default function ProgramsShowcase() {
           </p>
         </motion.div>
 
-        {/* Focused Programs - Compact strip (all 12) */}
-        <div className="text-center mb-6">
+        {/* Focused Programs - 4 detailed cards */}
+        <div className="text-center mb-8">
           <h3 className="text-sm font-semibold uppercase tracking-[0.18em] text-primary">Focused Programs</h3>
-          <p className="text-text-secondary/80 text-sm mt-2">A snapshot of every initiative we run.</p>
+          <p className="text-text-secondary/80 text-sm mt-2">Four priority initiatives shaping our current impact.</p>
         </div>
-        <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-12 gap-2.5 sm:gap-3 mb-8">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6 mb-12">
           {focused.map((program, i) => {
             const Icon = iconMap[program.icon] || Heart;
             return (
               <motion.div
                 key={program.slug}
-                initial={{ opacity: 0, y: 20, scale: 0.95 }}
-                animate={inView ? { opacity: 1, y: 0, scale: 1 } : {}}
-                transition={{ duration: 0.4, delay: 0.1 + i * 0.05 }}
+                initial={{ opacity: 0, y: 30 }}
+                animate={inView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.6, delay: 0.1 + i * 0.1 }}
               >
                 <Link
                   href={`/programs/${program.slug}`}
-                  title={program.title}
-                  className="group block card-premium card-lightning px-1.5 py-3 text-center h-full"
+                  className="group block card-premium card-lightning overflow-hidden h-full"
                 >
-                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary/10 to-primary/5 flex items-center justify-center mx-auto mb-2 group-hover:from-primary/20 group-hover:to-primary/10 transition-all duration-500">
-                    <Icon size={18} className="text-primary" />
+                  <div className="relative h-40 overflow-hidden">
+                    <Image
+                      src={program.image}
+                      alt={program.title}
+                      fill
+                      className="object-cover group-hover:scale-110 transition-transform duration-[800ms] ease-out"
+                      sizes="(max-width: 768px) 100vw, 25vw"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+                    <span className="absolute top-3 left-3 px-2.5 py-1 bg-white/95 backdrop-blur-sm text-[10px] font-semibold text-primary rounded-md shadow-sm">
+                      {program.category}
+                    </span>
                   </div>
-                  <h4 className="text-[10px] sm:text-[11px] font-semibold text-text-primary group-hover:text-primary transition-colors duration-300 leading-tight line-clamp-2">
-                    {program.title}
-                  </h4>
+                  <div className="p-5">
+                    <div className="flex items-center gap-3 mb-2">
+                      <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-primary/10 to-primary/5 flex items-center justify-center shrink-0 group-hover:from-primary/20 group-hover:to-primary/10 transition-all duration-300">
+                        <Icon size={18} className="text-primary" />
+                      </div>
+                      <h3 className="text-base font-bold text-text-primary group-hover:text-primary transition-colors duration-300 leading-tight">
+                        {program.title}
+                      </h3>
+                    </div>
+                    <p className="text-text-secondary text-[13px] leading-relaxed line-clamp-2">
+                      {program.tagline}
+                    </p>
+                  </div>
                 </Link>
               </motion.div>
             );

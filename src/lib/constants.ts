@@ -126,8 +126,8 @@ export const PROGRAMS = [
     image: "/images/events/Back2School2.jpg",
   },
   {
-    slug: "stem-camp",
-    title: "STEM Camp",
+    slug: "stem-training",
+    title: "STEM Training",
     tagline: "Inspiring the next generation of innovators in STEM",
     description:
       "Hands-on science, technology, engineering, and mathematics workshops for young people, connecting environmental problem-solving with practical skills.",

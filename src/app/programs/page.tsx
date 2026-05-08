@@ -30,27 +30,30 @@ export default function ProgramsPage() {
             </h2>
             <p className="text-text-secondary/80 text-sm mt-2">The full set of initiatives Haleyouth Foundation runs.</p>
           </div>
-          <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-12 gap-2.5 sm:gap-3 mb-14 sm:mb-20">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-5 mb-14 sm:mb-20">
             {PROGRAMS.map((program, i) => {
               const Icon = iconMap[program.icon] || Heart;
               return (
                 <motion.div
                   key={program.slug}
-                  initial={{ opacity: 0, y: 20, scale: 0.95 }}
+                  initial={{ opacity: 0, y: 25, scale: 0.95 }}
                   animate={{ opacity: 1, y: 0, scale: 1 }}
-                  transition={{ duration: 0.4, delay: i * 0.04 }}
+                  transition={{ duration: 0.45, delay: i * 0.05 }}
                 >
                   <Link
                     href={`/programs/${program.slug}`}
                     title={program.title}
-                    className="group block card-premium card-lightning px-1.5 py-3 text-center h-full"
+                    className="group block card-premium card-lightning p-5 text-center h-full"
                   >
-                    <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary/10 to-primary/5 flex items-center justify-center mx-auto mb-2 group-hover:from-primary/20 group-hover:to-primary/10 transition-all duration-500">
-                      <Icon size={18} className="text-primary" />
+                    <div className="w-[52px] h-[52px] rounded-2xl bg-gradient-to-br from-primary/10 to-primary/5 flex items-center justify-center mx-auto mb-3 group-hover:scale-110 group-hover:from-primary/20 group-hover:to-primary/10 transition-all duration-500">
+                      <Icon size={22} className="text-primary" />
                     </div>
-                    <h4 className="text-[10px] sm:text-[11px] font-semibold text-text-primary group-hover:text-primary transition-colors duration-300 leading-tight line-clamp-2">
+                    <h3 className="text-[13px] font-bold text-text-primary group-hover:text-primary transition-colors duration-300 mb-1 leading-tight">
                       {program.title}
-                    </h4>
+                    </h3>
+                    <p className="text-[11px] text-text-secondary/70 line-clamp-2 leading-relaxed">
+                      {program.tagline}
+                    </p>
                   </Link>
                 </motion.div>
               );
