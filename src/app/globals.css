@@ -122,35 +122,40 @@ section {
 /* ══════════════════════════════════════
    PREMIUM CARDS
    ══════════════════════════════════════ */
-.card-premium {
+.card-premium,
+.card-hover,
+.card-lightning {
   background: #FFFFFF;
   border: 1px solid rgba(226, 232, 240, 0.8);
   border-radius: 16px;
-  transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              box-shadow 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              border-color 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   box-shadow:
     0 1px 3px rgba(0,0,0,0.03),
     0 4px 12px rgba(0,0,0,0.02);
-  overflow: hidden;
-}
-
-.card-premium:hover {
-  transform: translateY(-8px);
-  border-color: rgba(21, 101, 192, 0.12);
-  box-shadow:
-    0 24px 48px rgba(0, 0, 0, 0.08),
-    0 12px 24px rgba(0, 0, 0, 0.04),
-    0 0 0 1px rgba(21, 101, 192, 0.06);
-}
-
-/* ══════════════════════════════════════
-   NEON LIGHTNING CARD
-   Premium animated lightning border on hover
-   ══════════════════════════════════════ */
-.card-lightning {
   position: relative;
   isolation: isolate;
 }
 
+/* ══════════════════════════════════════
+   NEON LIGHTNING BORDER (applied to all cards)
+   Animated rotating neon border revealed on hover
+   ══════════════════════════════════════ */
+@property --lightning-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes lightning-spin {
+  to { --lightning-angle: 360deg; }
+}
+
+.card-premium::before,
+.card-premium::after,
+.card-hover::before,
+.card-hover::after,
 .card-lightning::before,
 .card-lightning::after {
   content: "";
@@ -181,21 +186,14 @@ section {
   z-index: 2;
 }
 
+.card-premium::after,
+.card-hover::after,
 .card-lightning::after {
   filter: blur(10px);
-  opacity: 0;
 }
 
-@property --lightning-angle {
-  syntax: "<angle>";
-  initial-value: 0deg;
-  inherits: false;
-}
-
-@keyframes lightning-spin {
-  to { --lightning-angle: 360deg; }
-}
-
+.card-premium:hover,
+.card-hover:hover,
 .card-lightning:hover {
   transform: translateY(-8px);
   border-color: rgba(79, 195, 247, 0.5);
@@ -206,17 +204,25 @@ section {
     0 24px 48px rgba(0, 0, 0, 0.12);
 }
 
+.card-premium:hover::before,
+.card-hover:hover::before,
 .card-lightning:hover::before {
   opacity: 1;
   animation: lightning-spin 2.4s linear infinite;
 }
 
+.card-premium:hover::after,
+.card-hover:hover::after,
 .card-lightning:hover::after {
   opacity: 0.85;
   animation: lightning-spin 2.4s linear infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .card-premium:hover::before,
+  .card-premium:hover::after,
+  .card-hover:hover::before,
+  .card-hover:hover::after,
   .card-lightning:hover::before,
   .card-lightning:hover::after { animation: none; }
 }
