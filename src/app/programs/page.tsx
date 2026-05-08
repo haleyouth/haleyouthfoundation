@@ -21,8 +21,50 @@ export default function ProgramsPage() {
     <>
       <PageHeader title="Our Programs" subtitle="Impactful programs addressing real challenges facing young people in Nigeria and Africa." badge="What We Do" />
 
-      <section className="py-12 sm:py-24 bg-bg-primary">
+      <section className="py-12 sm:py-20 bg-bg-primary">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Focused Programs strip - all 12 compact cards with lightning */}
+          <div className="text-center mb-6">
+            <h2 className="text-xl sm:text-2xl font-bold text-text-primary" style={{ fontFamily: "var(--font-playfair)" }}>
+              Focused Programs
+            </h2>
+            <p className="text-text-secondary/80 text-sm mt-2">The full set of initiatives Haleyouth Foundation runs.</p>
+          </div>
+          <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-12 gap-2.5 sm:gap-3 mb-14 sm:mb-20">
+            {PROGRAMS.map((program, i) => {
+              const Icon = iconMap[program.icon] || Heart;
+              return (
+                <motion.div
+                  key={program.slug}
+                  initial={{ opacity: 0, y: 20, scale: 0.95 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  transition={{ duration: 0.4, delay: i * 0.04 }}
+                >
+                  <Link
+                    href={`/programs/${program.slug}`}
+                    title={program.title}
+                    className="group block card-premium card-lightning px-1.5 py-3 text-center h-full"
+                  >
+                    <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary/10 to-primary/5 flex items-center justify-center mx-auto mb-2 group-hover:from-primary/20 group-hover:to-primary/10 transition-all duration-500">
+                      <Icon size={18} className="text-primary" />
+                    </div>
+                    <h4 className="text-[10px] sm:text-[11px] font-semibold text-text-primary group-hover:text-primary transition-colors duration-300 leading-tight line-clamp-2">
+                      {program.title}
+                    </h4>
+                  </Link>
+                </motion.div>
+              );
+            })}
+          </div>
+
+          {/* Current Programs subheading */}
+          <div className="text-center mb-8">
+            <h2 className="text-xl sm:text-2xl font-bold text-text-primary" style={{ fontFamily: "var(--font-playfair)" }}>
+              Current Programs
+            </h2>
+            <p className="text-text-secondary/80 text-sm mt-2">Explore each program in detail — filter by category below.</p>
+          </div>
+
           {/* Category filter */}
           <div className="flex flex-wrap gap-2 justify-center mb-8 sm:mb-14">
             {PROGRAM_CATEGORIES.map((cat) => (

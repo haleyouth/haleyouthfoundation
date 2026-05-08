@@ -25,7 +25,7 @@ function AnimatedStat({ value, inView }: { value: string; inView: boolean }) {
 export default function ProgramsShowcase() {
   const { ref, inView } = useScrollAnimation();
   const featured = PROGRAMS.filter((p) => p.featured);
-  const others = PROGRAMS.filter((p) => !p.featured);
+  const focused = PROGRAMS;
 
   return (
     <section ref={ref} className="py-16 sm:py-28 lg:py-36 section-gradient-light relative overflow-hidden">
@@ -56,7 +56,59 @@ export default function ProgramsShowcase() {
           </p>
         </motion.div>
 
+        {/* Focused Programs - Compact strip (all 12) */}
+        <div className="text-center mb-6">
+          <h3 className="text-sm font-semibold uppercase tracking-[0.18em] text-primary">Focused Programs</h3>
+          <p className="text-text-secondary/80 text-sm mt-2">A snapshot of every initiative we run.</p>
+        </div>
+        <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-12 gap-2.5 sm:gap-3 mb-8">
+          {focused.map((program, i) => {
+            const Icon = iconMap[program.icon] || Heart;
+            return (
+              <motion.div
+                key={program.slug}
+                initial={{ opacity: 0, y: 20, scale: 0.95 }}
+                animate={inView ? { opacity: 1, y: 0, scale: 1 } : {}}
+                transition={{ duration: 0.4, delay: 0.1 + i * 0.05 }}
+              >
+                <Link
+                  href={`/programs/${program.slug}`}
+                  title={program.title}
+                  className="group block card-premium card-lightning px-1.5 py-3 text-center h-full"
+                >
+                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary/10 to-primary/5 flex items-center justify-center mx-auto mb-2 group-hover:from-primary/20 group-hover:to-primary/10 transition-all duration-500">
+                    <Icon size={18} className="text-primary" />
+                  </div>
+                  <h4 className="text-[10px] sm:text-[11px] font-semibold text-text-primary group-hover:text-primary transition-colors duration-300 leading-tight line-clamp-2">
+                    {program.title}
+                  </h4>
+                </Link>
+              </motion.div>
+            );
+          })}
+        </div>
+
+        {/* View All CTA - placed under Focused Programs */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ delay: 0.6 }}
+          className="text-center mb-16"
+        >
+          <Link
+            href="/programs"
+            className="inline-flex items-center gap-2.5 px-7 py-3 border-2 border-primary text-primary rounded-xl font-semibold text-sm hover:bg-primary hover:text-white transition-all duration-300 hover:shadow-lg hover:shadow-primary/20"
+          >
+            View All Programs
+            <ArrowRight size={16} />
+          </Link>
+        </motion.div>
+
         {/* Featured Programs - Premium Cards with Stats */}
+        <div className="text-center mb-8">
+          <h3 className="text-sm font-semibold uppercase tracking-[0.18em] text-primary">Featured Programs</h3>
+          <p className="text-text-secondary/80 text-sm mt-2">Flagship initiatives driving the most impact right now.</p>
+        </div>
         <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-5 sm:gap-7 mb-12">
           {featured.map((program, i) => {
             const Icon = iconMap[program.icon] || Heart;
@@ -167,51 +219,6 @@ export default function ProgramsShowcase() {
           })}
         </div>
 
-        {/* Other Programs - Compact Grid */}
-        <div className="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4 mb-14">
-          {others.map((program, i) => {
-            const Icon = iconMap[program.icon] || Heart;
-            return (
-              <motion.div
-                key={program.slug}
-                initial={{ opacity: 0, y: 25, scale: 0.95 }}
-                animate={inView ? { opacity: 1, y: 0, scale: 1 } : {}}
-                transition={{ duration: 0.5, delay: 0.5 + i * 0.08 }}
-              >
-                <Link
-                  href={`/programs/${program.slug}`}
-                  className="group block card-premium card-lightning p-5 text-center h-full"
-                >
-                  <div className="w-13 h-13 rounded-2xl bg-gradient-to-br from-primary/8 to-primary/3 flex items-center justify-center mx-auto mb-3 group-hover:scale-115 group-hover:from-primary/15 group-hover:to-primary/8 transition-all duration-500 w-[52px] h-[52px]">
-                    <Icon size={22} className="text-primary" />
-                  </div>
-                  <h3 className="text-[13px] font-bold text-text-primary group-hover:text-primary transition-colors duration-300 mb-1">
-                    {program.title}
-                  </h3>
-                  <p className="text-[11px] text-text-secondary/70 line-clamp-2 leading-relaxed">
-                    {program.tagline}
-                  </p>
-                </Link>
-              </motion.div>
-            );
-          })}
-        </div>
-
-        {/* View All CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 1 }}
-          className="text-center"
-        >
-          <Link
-            href="/programs"
-            className="inline-flex items-center gap-2.5 px-8 py-3.5 border-2 border-primary text-primary rounded-xl font-semibold text-sm hover:bg-primary hover:text-white transition-all duration-300 hover:shadow-lg hover:shadow-primary/20"
-          >
-            View All Programs & Events
-            <ArrowRight size={16} />
-          </Link>
-        </motion.div>
       </div>
     </section>
   );
