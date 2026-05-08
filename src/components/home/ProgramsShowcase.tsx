@@ -25,7 +25,7 @@ function AnimatedStat({ value, inView }: { value: string; inView: boolean }) {
 export default function ProgramsShowcase() {
   const { ref, inView } = useScrollAnimation();
   const featured = PROGRAMS.filter((p) => p.featured);
-  const others = PROGRAMS.filter((p) => !p.featured).slice(0, 6);
+  const others = PROGRAMS.filter((p) => !p.featured);
 
   return (
     <section ref={ref} className="py-16 sm:py-28 lg:py-36 section-gradient-light relative overflow-hidden">
@@ -73,7 +73,7 @@ export default function ProgramsShowcase() {
               >
                 <Link
                   href={`/programs/${program.slug}`}
-                  className="group block card-premium overflow-hidden h-full"
+                  className="group block card-premium card-lightning overflow-hidden h-full"
                 >
                   {/* Image */}
                   <div className="relative h-44 sm:h-56 overflow-hidden">
@@ -180,7 +180,7 @@ export default function ProgramsShowcase() {
               >
                 <Link
                   href={`/programs/${program.slug}`}
-                  className="group block card-premium p-5 text-center h-full"
+                  className="group block card-premium card-lightning p-5 text-center h-full"
                 >
                   <div className="w-13 h-13 rounded-2xl bg-gradient-to-br from-primary/8 to-primary/3 flex items-center justify-center mx-auto mb-3 group-hover:scale-115 group-hover:from-primary/15 group-hover:to-primary/8 transition-all duration-500 w-[52px] h-[52px]">
                     <Icon size={22} className="text-primary" />
@@ -208,7 +208,7 @@ export default function ProgramsShowcase() {
             href="/programs"
             className="inline-flex items-center gap-2.5 px-8 py-3.5 border-2 border-primary text-primary rounded-xl font-semibold text-sm hover:bg-primary hover:text-white transition-all duration-300 hover:shadow-lg hover:shadow-primary/20"
           >
-            View All 12 Programs
+            View All Programs & Events
             <ArrowRight size={16} />
           </Link>
         </motion.div>

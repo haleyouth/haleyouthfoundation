@@ -59,7 +59,7 @@ export default function ProgramsPage() {
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     transition={{ duration: 0.5, delay: i * 0.07, ease: [0.22, 1, 0.36, 1] }}
                   >
-                    <Link href={`/programs/${program.slug}`} className="group block card-premium overflow-hidden h-full">
+                    <Link href={`/programs/${program.slug}`} className="group block card-premium card-lightning overflow-hidden h-full relative">
                       {/* Image section */}
                       <div className="relative h-56 overflow-hidden">
                         <Image
@@ -70,6 +70,25 @@ export default function ProgramsPage() {
                           sizes="(max-width: 768px) 100vw, 33vw"
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+
+                        {/* Hover details overlay */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-primary/95 via-primary/85 to-primary/70 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center p-5 text-center">
+                          <div className="text-white">
+                            <Icon size={28} className="mx-auto mb-3 opacity-90" />
+                            <h4 className="font-bold text-base mb-2 leading-tight">{program.title}</h4>
+                            <p className="text-[12px] leading-relaxed text-white/90 line-clamp-5">{program.description}</p>
+                            {program.stats && (
+                              <div className="flex justify-center gap-3 mt-3">
+                                {program.stats.slice(0, 2).map((stat) => (
+                                  <div key={stat.label} className="text-center">
+                                    <p className="text-sm font-bold leading-none">{stat.value}</p>
+                                    <p className="text-[9px] uppercase tracking-wider text-white/70 mt-1">{stat.label}</p>
+                                  </div>
+                                ))}
+                              </div>
+                            )}
+                          </div>
+                        </div>
 
                         {/* Badges */}
                         <div className="absolute top-4 left-4 right-4 flex justify-between items-start">

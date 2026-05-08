@@ -143,6 +143,85 @@ section {
 }
 
 /* ══════════════════════════════════════
+   NEON LIGHTNING CARD
+   Premium animated lightning border on hover
+   ══════════════════════════════════════ */
+.card-lightning {
+  position: relative;
+  isolation: isolate;
+}
+
+.card-lightning::before,
+.card-lightning::after {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  padding: 2px;
+  background: conic-gradient(
+    from var(--lightning-angle, 0deg),
+    transparent 0deg,
+    rgba(21, 101, 192, 0.0) 60deg,
+    #1565C0 90deg,
+    #4FC3F7 120deg,
+    #ffffff 150deg,
+    #4FC3F7 180deg,
+    #1565C0 210deg,
+    rgba(21, 101, 192, 0.0) 240deg,
+    transparent 360deg
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s ease;
+  z-index: 2;
+}
+
+.card-lightning::after {
+  filter: blur(10px);
+  opacity: 0;
+}
+
+@property --lightning-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes lightning-spin {
+  to { --lightning-angle: 360deg; }
+}
+
+.card-lightning:hover {
+  transform: translateY(-8px);
+  border-color: rgba(79, 195, 247, 0.5);
+  box-shadow:
+    0 0 0 1px rgba(79, 195, 247, 0.35),
+    0 0 24px rgba(21, 101, 192, 0.35),
+    0 0 56px rgba(79, 195, 247, 0.25),
+    0 24px 48px rgba(0, 0, 0, 0.12);
+}
+
+.card-lightning:hover::before {
+  opacity: 1;
+  animation: lightning-spin 2.4s linear infinite;
+}
+
+.card-lightning:hover::after {
+  opacity: 0.85;
+  animation: lightning-spin 2.4s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card-lightning:hover::before,
+  .card-lightning:hover::after { animation: none; }
+}
+
+/* ══════════════════════════════════════
    INFINITE PARTNER SCROLL
    ══════════════════════════════════════ */
 @keyframes partner-scroll {

@@ -215,14 +215,14 @@ export const PROGRAMS = [
     image: "/images/events/Back2School.jpg",
   },
   {
-    slug: "cultural-heritage",
-    title: "Cultural Heritage",
-    tagline: "Preserving and celebrating African heritage",
+    slug: "language-and-culture",
+    title: "Language and Culture",
+    tagline: "Reviving Nigeria's endangered languages and heritage",
     description:
-      "Promoting cultural awareness and preserving Nigerian and African cultural heritage through community events and education.",
+      "Documenting, teaching, and celebrating Nigerian languages — with special emphasis on endangered languages — alongside community events that preserve cultural heritage for future generations.",
     icon: "Globe",
     category: "Community Development",
-    sdgs: [11],
+    sdgs: [4, 11],
     image: "/images/events/UNGA80_d.jpeg",
   },
 ];
@@ -318,6 +318,13 @@ export const PARTNERS = [
     logo: "/images/partners/google-nonprofits.jpg",
     tier: "support" as const,
     website: "https://www.google.com/nonprofits/",
+    description: "Trust and support in our journey to impact local communities",
+  },
+  {
+    name: "OpenAI",
+    logo: "/images/partners/openai.png",
+    tier: "support" as const,
+    website: "https://openai.com/",
     description: "Trust and support in our journey to impact local communities",
   },
 ];
