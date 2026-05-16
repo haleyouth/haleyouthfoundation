@@ -2,6 +2,34 @@ import type { Metadata } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import PublicShell from "@/components/layout/PublicShell";
+import { SITE_CONFIG } from "@/lib/constants";
+
+const orgJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "NGO",
+  name: "Haleyouth Foundation",
+  alternateName: "Haleyouth",
+  url: SITE_CONFIG.url,
+  logo: `${SITE_CONFIG.url}/images/logo_l.png`,
+  description:
+    "Registered Nigerian non-profit empowering youth through mentorship, STEM education, menstrual-health programs, and climate-resilient community development across Nigeria.",
+  foundingDate: String(SITE_CONFIG.founded),
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: SITE_CONFIG.addressParts.streetAddress,
+    addressRegion: SITE_CONFIG.addressParts.addressRegion,
+    postalCode: SITE_CONFIG.addressParts.postalCode,
+    addressCountry: SITE_CONFIG.addressParts.addressCountry,
+  },
+  email: SITE_CONFIG.email,
+  identifier: `CAC ${SITE_CONFIG.registrationNumber}`,
+  sameAs: [
+    SITE_CONFIG.social.facebook,
+    SITE_CONFIG.social.twitter,
+    SITE_CONFIG.social.linkedin,
+    SITE_CONFIG.social.instagram,
+  ],
+};
 
 const inter = Inter({
   variable: "--font-inter",
@@ -64,6 +92,10 @@ export default function RootLayout({
         <a href="#main-content" className="skip-to-content">
           Skip to content
         </a>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }}
+        />
         <PublicShell>{children}</PublicShell>
       </body>
     </html>

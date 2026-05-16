@@ -1,4 +1,5 @@
 import HeroSlider from "@/components/home/HeroSlider";
+import MissionStatement from "@/components/home/MissionStatement";
 import AboutPreview from "@/components/home/AboutPreview";
 import ProgramsShowcase from "@/components/home/ProgramsShowcase";
 import ImpactStats from "@/components/home/ImpactStats";
@@ -11,6 +12,7 @@ export default function HomePage() {
   return (
     <>
       <HeroSlider />
+      <MissionStatement />
       <AboutPreview />
       <ProgramsShowcase />
       <ImpactStats />

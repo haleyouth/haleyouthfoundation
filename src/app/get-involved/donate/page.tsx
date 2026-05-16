@@ -306,9 +306,34 @@ export default function DonatePage() {
             <div className="mt-6 flex items-center justify-center gap-4 sm:gap-6 text-text-secondary text-xs flex-wrap">
               <span className="flex items-center gap-1"><Shield size={14} /> Secure</span>
               <span>{SITE_CONFIG.registration}</span>
-              <span className="flex items-center gap-1"><Heart size={12} className="text-accent" /> Tax-deductible</span>
+              <span className="flex items-center gap-1"><Heart size={12} className="text-accent" /> Tax-deductible in Nigeria</span>
             </div>
           </form>
+
+          {/* About donations */}
+          <div className="mt-8 card-premium p-6 sm:p-7">
+            <h3 className="font-bold text-text-primary text-base mb-3" style={{ fontFamily: "var(--font-playfair)" }}>
+              About your donation
+            </h3>
+            <ul className="text-text-secondary text-sm leading-relaxed space-y-2 list-disc pl-5">
+              <li>
+                Haleyouth Foundation is a non-profit registered in Nigeria ({SITE_CONFIG.registration}). Donations may be tax-deductible in Nigeria under applicable non-profit provisions. Donors outside Nigeria should consult their own tax advisor regarding deductibility in their jurisdiction.
+              </li>
+              <li>
+                Every donor receives a written acknowledgement and receipt within <strong>5 business days</strong> of confirmed payment, sent to the email address you provide.
+              </li>
+              <li>
+                Funds are applied to the program you allocate above. If you choose the General Fund, your gift supports the programs with the greatest current need.
+              </li>
+              <li>
+                If you need a customised receipt or have questions about your donation, email{" "}
+                <a href={`mailto:${SITE_CONFIG.email}`} className="text-primary hover:underline">
+                  {SITE_CONFIG.email}
+                </a>
+                .
+              </li>
+            </ul>
+          </div>
         </div>
       </section>
     </>

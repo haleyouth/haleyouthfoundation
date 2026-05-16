@@ -15,10 +15,10 @@ export default function AboutPreview() {
           <div className={`relative transition-all duration-700 ${inView ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-8"}`}>
             <div className="relative w-full aspect-[4/3]">
               <div className="absolute top-0 left-0 w-[65%] h-[72%] rounded-xl sm:rounded-2xl overflow-hidden shadow-xl z-10">
-                <Image src="/images/events/UNGA80_a.jpg" alt="UNGA event" fill className="object-cover" sizes="(max-width: 1024px) 60vw, 30vw" />
+                <Image src="/images/events/UNGA80_a.jpg" alt="Haleyouth Foundation representatives at the SDGs Roundtable Discussion, UN General Assembly 2025, New York" fill className="object-cover" sizes="(max-width: 1024px) 60vw, 30vw" />
               </div>
               <div className="absolute bottom-0 right-0 w-[55%] h-[60%] rounded-xl sm:rounded-2xl overflow-hidden shadow-xl z-20 border-[3px] sm:border-4 border-white">
-                <Image src="/images/events/JabiAK ADAAVA 37.jpg" alt="Pad-a-Girl event" fill className="object-cover" sizes="(max-width: 1024px) 50vw, 25vw" />
+                <Image src="/images/events/JabiAK ADAAVA 37.jpg" alt="Schoolgirls holding Pad-a-Girl advocacy placards at the Jabi distribution event, Abuja" fill className="object-cover" sizes="(max-width: 1024px) 50vw, 25vw" />
               </div>
               {/* Stat badge */}
               <div className="absolute -bottom-2 left-2 sm:-bottom-3 sm:left-3 bg-white rounded-lg sm:rounded-xl p-2.5 sm:p-3 shadow-lg z-30 border border-gray-100">

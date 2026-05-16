@@ -35,7 +35,7 @@ export default function HeroSlider() {
       <div className="absolute inset-0">
         <Image
           src={slide.image}
-          alt={slide.headline}
+          alt={slide.alt}
           fill
           className={`object-cover transition-all duration-700 ${fade ? "opacity-100 scale-100" : "opacity-0 scale-105"}`}
           priority

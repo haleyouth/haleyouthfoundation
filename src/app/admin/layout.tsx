@@ -33,6 +33,17 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const [authenticated, setAuthenticated] = useState(false);
 
   useEffect(() => {
+    const META_ID = "hyf-admin-robots";
+    if (!document.getElementById(META_ID)) {
+      const m = document.createElement("meta");
+      m.id = META_ID;
+      m.name = "robots";
+      m.content = "noindex, nofollow";
+      document.head.appendChild(m);
+    }
+  }, []);
+
+  useEffect(() => {
     if (isLoginPage(pathname)) {
       setReady(true);
       return;

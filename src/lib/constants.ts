@@ -6,8 +6,15 @@ export const SITE_CONFIG = {
   url: "https://haleyouthfoundation.org",
   email: "info@haleyouthfoundation.org",
   phone: "",
-  address: "Ateba Agassa-Okene, Kogi State, Nigeria",
+  address: "Ateba Agassa-Okene, Kogi State 263101, Nigeria",
+  addressParts: {
+    streetAddress: "Ateba Agassa-Okene",
+    addressRegion: "Kogi State",
+    postalCode: "263101",
+    addressCountry: "NG",
+  },
   registration: "CAC RC - 138260",
+  registrationNumber: "RC-138260",
   founded: 2019,
   social: {
     facebook: "https://www.facebook.com/haleyouthfoundation/",
@@ -31,6 +38,7 @@ export const NAV_ITEMS = [
 export const HERO_SLIDES = [
   {
     image: "/images/events/Garki_IMG_0011.jpg",
+    alt: "Girls receiving reusable menstrual pad kits during the Pad-a-Girl distribution at Garki public school, Abuja",
     headline: "Keeping Girls in School with Dignity",
     subtitle:
       "Through the Pad-a-Girl initiative, we've distributed 1,000+ reusable pad kits, empowering girls to stay in school and thrive.",
@@ -38,6 +46,7 @@ export const HERO_SLIDES = [
   },
   {
     image: "/images/events/karimo_img.jpg",
+    alt: "Pad-a-Girl Climate Action education session for schoolgirls in Karimo, Northern Nigeria",
     headline: "Climate Action Starts in Communities",
     subtitle:
       "Our Pad-a-Girl Climate Action project brings menstrual health education and sustainable solutions to schools across Northern Nigeria.",
@@ -45,6 +54,7 @@ export const HERO_SLIDES = [
   },
   {
     image: "/images/events/Back2School.jpg",
+    alt: "Rural students receiving textbooks and learning materials through the Haleyouth Back-to-School program",
     headline: "Education is the Foundation of Peace",
     subtitle:
       "Our Back-to-School program provides learning materials and support to hundreds of students in underserved communities.",
@@ -52,6 +62,7 @@ export const HERO_SLIDES = [
   },
   {
     image: "/images/events/Jabi_AK ADAAVA 9.jpg",
+    alt: "Haleyouth Foundation team and beneficiary girls at the Pad-a-Girl distribution event in Jabi, Abuja",
     headline: "Empowering Youth. Transforming Communities.",
     subtitle:
       "We equip young people with skills, mentorship, and resources to become agents of positive change in their communities.",
@@ -59,6 +70,7 @@ export const HERO_SLIDES = [
   },
   {
     image: "/images/events/Garki_IMG_0015.jpg",
+    alt: "Community engagement and reusable pad distribution at Garki public school, Abuja",
     headline: "Community Transformation Powered by Youth",
     subtitle:
       "From digital skills training to STEM workshops, we build capacity for the next generation of African leaders.",
@@ -66,6 +78,7 @@ export const HERO_SLIDES = [
   },
   {
     image: "/images/events/DSC04757.jpg",
+    alt: "Speakers panel at the SDGs Roundtable Discussion at the UN General Assembly 2025, New York",
     headline: "From Local Action to Global Impact",
     subtitle:
       "Haleyouth Foundation represented at the UN General Assembly SDGs Roundtable Discussion in New York.",

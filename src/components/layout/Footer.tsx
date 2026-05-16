@@ -68,7 +68,7 @@ export default function Footer() {
             <Link href="/" className="flex items-center gap-3 mb-5">
               <Image
                 src="/images/logo_s.png"
-                alt="Haleyouth Foundation"
+                alt="Haleyouth Foundation logo"
                 width={44}
                 height={44}
                 className="h-11 w-auto"
