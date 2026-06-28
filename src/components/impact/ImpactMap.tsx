@@ -22,26 +22,26 @@ const STATUS: Record<Status, StatusStyle> = {
   active: {
     label: "Active impact",
     fill: "#0B4D2C",
-    stroke: "#0B4D2C",
+    stroke: "#F4E7B8", // pale gold, light stroke on dark fill
     description: "Programmes delivered and beneficiaries reached today.",
   },
   planned: {
     label: "Planned expansion",
     fill: "#1B7A3E",
-    stroke: "#0B4D2C",
+    stroke: "#FAF7EC", // soft cream, light stroke on dark fill
     description: "Country or state confirmed for next-cycle programmes.",
   },
   aspirational: {
     label: "Aspirational reach",
     fill: "#F4E7B8",
-    stroke: "#A47A00",
+    stroke: "#8C6D1F", // deep bronze, dark stroke on light fill
     description:
       "Within our medium-term Sub-Saharan-African pathway, in line with the WHO African Region under-supply countries (donations under 10 per 1,000 people).",
   },
   none: {
     label: "No active programmes yet",
     fill: "#FAF7EC",
-    stroke: "#C8CBCE",
+    stroke: "#8B8F94", // muted slate, dark stroke on light fill
     description: "Not yet in scope.",
   },
 };
@@ -403,7 +403,11 @@ function AfricaView({
               d={c.d}
               fill={isNigeria ? "url(#ngPulse)" : s.fill}
               stroke={s.stroke}
-              strokeWidth={status === "active" ? 1.2 : 0.6}
+              strokeWidth={
+                status === "active" ? 1.6 :
+                status === "planned" ? 1.3 :
+                1.0
+              }
               className={
                 "transition-all duration-200 " +
                 (status === "none"
@@ -469,7 +473,11 @@ function NigeriaView({ onHover }: { onHover: (info: HoverInfo | null) => void })
               d={st.d}
               fill={s.fill}
               stroke={s.stroke}
-              strokeWidth={status === "active" ? 1.6 : 0.8}
+              strokeWidth={
+                status === "active" ? 1.4 :
+                status === "planned" ? 1.2 :
+                0.9
+              }
               className="transition-all duration-200 hover:brightness-110"
               style={{ cursor: "default" }}
               onMouseMove={(e) => {
