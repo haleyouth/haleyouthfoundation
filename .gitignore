@@ -39,3 +39,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Natural Earth source data for the impact map (large; regenerable via _build_svg.py)
+src/components/impact/_data/
