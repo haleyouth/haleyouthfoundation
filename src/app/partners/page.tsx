@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
+import Link from "@/components/ui/Link";
 import PageHeader from "@/components/ui/PageHeader";
 import { PARTNERS } from "@/lib/constants";
 import { ArrowRight, ExternalLink } from "lucide-react";

@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { TIMELINE_EVENTS } from "@/lib/constants";
-import Link from "next/link";
+import Link from "@/components/ui/Link";
 import { ArrowRight, Calendar } from "lucide-react";
 
 export default function TimelineSection() {

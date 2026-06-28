@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Link from "next/link";
+import Link from "@/components/ui/Link";
 import { fetchSubmissions } from "@/lib/submissions";
 import { FileText, ImageIcon, Target, Handshake, Users, Mail, Heart, TrendingUp, UserPlus, BarChart3, ExternalLink, Loader2, Newspaper } from "lucide-react";
 

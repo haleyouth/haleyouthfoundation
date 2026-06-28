@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import Link from "@/components/ui/Link";
 import PageHeader from "@/components/ui/PageHeader";
+import ImpactMap from "@/components/impact/ImpactMap";
 import { IMPACT_STATS } from "@/lib/constants";
-import { ArrowRight, Users, Heart, BookOpen, Home, GraduationCap, Handshake, MapPin, TrendingUp } from "lucide-react";
+import { Users, Heart, BookOpen, Home, GraduationCap, Handshake, TrendingUp, FileText, ExternalLink, CheckCircle2 } from "lucide-react";
 
 export const metadata: Metadata = { title: "Our Impact", description: "See the measurable impact of Haleyouth Foundation's programs across Nigeria." };
 
@@ -14,7 +15,7 @@ const achievements = [
   "200+ rural students received learning materials",
   "100+ families supported with food and essentials",
   "3 cycles of women empowerment training delivered",
-  "$100K+ cumulative scholarship value mentored",
+  "$250K+ cumulative scholarship value mentored",
   "STEM workshop and digital literacy training programs delivered",
   "Climate action essay, debate, and social media competitions held",
   "Multiple community sensitization events conducted",
@@ -42,41 +43,28 @@ export default function ImpactPage() {
             })}
           </div>
 
-          {/* Geographic reach */}
-          <div className="grid lg:grid-cols-2 gap-12 mb-16">
-            <div>
-              <h2 className="text-2xl font-bold text-text-primary mb-6" style={{ fontFamily: "var(--font-playfair)" }}>
-                Geographic Reach
-              </h2>
-              <p className="text-text-secondary leading-relaxed mb-6">
-                Haleyouth Foundation operates across multiple states in Nigeria, with a focus on underserved communities in Northern Nigeria. Our programs have reached communities in Abuja (FCT), Kogi, Kano, and Kaduna states.
-              </p>
-              <div className="space-y-3">
-                {["Abuja (FCT)", "Kogi State", "Kano State", "Kaduna State"].map((loc) => (
-                  <div key={loc} className="flex items-center gap-3 text-text-secondary">
-                    <MapPin size={16} className="text-primary shrink-0" />
-                    <span>{loc}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div>
-              <h2 className="text-2xl font-bold text-text-primary mb-6" style={{ fontFamily: "var(--font-playfair)" }}>
-                Key Achievements
-              </h2>
-              <ul className="space-y-3">
-                {achievements.map((a) => (
-                  <li key={a} className="flex items-start gap-3">
-                    <TrendingUp size={16} className="text-secondary shrink-0 mt-0.5" />
-                    <span className="text-text-secondary text-sm">{a}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+          {/* Interactive impact map */}
+          <div className="mb-16">
+            <ImpactMap />
+          </div>
+
+          {/* Key Achievements */}
+          <div className="mb-16">
+            <h2 className="text-2xl font-bold text-text-primary mb-6" style={{ fontFamily: "var(--font-playfair)" }}>
+              Key Achievements
+            </h2>
+            <ul className="grid sm:grid-cols-2 gap-x-8 gap-y-3">
+              {achievements.map((a) => (
+                <li key={a} className="flex items-start gap-3">
+                  <TrendingUp size={16} className="text-secondary shrink-0 mt-0.5" />
+                  <span className="text-text-secondary text-sm">{a}</span>
+                </li>
+              ))}
+            </ul>
           </div>
 
           {/* SDG Alignment */}
-          <div className="bg-gradient-to-br from-primary/5 via-bg-secondary to-secondary/5 rounded-2xl p-8 sm:p-12 text-center">
+          <div className="bg-gradient-to-br from-primary/5 via-bg-secondary to-secondary/5 rounded-2xl p-8 sm:p-12 text-center mb-16">
             <h3 className="text-2xl font-bold text-text-primary mb-2" style={{ fontFamily: "var(--font-playfair)" }}>SDG Alignment</h3>
             <p className="text-text-secondary text-sm mb-8 max-w-xl mx-auto">
               Our programs proudly support global efforts in the SDGs
@@ -88,6 +76,100 @@ export default function ImpactPage() {
                 </div>
               ))}
             </div>
+          </div>
+
+          {/* Reports */}
+          <div>
+            <div className="text-center mb-10">
+              <h2 className="text-3xl font-bold text-text-primary mb-2" style={{ fontFamily: "var(--font-playfair)" }}>
+                Annual Reports
+              </h2>
+              <p className="text-text-secondary text-sm max-w-2xl mx-auto">
+                Year-on-year, what we delivered, who we worked with, and where the money went.
+              </p>
+            </div>
+
+            {/* 2025 Annual Report, hero card with embedded flipbook */}
+            <article className="rounded-2xl overflow-hidden bg-white border border-neutral-200 shadow-sm hover:shadow-xl transition-shadow duration-300 mb-6">
+              <div className="h-2 bg-gradient-to-r from-primary via-secondary to-accent" />
+              <div className="p-6 sm:p-7 lg:p-8">
+                <div className="flex flex-wrap items-start justify-between gap-4 mb-5">
+                  <div className="flex items-start gap-4">
+                    <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-primary/10 text-primary shrink-0">
+                      <FileText size={22} />
+                    </div>
+                    <div>
+                      <h3 className="text-2xl font-bold text-text-primary leading-tight" style={{ fontFamily: "var(--font-playfair)" }}>
+                        2025 Annual Report
+                      </h3>
+                      <p className="text-xs text-text-secondary/80 mt-1">Reporting period: January to December 2025</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <span className="inline-flex items-center gap-1.5 text-[11px] uppercase tracking-wide font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2.5 py-1 rounded-full">
+                      <CheckCircle2 size={11} /> Available
+                    </span>
+                    <a
+                      href="https://player.flipsnack.com?hash=NkFDQjU4N0E5RjcrZHRwMHB1ZDJneA=="
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 text-sm text-primary hover:text-primary/80 font-medium"
+                    >
+                      Open full view <ExternalLink size={14} />
+                    </a>
+                  </div>
+                </div>
+
+                <p className="text-sm text-text-secondary leading-relaxed mb-5 max-w-3xl">
+                  Headline impact, programme delivery in 2025, the cash position at year end, partner and recognition list,
+                  governance and stewardship, and the year ahead in 2026. Flip through the report below, or open it on Flipsnack for a full-screen view.
+                </p>
+
+                {/* Flipsnack embed, fixed pixel height for reliable rendering */}
+                <div className="rounded-xl overflow-hidden bg-neutral-50 border border-neutral-200 shadow-inner">
+                  <iframe
+                    src="https://player.flipsnack.com?hash=NkFDQjU4N0E5RjcrZHRwMHB1ZDJneA=="
+                    title="Haleyouth Foundation Annual Report 2025"
+                    width="100%"
+                    height="600"
+                    seamless
+                    scrolling="no"
+                    frameBorder={0}
+                    allowFullScreen
+                    allow="autoplay; clipboard-read; clipboard-write"
+                    className="w-full block"
+                    style={{ minHeight: "600px" }}
+                  />
+                </div>
+              </div>
+            </article>
+
+            {/* Prior years, compact button-style */}
+            <div className="flex flex-wrap items-center justify-center gap-3 mb-6">
+              <button
+                disabled
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-neutral-100 border border-neutral-200 text-text-secondary/80 text-sm cursor-not-allowed"
+                aria-label="2024 Annual Report"
+              >
+                <FileText size={14} />
+                <span className="font-medium">2024 Report</span>
+              </button>
+              <button
+                disabled
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-neutral-100 border border-neutral-200 text-text-secondary/80 text-sm cursor-not-allowed"
+                aria-label="2023 Annual Report"
+              >
+                <FileText size={14} />
+                <span className="font-medium">2023 Report</span>
+              </button>
+            </div>
+
+            <p className="text-center text-xs text-text-secondary/70">
+              Looking for an earlier copy?{" "}
+              <a href="mailto:info@haleyouthfoundation.org" className="text-primary hover:underline">
+                info@haleyouthfoundation.org
+              </a>
+            </p>
           </div>
         </div>
       </section>

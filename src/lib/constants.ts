@@ -183,13 +183,13 @@ export const PROGRAMS = [
     title: "Career & Mentorship",
     tagline: "Scholarships, mentorship, and global career pathways",
     description:
-      "Mentoring students and graduates to access scholarships and career opportunities worldwide — with a cumulative worth of over $100,000 across France, Germany, UK, and Malaysia. Includes academic support and career guidance for deserving students from underserved backgrounds.",
+      "Mentoring students and graduates to access scholarships and career opportunities worldwide, with a cumulative worth of over $250,000 across France, Germany, UK, and Malaysia. Includes academic support and career guidance for deserving students from underserved backgrounds.",
     icon: "GraduationCap",
     category: "Education & Scholarships",
     featured: true,
     sdgs: [4, 8, 10],
     stats: [
-      { label: "Scholarship Value Mentored", value: "$100K+" },
+      { label: "Scholarship Value Mentored", value: "$250K+" },
       { label: "Countries", value: "5+" },
     ],
     image: "/images/events/Unga80_c.jpg",
@@ -327,6 +327,13 @@ export const PARTNERS = [
     logo: "/images/partners/openai.png",
     tier: "support" as const,
     website: "https://openai.com/",
+    description: "Trust and support in our journey to impact local communities",
+  },
+  {
+    name: "Canva",
+    logo: "/images/partners/canva.jpg",
+    tier: "support" as const,
+    website: "https://www.canva.com/",
     description: "Trust and support in our journey to impact local communities",
   },
 ];

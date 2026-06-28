@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
-import Link from "next/link";
+import Link from "@/components/ui/Link";
 import { HERO_SLIDES } from "@/lib/constants";
 
 export default function HeroSlider() {

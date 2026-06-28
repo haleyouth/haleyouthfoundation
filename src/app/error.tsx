@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import Link from "next/link";
+import Link from "@/components/ui/Link";
 import { AlertTriangle, Home, RefreshCw } from "lucide-react";
 
 export default function GlobalError({

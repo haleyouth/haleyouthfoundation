@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from "@/components/ui/Link";
 import Image from "next/image";
 import { MapPin, Mail, Heart, ArrowUpRight, Shield } from "lucide-react";
 import { FacebookIcon, XTwitterIcon, LinkedInIcon, InstagramIcon } from "@/components/ui/SocialIcons";
