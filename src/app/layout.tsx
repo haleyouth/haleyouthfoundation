@@ -22,6 +22,7 @@ const orgJsonLd = {
     addressCountry: SITE_CONFIG.addressParts.addressCountry,
   },
   email: SITE_CONFIG.email,
+  telephone: SITE_CONFIG.phoneHref,
   identifier: `CAC ${SITE_CONFIG.registrationNumber}`,
   sameAs: [
     SITE_CONFIG.social.facebook,
@@ -44,6 +45,7 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_CONFIG.url),
   title: {
     default: "Haleyouth Foundation — Strengthening Youth Potentials",
     template: "%s | Haleyouth Foundation",

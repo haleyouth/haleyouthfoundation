@@ -3,7 +3,7 @@ import Link from "@/components/ui/Link";
 import PageHeader from "@/components/ui/PageHeader";
 import ImpactMap from "@/components/impact/ImpactMap";
 import { IMPACT_STATS } from "@/lib/constants";
-import { Users, Heart, BookOpen, Home, GraduationCap, Handshake, TrendingUp, FileText, ExternalLink, CheckCircle2 } from "lucide-react";
+import { Users, Heart, BookOpen, Home, GraduationCap, Handshake, TrendingUp, FileText, ExternalLink, CheckCircle2, ShieldCheck, Landmark, ScrollText, Receipt } from "lucide-react";
 
 export const metadata: Metadata = { title: "Our Impact", description: "See the measurable impact of Haleyouth Foundation's programs across Nigeria." };
 
@@ -72,9 +72,56 @@ export default function ImpactPage() {
             <div className="flex flex-wrap justify-center gap-3 sm:gap-4">
               {[1, 2, 3, 4, 6, 10, 12, 13, 16].map((num) => (
                 <div key={num} className="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 rounded-xl overflow-hidden shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300 cursor-default">
-                  <img src={`/images/sdgs/sdg-${num}.png`} alt={`SDG ${num}`} className="w-full h-full object-cover" />
+                  <img src={`/images/sdgs/sdg-${num}.png`} alt={`UN Sustainable Development Goal ${num}`} width={192} height={192} loading="lazy" decoding="async" className="w-full h-full object-cover" />
                 </div>
               ))}
+            </div>
+          </div>
+
+          {/* Transparency & Accountability */}
+          <div className="mb-16">
+            <div className="text-center mb-10">
+              <h2 className="text-3xl font-bold text-text-primary mb-2" style={{ fontFamily: "var(--font-playfair)" }}>
+                Transparency &amp; Accountability
+              </h2>
+              <p className="text-text-secondary text-sm max-w-2xl mx-auto">
+                We hold ourselves to clear standards of governance and financial management, so
+                every donor and partner can see how funds are used.
+              </p>
+            </div>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+              <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+                <Landmark size={22} className="text-primary mb-3" />
+                <h3 className="font-bold text-text-primary text-sm mb-1.5">Registered &amp; Regulated</h3>
+                <p className="text-text-secondary text-sm leading-relaxed">
+                  Incorporated with Nigeria&rsquo;s Corporate Affairs Commission (CAC RC-138260) and
+                  tax-registered.
+                </p>
+              </div>
+              <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+                <ShieldCheck size={22} className="text-primary mb-3" />
+                <h3 className="font-bold text-text-primary text-sm mb-1.5">SCUML Registered</h3>
+                <p className="text-text-secondary text-sm leading-relaxed">
+                  Registered with the Special Control Unit Against Money Laundering (SCUML),
+                  Nigeria&rsquo;s anti-money-laundering compliance authority for non-profits (RN: SC 088682).
+                </p>
+              </div>
+              <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+                <Receipt size={22} className="text-primary mb-3" />
+                <h3 className="font-bold text-text-primary text-sm mb-1.5">Donor Receipts</h3>
+                <p className="text-text-secondary text-sm leading-relaxed">
+                  Every confirmed gift receives a written acknowledgement and receipt within five
+                  business days.
+                </p>
+              </div>
+              <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+                <ScrollText size={22} className="text-primary mb-3" />
+                <h3 className="font-bold text-text-primary text-sm mb-1.5">Public Reporting</h3>
+                <p className="text-text-secondary text-sm leading-relaxed">
+                  Annual and project reports show what we delivered, who we worked with, and where
+                  the money went. See below.
+                </p>
+              </div>
             </div>
           </div>
 

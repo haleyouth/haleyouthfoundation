@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import PageHeader from "@/components/ui/PageHeader";
 import { submitDonation } from "@/lib/submissions";
+import { logConversion } from "@/lib/firebase";
 import { SITE_CONFIG } from "@/lib/constants";
 import { Heart, BookOpen, Shirt, Shield, CreditCard, Building2, CheckCircle, AlertCircle, Loader2, User, Mail, MessageSquare, Copy, Check, Phone } from "lucide-react";
 
@@ -81,8 +82,10 @@ export default function DonatePage() {
     if (!effectiveAmount || !name || !email || !phone) return;
     setLoading(true);
     setError("");
+    void logConversion("donate_intent", { amount: effectiveAmount, currency, program });
     try {
       await submitDonation({ name, email, phone, amount: effectiveAmount, currency, program, message, method, anonymous });
+      void logConversion("donate_submitted", { amount: effectiveAmount, currency, program });
       setSubmitted(true);
     } catch {
       setError("Something went wrong. Please try again or contact us directly.");

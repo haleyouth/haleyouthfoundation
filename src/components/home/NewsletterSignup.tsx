@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { Send, CheckCircle, Mail } from "lucide-react";
 import { submitNewsletter } from "@/lib/submissions";
+import { logConversion } from "@/lib/firebase";
 
 export default function NewsletterSignup() {
   const { ref, inView } = useScrollAnimation();
@@ -16,6 +17,7 @@ export default function NewsletterSignup() {
     if (email) {
       try {
         await submitNewsletter(email);
+        void logConversion("newsletter_signup");
       } catch {}
       setSubmitted(true);
       setEmail("");

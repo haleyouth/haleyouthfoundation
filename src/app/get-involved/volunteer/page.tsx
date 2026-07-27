@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import PageHeader from "@/components/ui/PageHeader";
 import { submitVolunteer } from "@/lib/submissions";
+import { logConversion } from "@/lib/firebase";
 import { Send, CheckCircle, AlertCircle, Loader2, Users, MapPin, Clock, Briefcase } from "lucide-react";
 
 export default function VolunteerPage() {
@@ -21,6 +22,7 @@ export default function VolunteerPage() {
     setError("");
     try {
       await submitVolunteer(form);
+      void logConversion("volunteer_applied");
       setSubmitted(true);
     } catch {
       setError("Something went wrong. Please try again.");

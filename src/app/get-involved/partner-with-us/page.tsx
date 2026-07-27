@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import PageHeader from "@/components/ui/PageHeader";
 import { submitPartner } from "@/lib/submissions";
+import { logConversion } from "@/lib/firebase";
 import { Send, CheckCircle, AlertCircle, Loader2, Target, Users, Globe, TrendingUp, Award, Handshake } from "lucide-react";
 
 const benefits = [
@@ -29,6 +30,7 @@ export default function PartnerWithUsPage() {
     setError("");
     try {
       await submitPartner(form);
+      void logConversion("partner_applied");
       setSubmitted(true);
     } catch {
       setError("Something went wrong. Please try again.");

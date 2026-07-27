@@ -9,12 +9,19 @@ export default function MissionStatement() {
           <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
             <ShieldCheck size={20} className="text-primary" />
           </div>
-          <p className="text-text-primary text-sm sm:text-base leading-relaxed">
-            <span className="font-semibold">Haleyouth Foundation</span> is a registered Nigerian
-            non-profit ({SITE_CONFIG.registration}, founded {SITE_CONFIG.founded}) empowering
-            youth through mentorship, STEM education, menstrual-health programs, and
-            climate-resilient community development across Nigeria.
-          </p>
+          <div>
+            <p className="text-text-primary text-sm sm:text-base leading-relaxed">
+              <span className="font-semibold">Haleyouth Foundation</span> is a registered Nigerian
+              non-profit ({SITE_CONFIG.registration}, founded {SITE_CONFIG.founded}) empowering
+              youth through mentorship, STEM education, menstrual-health programs, and
+              climate-resilient community development across Nigeria.
+            </p>
+            <p className="text-text-secondary text-xs sm:text-sm leading-relaxed mt-2">
+              We are registered with Nigeria&rsquo;s Special Control Unit Against Money Laundering
+              (SCUML) and uphold transparency and accountability in our financial management, with
+              donor receipts issued and project and financial reports published to the community we serve.
+            </p>
+          </div>
         </div>
       </div>
     </section>

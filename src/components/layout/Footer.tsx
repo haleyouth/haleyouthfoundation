@@ -1,6 +1,6 @@
 import Link from "@/components/ui/Link";
 import Image from "next/image";
-import { MapPin, Mail, Heart, ArrowUpRight, Shield } from "lucide-react";
+import { MapPin, Mail, Phone, Heart, ArrowUpRight, Shield } from "lucide-react";
 import { FacebookIcon, XTwitterIcon, LinkedInIcon, InstagramIcon } from "@/components/ui/SocialIcons";
 import { SITE_CONFIG } from "@/lib/constants";
 
@@ -160,6 +160,14 @@ export default function Footer() {
                   {SITE_CONFIG.email}
                 </a>
               </div>
+              {SITE_CONFIG.phone && (
+                <div className="flex items-center gap-3">
+                  <Phone size={14} className="text-primary shrink-0" />
+                  <a href={`tel:${SITE_CONFIG.phoneHref}`} className="text-white/50 text-sm hover:text-white transition-colors">
+                    {SITE_CONFIG.phone}
+                  </a>
+                </div>
+              )}
             </div>
           </div>
         </div>
