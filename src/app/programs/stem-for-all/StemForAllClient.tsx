@@ -7,11 +7,14 @@ import { submitStemForAll } from "@/lib/submissions";
 import { logConversion } from "@/lib/firebase";
 import { COUNTRIES } from "@/lib/geo";
 import {
-  Send, CheckCircle, AlertCircle, Loader2, Brain, FlaskConical, Code2,
+  Send, AlertCircle, Loader2, Brain, FlaskConical, Code2,
   Sigma, Award, Rocket, Users, BadgeCheck, Sparkles, Clock, Target,
+  ArrowRight, Copy, Check, UserPlus, Globe, Smartphone, PartyPopper,
 } from "lucide-react";
 
 const PARTNER = "Brilliant";
+const BRILLIANT_INVITE = "https://brilliant.org/classroom/join-v2/b08e37d3-822e-4b02-b4a1-30d86129c601";
+const COHORT = "Haleyouth Foundation STEM for All 2026 Cohort";
 
 const tracks = [
   { Icon: Sigma, title: "Mathematics", desc: "From foundations to advanced topics, built through interactive problem-solving rather than rote memorisation." },
@@ -42,10 +45,21 @@ export default function StemForAllClient() {
   const [error, setError] = useState("");
   const [form, setForm] = useState({
     name: "", email: "", phone: "", country: "Nigeria", location: "", dob: "", gender: "",
-    education: "", occupation: "", experience: "",
+    education: "",
     hasDevice: "", hasInternet: "", hoursPerWeek: "", interests: "", motivation: "",
   });
   const [agreed, setAgreed] = useState<boolean[]>(pledges.map(() => false));
+  const [copied, setCopied] = useState(false);
+
+  const copyInvite = async () => {
+    try {
+      await navigator.clipboard.writeText(BRILLIANT_INVITE);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2500);
+    } catch {
+      /* clipboard may be blocked; the link is visible to copy manually */
+    }
+  };
 
   const set = (k: string, v: string) => setForm((f) => ({ ...f, [k]: v }));
   const allAgreed = agreed.every(Boolean);
@@ -88,27 +102,125 @@ export default function StemForAllClient() {
   const inputClass = "w-full px-4 py-3.5 rounded-xl border border-gray-200 bg-white text-text-primary text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all placeholder:text-gray-400";
 
   if (submitted) {
+    const steps = [
+      {
+        Icon: UserPlus,
+        title: "Create your Brilliant account",
+        desc: "Sign up (free) at brilliant.org or download the Brilliant app from the App Store or Google Play. Use the same email you entered here.",
+      },
+      {
+        Icon: Globe,
+        title: "Open the join link",
+        desc: `Paste the invite link below into your browser, or tap it, to join the ${COHORT} and unlock your free Premium access.`,
+      },
+      {
+        Icon: Smartphone,
+        title: "Start learning",
+        desc: "Open a course that interests you and begin. Aim for a little every day, consistency is how you get the most out of it and keep your place.",
+      },
+    ];
+
     return (
       <>
-        <PageHeader title="STEM for All" subtitle="Your sign-up has been received." badge="STEM & Learning" />
-        <section className="py-24 bg-bg-primary">
-          <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="max-w-xl mx-auto px-4">
-            <div className="card-premium p-12 text-center">
-              <div className="w-16 h-16 rounded-full bg-secondary/10 flex items-center justify-center mx-auto mb-5">
-                <CheckCircle size={32} className="text-secondary" />
+        <PageHeader title="STEM for All" subtitle="You're in. Here's how to join your Brilliant cohort." badge="STEM & Learning" />
+        <section className="py-20 bg-bg-primary">
+          <div className="max-w-2xl mx-auto px-4">
+
+            {/* Celebration header */}
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="text-center mb-10"
+            >
+              <motion.div
+                initial={{ scale: 0, rotate: -12 }}
+                animate={{ scale: 1, rotate: 0 }}
+                transition={{ type: "spring", stiffness: 200, damping: 12, delay: 0.15 }}
+                className="w-20 h-20 rounded-full bg-secondary/10 flex items-center justify-center mx-auto mb-5"
+              >
+                <PartyPopper size={38} className="text-secondary" />
+              </motion.div>
+              <h2 className="text-2xl sm:text-3xl font-bold text-text-primary mb-2" style={{ fontFamily: "var(--font-playfair)" }}>
+                Welcome to STEM for All!
+              </h2>
+              <p className="text-text-secondary">
+                Thank you for signing up and making the commitment. Your free {PARTNER} Premium access is ready, follow the steps below to join the <strong>{COHORT}</strong>.
+              </p>
+            </motion.div>
+
+            {/* Invite link card, animated */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+              className="card-premium p-6 sm:p-8 mb-8 relative overflow-hidden"
+            >
+              {/* soft animated glow */}
+              <motion.div
+                aria-hidden
+                className="absolute -top-16 -right-16 w-48 h-48 rounded-full bg-accent/10 blur-2xl"
+                animate={{ scale: [1, 1.25, 1], opacity: [0.5, 0.8, 0.5] }}
+                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+              />
+              <div className="relative">
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-accent/10 text-accent text-xs font-bold uppercase tracking-wider rounded-full mb-3">
+                  <Sparkles size={13} /> Your invite link
+                </span>
+                <div className="flex flex-col sm:flex-row items-stretch gap-3 mt-1">
+                  <a
+                    href={BRILLIANT_INVITE}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-primary flex-1 inline-flex items-center justify-center gap-2 text-center"
+                  >
+                    Join on Brilliant <ArrowRight size={16} />
+                  </a>
+                  <button
+                    onClick={copyInvite}
+                    className="inline-flex items-center justify-center gap-2 px-4 py-3 rounded-xl border border-gray-200 bg-white text-text-primary text-sm font-medium hover:border-primary/40 hover:bg-primary/5 transition-all"
+                  >
+                    {copied ? <><Check size={16} className="text-secondary" /> Copied!</> : <><Copy size={16} /> Copy link</>}
+                  </button>
+                </div>
+                <p className="mt-3 text-xs text-text-secondary/80 break-all bg-gray-50 rounded-lg px-3 py-2 border border-gray-100">
+                  {BRILLIANT_INVITE}
+                </p>
               </div>
-              <h2 className="text-2xl font-bold text-text-primary mb-2" style={{ fontFamily: "var(--font-playfair)" }}>You&apos;re on the list</h2>
-              <p className="text-text-secondary mb-4">
-                Thank you for signing up for STEM for All. Our team reviews sign-ups and sends {PARTNER} Premium access
-                to committed learners in batches. We will email you the next steps.
-              </p>
-              <p className="text-text-secondary text-sm">
-                Please watch your inbox (and spam folder) for a message from
-                <strong> info@haleyouthfoundation.org</strong>. When your access arrives, start learning promptly, that
-                is how you keep your place.
-              </p>
+            </motion.div>
+
+            {/* Steps */}
+            <div className="space-y-3 mb-8">
+              {steps.map((s, i) => (
+                <motion.div
+                  key={s.title}
+                  initial={{ opacity: 0, x: -16 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.4, delay: 0.45 + i * 0.12 }}
+                  className="card-premium p-5 flex items-start gap-4"
+                >
+                  <div className="w-10 h-10 rounded-xl bg-primary/5 flex items-center justify-center shrink-0 relative">
+                    <s.Icon size={19} className="text-primary" />
+                    <span className="absolute -top-2 -left-2 w-5 h-5 rounded-full bg-primary text-white text-[11px] font-bold flex items-center justify-center">{i + 1}</span>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-text-primary text-sm mb-0.5">{s.title}</h4>
+                    <p className="text-text-secondary text-xs leading-relaxed">{s.desc}</p>
+                  </div>
+                </motion.div>
+              ))}
             </div>
-          </motion.div>
+
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.9 }}
+              className="text-center text-text-secondary text-sm"
+            >
+              We&apos;ve also emailed these details to you. Questions? Reach us at{" "}
+              <a href="mailto:info@haleyouthfoundation.org" className="text-primary font-medium hover:underline">info@haleyouthfoundation.org</a>.
+            </motion.p>
+          </div>
         </section>
       </>
     );
@@ -292,43 +404,12 @@ export default function StemForAllClient() {
 
                 <div className="grid sm:grid-cols-2 gap-5">
                   <div>
-                    <label className="block text-sm font-medium text-text-primary mb-2">Highest Education *</label>
+                    <label className="block text-sm font-medium text-text-primary mb-2">Education level *</label>
                     <select required value={form.education} onChange={(e) => set("education", e.target.value)} className={inputClass}>
                       <option value="">Select level</option>
-                      <option>Primary school</option>
-                      <option>Secondary school</option>
-                      <option>Diploma / NCE / OND</option>
-                      <option>Undergraduate / HND</option>
-                      <option>Bachelor&apos;s degree</option>
-                      <option>Master&apos;s degree</option>
-                      <option>PhD</option>
-                      <option>Other</option>
-                    </select>
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-text-primary mb-2">Current Status *</label>
-                    <select required value={form.occupation} onChange={(e) => set("occupation", e.target.value)} className={inputClass}>
-                      <option value="">Select</option>
-                      <option>Student (secondary)</option>
-                      <option>Student (tertiary)</option>
-                      <option>Recent graduate</option>
-                      <option>Employed</option>
-                      <option>Self-employed</option>
-                      <option>Seeking work</option>
-                      <option>Other</option>
-                    </select>
-                  </div>
-                </div>
-
-                <div className="grid sm:grid-cols-2 gap-5">
-                  <div>
-                    <label className="block text-sm font-medium text-text-primary mb-2">STEM / Maths Experience *</label>
-                    <select required value={form.experience} onChange={(e) => set("experience", e.target.value)} className={inputClass}>
-                      <option value="">Select level</option>
-                      <option>Complete beginner</option>
-                      <option>Some exposure</option>
-                      <option>Intermediate</option>
-                      <option>Advanced</option>
+                      <option>Elementary / Primary school</option>
+                      <option>Secondary / Middle school / High school</option>
+                      <option>College / Undergraduate</option>
                     </select>
                   </div>
                   <div>
@@ -367,13 +448,15 @@ export default function StemForAllClient() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-text-primary mb-2">Which areas interest you most? *</label>
+                  <label className="block text-sm font-medium text-text-primary mb-2">Which Brilliant courses interest you most? *</label>
                   <select required value={form.interests} onChange={(e) => set("interests", e.target.value)} className={inputClass}>
                     <option value="">Select</option>
-                    <option>Mathematics</option>
+                    <option>Foundational Math</option>
+                    <option>Data Analysis</option>
+                    <option>Programming &amp; Computer Science</option>
+                    <option>Artificial Intelligence &amp; Machine Learning</option>
                     <option>Science &amp; Engineering</option>
-                    <option>Computer Science &amp; Programming</option>
-                    <option>Data &amp; Artificial Intelligence</option>
+                    <option>Logic &amp; Problem Solving</option>
                     <option>A mix of everything</option>
                   </select>
                 </div>

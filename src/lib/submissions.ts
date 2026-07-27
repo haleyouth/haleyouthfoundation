@@ -86,8 +86,6 @@ export interface StemForAllSubmission {
   dob: string;
   gender: string;
   education: string;
-  occupation: string;
-  experience: string;
   hasDevice: string;
   hasInternet: string;
   hoursPerWeek: string;
