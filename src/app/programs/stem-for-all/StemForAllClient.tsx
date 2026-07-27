@@ -15,6 +15,8 @@ import {
 const PARTNER = "Brilliant";
 const BRILLIANT_INVITE = "https://brilliant.org/classroom/join-v2/b08e37d3-822e-4b02-b4a1-30d86129c601";
 const COHORT = "Haleyouth Foundation STEM for All 2026 Cohort";
+// Value of the Brilliant Premium access each learner receives free.
+const PREMIUM_ANNUAL_VALUE = "$240";
 
 const tracks = [
   { Icon: Sigma, title: "Mathematics", desc: "From foundations to advanced topics, built through interactive problem-solving rather than rote memorisation." },
@@ -276,6 +278,20 @@ export default function StemForAllClient() {
                 Foundation you can access it free. Sign up below, make the commitment, and we will guide you through
                 activating your access.
               </p>
+
+              {/* Value callout */}
+              <div className="flex flex-wrap items-center gap-3 mb-5">
+                <div className="inline-flex items-baseline gap-2 rounded-xl bg-primary/5 px-4 py-2.5">
+                  <span className="text-xs text-text-secondary uppercase tracking-wider">Value of over</span>
+                  <span className="text-lg font-bold text-text-secondary/70 line-through decoration-2 decoration-red-500/70">
+                    {PREMIUM_ANNUAL_VALUE}
+                  </span>
+                </div>
+                <span className="inline-flex items-center gap-1.5 rounded-xl bg-secondary/10 text-secondary px-4 py-2.5 text-lg font-extrabold">
+                  <Sparkles size={16} /> FREE for you
+                </span>
+              </div>
+
               <a href="#signup" className="btn-primary inline-flex items-center gap-2">
                 <Send size={16} /> Sign up now
               </a>
