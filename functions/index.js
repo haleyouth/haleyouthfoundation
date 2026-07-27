@@ -130,7 +130,9 @@ export const sendEmail = onCall(
     const html = renderEmail({ ...design, greetingName: firstName(name) });
 
     try {
-      await brevoSend({ apiKey, to: { email: to, name }, subject, html, text: body });
+      // Do not put a name in the To header; the address alone is correct and
+      // avoids showing a sample/placeholder name as the recipient.
+      await brevoSend({ apiKey, to: { email: to }, subject, html, text: body });
     } catch (err) {
       console.error("Send failed:", err.message);
       throw new HttpsError("internal", `Email service error. ${err.message}`);
