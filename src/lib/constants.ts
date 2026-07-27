@@ -5,7 +5,8 @@ export const SITE_CONFIG = {
     "Haleyouth Foundation is a registered non-profit empowering youth through mentorship, advancing STEM education, and fostering community development in Nigeria and across Africa.",
   url: "https://haleyouthfoundation.org",
   email: "info@haleyouthfoundation.org",
-  phone: "",
+  phone: "+234 806 144 0418",
+  phoneHref: "+2348061440418",
   address: "Ateba Agassa-Okene, Kogi State 263101, Nigeria",
   addressParts: {
     streetAddress: "Ateba Agassa-Okene",
@@ -15,6 +16,7 @@ export const SITE_CONFIG = {
   },
   registration: "CAC RC - 138260",
   registrationNumber: "RC-138260",
+  scuml: "SCUML registered (RN: SC 088682)",
   founded: 2019,
   social: {
     facebook: "https://www.facebook.com/haleyouthfoundation/",
@@ -35,9 +37,18 @@ export const NAV_ITEMS = [
   { label: "Contact", href: "/contact" },
 ];
 
+// Dropdown items shown under a top-level nav label (keyed by href).
+export const NAV_SUBMENUS: Record<string, { label: string; href: string; badge?: string }[]> = {
+  "/programs": [
+    { label: "All Programs", href: "/programs" },
+    { label: "Tech Skill Training", href: "/programs/tech-skill-training", badge: "New" },
+    { label: "STEM for All", href: "/programs/stem-for-all", badge: "New" },
+  ],
+};
+
 export const HERO_SLIDES = [
   {
-    image: "/images/events/Garki_IMG_0011.jpg",
+    image: "/images/events/Garki_IMG_0011.webp",
     alt: "Girls receiving reusable menstrual pad kits during the Pad-a-Girl distribution at Garki public school, Abuja",
     headline: "Keeping Girls in School with Dignity",
     subtitle:
@@ -45,7 +56,7 @@ export const HERO_SLIDES = [
     cta: { text: "Learn More", href: "/programs/pad-a-girl" },
   },
   {
-    image: "/images/events/karimo_img.jpg",
+    image: "/images/events/karimo_img.webp",
     alt: "Pad-a-Girl Climate Action education session for schoolgirls in Karimo, Northern Nigeria",
     headline: "Climate Action Starts in Communities",
     subtitle:
@@ -53,7 +64,7 @@ export const HERO_SLIDES = [
     cta: { text: "Our Programs", href: "/programs" },
   },
   {
-    image: "/images/events/Back2School.jpg",
+    image: "/images/events/Back2School.webp",
     alt: "Rural students receiving textbooks and learning materials through the Haleyouth Back-to-School program",
     headline: "Education is the Foundation of Peace",
     subtitle:
@@ -61,7 +72,7 @@ export const HERO_SLIDES = [
     cta: { text: "Support Education", href: "/get-involved/donate" },
   },
   {
-    image: "/images/events/Jabi_AK ADAAVA 9.jpg",
+    image: "/images/events/Jabi_AK ADAAVA 9.webp",
     alt: "Haleyouth Foundation team and beneficiary girls at the Pad-a-Girl distribution event in Jabi, Abuja",
     headline: "Empowering Youth. Transforming Communities.",
     subtitle:
@@ -69,7 +80,7 @@ export const HERO_SLIDES = [
     cta: { text: "Get Involved", href: "/get-involved" },
   },
   {
-    image: "/images/events/Garki_IMG_0015.jpg",
+    image: "/images/events/Garki_IMG_0015.webp",
     alt: "Community engagement and reusable pad distribution at Garki public school, Abuja",
     headline: "Community Transformation Powered by Youth",
     subtitle:
@@ -77,7 +88,7 @@ export const HERO_SLIDES = [
     cta: { text: "View Impact", href: "/impact" },
   },
   {
-    image: "/images/events/DSC04757.jpg",
+    image: "/images/events/DSC04757.webp",
     alt: "Speakers panel at the SDGs Roundtable Discussion at the UN General Assembly 2025, New York",
     headline: "From Local Action to Global Impact",
     subtitle:
@@ -103,7 +114,7 @@ export const PROGRAMS = [
       { label: "Women Trained", value: "3 Cycles" },
       { label: "Competition Participants", value: "590+" },
     ],
-    image: "/images/events/Garki_IMG_0011.jpg",
+    image: "/images/events/Garki_IMG_0011.webp",
   },
   {
     slug: "back-to-school",
@@ -120,7 +131,7 @@ export const PROGRAMS = [
       { label: "Schools Covered", value: "5+" },
       { label: "States Covered", value: "3" },
     ],
-    image: "/images/events/Back2School.jpg",
+    image: "/images/events/Back2School.webp",
   },
   {
     slug: "stem-training",
@@ -131,7 +142,7 @@ export const PROGRAMS = [
     icon: "Microscope",
     category: "Education & Scholarships",
     sdgs: [4, 6],
-    image: "/images/events/Jabi_AK ADAAVA 9.jpg",
+    image: "/images/events/Jabi_AK ADAAVA 9.webp",
   },
   {
     slug: "digital-skills",
@@ -142,7 +153,7 @@ export const PROGRAMS = [
     icon: "Laptop",
     category: "Skills & Empowerment",
     sdgs: [4, 6, 10],
-    image: "/images/events/Garki_IMG_0015.jpg",
+    image: "/images/events/Garki_IMG_0015.webp",
   },
   {
     slug: "community-healthcare",
@@ -153,7 +164,7 @@ export const PROGRAMS = [
     icon: "Stethoscope",
     category: "Health & Wellness",
     sdgs: [3],
-    image: "/images/events/Garki_IMG_0026.jpg",
+    image: "/images/events/Garki_IMG_0026.webp",
   },
   {
     slug: "humanitarian-projects",
@@ -165,7 +176,7 @@ export const PROGRAMS = [
     category: "Community Development",
     sdgs: [1, 2],
     stats: [{ label: "Families Supported", value: "100+" }],
-    image: "/images/events/fooddrive2.jpeg",
+    image: "/images/events/fooddrive2.webp",
   },
   {
     slug: "peace-ambassadors",
@@ -176,7 +187,7 @@ export const PROGRAMS = [
     icon: "Handshake",
     category: "Peace & Advocacy",
     sdgs: [16],
-    image: "/images/events/UNGA80_b.jpg",
+    image: "/images/events/UNGA80_b.webp",
   },
   {
     slug: "career-and-mentorship",
@@ -192,7 +203,7 @@ export const PROGRAMS = [
       { label: "Scholarship Value Mentored", value: "$250K+" },
       { label: "Countries", value: "5+" },
     ],
-    image: "/images/events/Unga80_c.jpg",
+    image: "/images/events/Unga80_c.webp",
   },
   {
     slug: "environmental-protection",
@@ -203,7 +214,7 @@ export const PROGRAMS = [
     icon: "TreePine",
     category: "Climate & Environment",
     sdgs: [13],
-    image: "/images/events/Garki_IMG_0011.jpg",
+    image: "/images/events/Garki_IMG_0011.webp",
   },
   {
     slug: "youth-skill-acquisition",
@@ -214,7 +225,7 @@ export const PROGRAMS = [
     icon: "Wrench",
     category: "Skills & Empowerment",
     sdgs: [1, 8],
-    image: "/images/events/Back2School.jpg",
+    image: "/images/events/Back2School.webp",
   },
   {
     slug: "language-and-culture",
@@ -225,14 +236,14 @@ export const PROGRAMS = [
     icon: "Globe",
     category: "Community Development",
     sdgs: [4, 11],
-    image: "/images/events/UNGA80_d.jpeg",
+    image: "/images/events/UNGA80_d.webp",
   },
 ];
 
 export const PARTNERS = [
   {
     name: "British Council",
-    logo: "/images/partners/BritishCouncil.png",
+    logo: "/images/partners/BritishCouncil.webp",
     tier: "strategic" as const,
     website:
       "https://www.britishcouncil.org/study-work-abroad/alumni-uk/alumni-opportunities-initiatives/climate-action-grants",
@@ -240,98 +251,98 @@ export const PARTNERS = [
   },
   {
     name: "Near Foundation",
-    logo: "/images/partners/NearFoundation.png",
+    logo: "/images/partners/NearFoundation.webp",
     tier: "program" as const,
     website: "https://nearfoundation.ngo/",
     description: "Program partner for youth empowerment",
   },
   {
     name: "African Future Leaders Initiative",
-    logo: "/images/partners/FLI.png",
+    logo: "/images/partners/FLI.webp",
     tier: "program" as const,
     website: null,
     description: "Pan-African youth leadership partner",
   },
   {
     name: "Hope 4 Her Foundation",
-    logo: "/images/partners/Hope4Her.png.png",
+    logo: "/images/partners/Hope4Her.png.webp",
     tier: "program" as const,
     website: null,
     description: "Girl-child empowerment and support partner",
   },
   {
     name: "Eduvate Kids",
-    logo: "/images/partners/eduvatekids.png",
+    logo: "/images/partners/eduvatekids.webp",
     tier: "program" as const,
     website: "https://eduvatekids-store.web.app/",
     description: "Education and children's development partner",
   },
   {
     name: "Scholarly Echo",
-    logo: "/images/partners/ScholarlyEcho.png",
+    logo: "/images/partners/ScholarlyEcho.webp",
     tier: "program" as const,
     website: "https://scholarly-echo.web.app/",
     description: "Academic mentorship and scholarship partner",
   },
   {
     name: "Precious Little Lives Initiative",
-    logo: "/images/partners/prelli.png",
+    logo: "/images/partners/prelli.webp",
     tier: "program" as const,
     website: null,
     description: "Children and community welfare partner",
   },
   {
     name: "Journalists & Writers Foundation",
-    logo: "/images/partners/jwf-logo-1.png",
+    logo: "/images/partners/jwf-logo-1.webp",
     tier: "knowledge" as const,
     website: "https://jwf.org/",
     description: "Host of SDGs Roundtable at UNGA",
   },
   {
     name: "UNGA SDGs Conference",
-    logo: "/images/partners/sdgs-conference-logo.png",
+    logo: "/images/partners/sdgs-conference-logo.webp",
     tier: "knowledge" as const,
     website: "https://unga-conference.org/",
     description: "United Nations General Assembly SDGs platform",
   },
   {
     name: "Zoom",
-    logo: "/images/partners/zoom.png",
+    logo: "/images/partners/zoom.webp",
     tier: "support" as const,
     website: "https://zoom.us/",
     description: "Trust and support in our journey to impact local communities",
   },
   {
     name: "Claude AI",
-    logo: "/images/partners/claude.png",
+    logo: "/images/partners/claude.webp",
     tier: "support" as const,
     website: "https://claude.ai/",
     description: "Trust and support in our journey to impact local communities",
   },
   {
     name: "Brilliant",
-    logo: "/images/partners/brilliant.png",
+    logo: "/images/partners/brilliant.webp",
     tier: "support" as const,
     website: "https://brilliant.org/",
     description: "Learning by Doing — trust and support in our journey to impact",
   },
   {
     name: "Google for Nonprofits",
-    logo: "/images/partners/google-nonprofits.jpg",
+    logo: "/images/partners/google-nonprofits.webp",
     tier: "support" as const,
     website: "https://www.google.com/nonprofits/",
     description: "Trust and support in our journey to impact local communities",
   },
   {
     name: "OpenAI",
-    logo: "/images/partners/openai.png",
+    logo: "/images/partners/openai.webp",
     tier: "support" as const,
     website: "https://openai.com/",
     description: "Trust and support in our journey to impact local communities",
   },
   {
     name: "Canva",
-    logo: "/images/partners/canva.jpg",
+    logo: "/images/partners/canva.webp",
     tier: "support" as const,
     website: "https://www.canva.com/",
     description: "Trust and support in our journey to impact local communities",
@@ -401,74 +412,74 @@ export const GALLERY_CATEGORIES = [
 
 export const GALLERY_IMAGES = [
   {
-    src: "/images/events/Garki_IMG_0011.jpg",
+    src: "/images/events/Garki_IMG_0011.webp",
     caption: "Pad-a-Girl Climate Action project — distribution event at Garki, Abuja",
     category: "Pad-a-Girl Events",
   },
   {
-    src: "/images/events/Garki_IMG_0015.jpg",
+    src: "/images/events/Garki_IMG_0015.webp",
     caption: "Community engagement during Pad-a-Girl distribution at Garki",
     category: "Pad-a-Girl Events",
   },
   {
-    src: "/images/events/Garki_IMG_0026.jpg",
+    src: "/images/events/Garki_IMG_0026.webp",
     caption: "Reusable pad distribution and menstrual health education session",
     category: "Pad-a-Girl Events",
   },
   {
-    src: "/images/events/JabiAK ADAAVA 37.jpg",
+    src: "/images/events/JabiAK ADAAVA 37.webp",
     caption: "Pad-a-Girl event at Jabi — girls holding advocacy placards",
     category: "Pad-a-Girl Events",
   },
   {
-    src: "/images/events/Jabi_AK ADAAVA 9.jpg",
+    src: "/images/events/Jabi_AK ADAAVA 9.webp",
     caption: "Pad-a-Girl distribution at Jabi with Haleyouth Foundation banner",
     category: "Pad-a-Girl Events",
   },
   {
-    src: "/images/events/Back2School.jpg",
+    src: "/images/events/Back2School.webp",
     caption: "Back-to-School project — students receiving textbooks and learning materials",
     category: "Back-to-School",
   },
   {
-    src: "/images/events/Back2School2.jpg",
+    src: "/images/events/Back2School2.webp",
     caption: "Back-to-School initiative supporting rural education",
     category: "Back-to-School",
   },
   {
-    src: "/images/events/UNGA80_a.jpg",
+    src: "/images/events/UNGA80_a.webp",
     caption:
       "Haleyouth Foundation at the SDGs Roundtable Discussion, UNGA 2025, New York",
     category: "UNGA & International",
   },
   {
-    src: "/images/events/UNGA80_b.jpg",
+    src: "/images/events/UNGA80_b.webp",
     caption: "Group photo at the SDGs Roundtable Discussion, UNGA 2025",
     category: "UNGA & International",
   },
   {
-    src: "/images/events/Unga80_c.jpg",
+    src: "/images/events/Unga80_c.webp",
     caption:
       "Receiving recognition plaque at the SDGs Roundtable Discussion",
     category: "UNGA & International",
   },
   {
-    src: "/images/events/UNGA80_d.jpeg",
+    src: "/images/events/UNGA80_d.webp",
     caption: "Full group of speakers and attendees at the UNGA SDGs event",
     category: "UNGA & International",
   },
   {
-    src: "/images/events/DSC04757.jpg",
+    src: "/images/events/DSC04757.webp",
     caption: "Speakers panel at the SDGs Roundtable Discussion in New York",
     category: "UNGA & International",
   },
   {
-    src: "/images/events/fooddrive1.jpeg",
+    src: "/images/events/fooddrive1.webp",
     caption: "Food drive — bulk supplies prepared for distribution to families in need",
     category: "Community Outreach",
   },
   {
-    src: "/images/events/fooddrive2.jpeg",
+    src: "/images/events/fooddrive2.webp",
     caption: "Food drive — packaged food parcels ready for community distribution",
     category: "Community Outreach",
   },

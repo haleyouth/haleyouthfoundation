@@ -1,43 +1,81 @@
 rules_version = '2';
 
+// Access model
+// -------------
+// Public visitors may ONLY create submissions (contact, volunteer, partner,
+// newsletter, donation intent). They may never read, edit, or delete them,
+// so donor and volunteer personal data is not exposed.
+//
+// Site content (programs, partners, team, gallery, posts) is public-read so
+// the website can render it, but writes require an authenticated admin.
+//
+// IMPORTANT: admin writes require Firebase Authentication (request.auth != null).
+// The admin panel must sign in with Firebase Auth for saving to work. Until
+// that migration lands, admin content can be edited from the Firebase console.
+// See AD_GRANTS_REVIEW.md "Manual steps" for the auth migration.
+
 service cloud.firestore {
   match /databases/{database}/documents {
-    // Public can create submissions
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    // ---- Public submissions: create-only ----
     match /submissions_contact/{doc} {
       allow create: if request.resource.data.email is string
-        && request.resource.data.name is string;
-      allow read, update, delete: if true;
+        && request.resource.data.name is string
+        && request.resource.data.size() < 20;
+      allow read, update, delete: if isSignedIn();
     }
 
     match /submissions_volunteer/{doc} {
       allow create: if request.resource.data.email is string
-        && request.resource.data.name is string;
-      allow read, update, delete: if true;
+        && request.resource.data.name is string
+        && request.resource.data.size() < 30;
+      allow read, update, delete: if isSignedIn();
     }
 
     match /submissions_partner/{doc} {
       allow create: if request.resource.data.email is string
-        && request.resource.data.orgName is string;
-      allow read, update, delete: if true;
+        && request.resource.data.orgName is string
+        && request.resource.data.size() < 30;
+      allow read, update, delete: if isSignedIn();
     }
 
     match /submissions_newsletter/{doc} {
-      allow create: if request.resource.data.email is string;
-      allow read, delete: if true;
+      allow create: if request.resource.data.email is string
+        && request.resource.data.size() < 10;
+      allow read, update, delete: if isSignedIn();
     }
 
     match /submissions_donations/{doc} {
       allow create: if request.resource.data.email is string
-        && request.resource.data.name is string;
-      allow read, update, delete: if true;
+        && request.resource.data.name is string
+        && request.resource.data.size() < 30;
+      allow read, update, delete: if isSignedIn();
     }
 
-    // Admin-managed content
-    match /admin_programs/{doc} { allow read, write: if true; }
-    match /admin_partners/{doc} { allow read, write: if true; }
-    match /admin_team/{doc} { allow read, write: if true; }
-    match /admin_gallery/{doc} { allow read, write: if true; }
-    match /admin_posts/{doc} { allow read, write: if true; }
+    match /submissions_skilltraining/{doc} {
+      allow create: if request.resource.data.email is string
+        && request.resource.data.name is string
+        && request.resource.data.size() < 25;
+      allow read, update, delete: if isSignedIn();
+    }
+
+    match /submissions_stemforall/{doc} {
+      allow create: if request.resource.data.email is string
+        && request.resource.data.name is string
+        && request.resource.data.size() < 25;
+      allow read, update, delete: if isSignedIn();
+    }
+
+    // ---- Site content: public read, admin write ----
+    match /admin_programs/{doc} { allow read: if true; allow write: if isSignedIn(); }
+    match /admin_partners/{doc} { allow read: if true; allow write: if isSignedIn(); }
+    match /admin_team/{doc}     { allow read: if true; allow write: if isSignedIn(); }
+    match /admin_gallery/{doc}  { allow read: if true; allow write: if isSignedIn(); }
+    match /admin_posts/{doc}    { allow read: if true; allow write: if isSignedIn(); }
 
     // Default deny
     match /{document=**} {

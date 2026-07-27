@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "@/components/ui/Link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { NAV_ITEMS, SITE_CONFIG } from "@/lib/constants";
+import { NAV_ITEMS, NAV_SUBMENUS, SITE_CONFIG } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 
 export default function Navbar() {
@@ -99,19 +99,49 @@ export default function Navbar() {
             <div className="hidden lg:flex items-center gap-2 xl:gap-3">
               {NAV_ITEMS.map((item) => {
                 const active = pathname === item.href || (item.href !== "/" && pathname.startsWith(item.href));
+                const submenu = NAV_SUBMENUS[item.href];
+                const linkClass = cn(
+                  "px-3 xl:px-4 py-2.5 rounded-lg text-[15px] font-medium transition-colors whitespace-nowrap inline-flex items-center gap-1",
+                  active
+                    ? transparent ? "text-white bg-white/20" : "text-primary bg-primary/5"
+                    : transparent ? "text-white/85 hover:text-white hover:bg-white/10" : "text-gray-700 hover:text-primary hover:bg-gray-50"
+                );
+
+                if (!submenu) {
+                  return <Link key={item.href} href={item.href} className={linkClass}>{item.label}</Link>;
+                }
+
                 return (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className={cn(
-                      "px-3 xl:px-4 py-2.5 rounded-lg text-[15px] font-medium transition-colors whitespace-nowrap",
-                      active
-                        ? transparent ? "text-white bg-white/20" : "text-primary bg-primary/5"
-                        : transparent ? "text-white/85 hover:text-white hover:bg-white/10" : "text-gray-700 hover:text-primary hover:bg-gray-50"
-                    )}
-                  >
-                    {item.label}
-                  </Link>
+                  <div key={item.href} className="relative group">
+                    <Link href={item.href} className={linkClass}>
+                      {item.label}
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="opacity-70 transition-transform group-hover:rotate-180">
+                        <path d="M6 9l6 6 6-6" />
+                      </svg>
+                    </Link>
+                    <div className="absolute left-0 top-full pt-2 opacity-0 invisible translate-y-1 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-200">
+                      <div className="min-w-[220px] bg-white rounded-xl shadow-xl border border-gray-100 p-1.5">
+                        {submenu.map((sub) => {
+                          const subActive = pathname === sub.href;
+                          return (
+                            <Link
+                              key={sub.href}
+                              href={sub.href}
+                              className={cn(
+                                "flex items-center justify-between gap-3 px-3.5 py-2.5 rounded-lg text-[14px] font-medium transition-colors",
+                                subActive ? "text-primary bg-primary/5" : "text-gray-700 hover:text-primary hover:bg-gray-50"
+                              )}
+                            >
+                              {sub.label}
+                              {sub.badge && (
+                                <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-accent/10 text-accent">{sub.badge}</span>
+                              )}
+                            </Link>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  </div>
                 );
               })}
               <Link
@@ -167,23 +197,42 @@ export default function Navbar() {
           <nav className="space-y-1">
             {NAV_ITEMS.map((item) => {
               const active = pathname === item.href || (item.href !== "/" && pathname.startsWith(item.href));
+              const submenu = NAV_SUBMENUS[item.href];
               return (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  onClick={() => setIsOpen(false)}
-                  className={cn(
-                    "flex items-center justify-between px-4 py-4 rounded-xl text-[17px] font-medium transition-colors",
-                    active
-                      ? "text-primary bg-primary/5 border-l-[3px] border-primary"
-                      : "text-gray-700 hover:bg-gray-50"
+                <div key={item.href}>
+                  <Link
+                    href={item.href}
+                    onClick={() => setIsOpen(false)}
+                    className={cn(
+                      "flex items-center justify-between px-4 py-4 rounded-xl text-[17px] font-medium transition-colors",
+                      active
+                        ? "text-primary bg-primary/5 border-l-[3px] border-primary"
+                        : "text-gray-700 hover:bg-gray-50"
+                    )}
+                  >
+                    {item.label}
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-gray-300">
+                      <path d="M9 18l6-6-6-6" />
+                    </svg>
+                  </Link>
+                  {submenu && (
+                    <div className="ml-4 mt-1 mb-1 space-y-1 border-l border-gray-100 pl-3">
+                      {submenu.filter((s) => s.href !== item.href).map((sub) => (
+                        <Link
+                          key={sub.href}
+                          href={sub.href}
+                          onClick={() => setIsOpen(false)}
+                          className="flex items-center justify-between px-3 py-3 rounded-lg text-[15px] font-medium text-gray-600 hover:text-primary hover:bg-gray-50 transition-colors"
+                        >
+                          {sub.label}
+                          {sub.badge && (
+                            <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-accent/10 text-accent">{sub.badge}</span>
+                          )}
+                        </Link>
+                      ))}
+                    </div>
                   )}
-                >
-                  {item.label}
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-gray-300">
-                    <path d="M9 18l6-6-6-6" />
-                  </svg>
-                </Link>
+                </div>
               );
             })}
           </nav>

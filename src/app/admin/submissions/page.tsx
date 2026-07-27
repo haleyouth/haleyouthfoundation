@@ -5,16 +5,20 @@ import {
   fetchSubmissions,
   updateSubmissionStatus,
   deleteSubmission,
+  sendEmail,
   type ContactSubmission,
   type VolunteerSubmission,
   type PartnerSubmission,
   type NewsletterSubscription,
 } from "@/lib/submissions";
-import { Mail, Users, Handshake, Newspaper, Eye, Trash2, RefreshCw, Loader2, ChevronDown, ExternalLink, Clock } from "lucide-react";
+import { Mail, Users, Handshake, Newspaper, GraduationCap, Trash2, RefreshCw, Loader2, ChevronDown, ExternalLink, Clock, Send, X, CheckCircle2 } from "lucide-react";
+import BroadcastPanel from "./BroadcastPanel";
 
 const tabs = [
   { key: "contact", label: "Contact Messages", icon: Mail, collection: "submissions_contact" },
   { key: "volunteer", label: "Volunteer Apps", icon: Users, collection: "submissions_volunteer" },
+  { key: "skilltraining", label: "Skill Training", icon: GraduationCap, collection: "submissions_skilltraining" },
+  { key: "stemforall", label: "STEM for All", icon: GraduationCap, collection: "submissions_stemforall" },
   { key: "partnership", label: "Partnership", icon: Handshake, collection: "submissions_partner" },
   { key: "newsletter", label: "Newsletter", icon: Newspaper, collection: "submissions_newsletter" },
 ];
@@ -24,6 +28,9 @@ const statusColors: Record<string, string> = {
   reviewed: "bg-yellow-100 text-yellow-700",
   responded: "bg-green-100 text-green-700",
   accepted: "bg-green-100 text-green-700",
+  shortlisted: "bg-purple-100 text-purple-700",
+  enrolled: "bg-green-100 text-green-700",
+  referred: "bg-green-100 text-green-700",
   declined: "bg-red-100 text-red-700",
   archived: "bg-gray-100 text-gray-500",
 };
@@ -31,8 +38,21 @@ const statusColors: Record<string, string> = {
 const statusOptions: Record<string, string[]> = {
   contact: ["new", "reviewed", "responded", "archived"],
   volunteer: ["new", "reviewed", "accepted", "declined"],
+  skilltraining: ["new", "reviewed", "shortlisted", "referred", "declined"],
+  stemforall: ["new", "reviewed", "shortlisted", "enrolled", "declined"],
   partnership: ["new", "reviewed", "accepted", "declined"],
 };
+
+function ageFromDob(dob: string): string {
+  if (!dob) return "";
+  const b = new Date(dob);
+  if (isNaN(b.getTime())) return "";
+  const now = new Date();
+  let age = now.getFullYear() - b.getFullYear();
+  const m = now.getMonth() - b.getMonth();
+  if (m < 0 || (m === 0 && now.getDate() < b.getDate())) age--;
+  return age >= 0 && age < 130 ? String(age) : "";
+}
 
 function formatDate(ts: { seconds: number } | null) {
   if (!ts) return "—";
@@ -47,6 +67,15 @@ export default function AdminSubmissionsPage() {
   const [loading, setLoading] = useState(true);
   const [counts, setCounts] = useState<Record<string, number>>({});
   const [expandedId, setExpandedId] = useState<string | null>(null);
+
+  // Email composer state (keyed to the submission being emailed)
+  const [composeId, setComposeId] = useState<string | null>(null);
+  const [composeTo, setComposeTo] = useState("");
+  const [composeSubject, setComposeSubject] = useState("");
+  const [composeBody, setComposeBody] = useState("");
+  const [sending, setSending] = useState(false);
+  const [sentId, setSentId] = useState<string | null>(null);
+  const [composeError, setComposeError] = useState("");
 
   const activeCollection = tabs.find((t) => t.key === activeTab)!.collection;
 
@@ -83,7 +112,55 @@ export default function AdminSubmissionsPage() {
     }
   };
 
+  const openCompose = (docId: string, email: string, name: string) => {
+    setComposeId(docId);
+    setComposeTo(email);
+    setComposeSubject("");
+    setComposeBody(name ? `Dear ${name.split(" ")[0]},\n\n` : "");
+    setComposeError("");
+    setSentId(null);
+  };
+
+  const closeCompose = () => {
+    setComposeId(null);
+    setSending(false);
+    setComposeError("");
+  };
+
+  const handleSend = async () => {
+    if (!composeTo || !composeSubject.trim() || !composeBody.trim()) {
+      setComposeError("Recipient, subject, and message are all required.");
+      return;
+    }
+    setSending(true);
+    setComposeError("");
+    try {
+      await sendEmail({ to: composeTo, subject: composeSubject.trim(), body: composeBody });
+      setSentId(composeId);
+      setComposeId(null);
+    } catch (err) {
+      console.error("Failed to send email:", err);
+      setComposeError("Could not send. Make sure you are signed in and try again.");
+    } finally {
+      setSending(false);
+    }
+  };
+
   const items = (data[activeTab] || []) as Record<string, unknown>[];
+
+  // Recipients for the broadcast panel: everyone in the active tab with an email.
+  const recipients = items
+    .map((it) => ({
+      email: (it.email as string) || "",
+      name:
+        (it.name as string) ||
+        (it.contactName as string) ||
+        (it.orgName as string) ||
+        "",
+    }))
+    .filter((r) => r.email);
+
+  const activeLabel = tabs.find((t) => t.key === activeTab)!.label;
 
   return (
     <div className="space-y-6">
@@ -123,6 +200,11 @@ export default function AdminSubmissionsPage() {
         ))}
       </div>
 
+      {/* Broadcast tool for the active audience */}
+      {!loading && recipients.length > 0 && (
+        <BroadcastPanel audienceLabel={activeLabel} recipients={recipients} />
+      )}
+
       {/* Content */}
       {loading ? (
         <div className="bg-white rounded-xl p-12 shadow-sm text-center">
@@ -153,12 +235,16 @@ export default function AdminSubmissionsPage() {
                     <p className="font-medium text-gray-900 text-sm truncate">
                       {activeTab === "contact" && (item as unknown as ContactSubmission).name}
                       {activeTab === "volunteer" && (item as unknown as VolunteerSubmission).name}
+                      {activeTab === "skilltraining" && (item.name as string)}
+                      {activeTab === "stemforall" && (item.name as string)}
                       {activeTab === "partnership" && (item as unknown as PartnerSubmission).orgName}
                       {activeTab === "newsletter" && (item as unknown as NewsletterSubscription).email}
                     </p>
                     <p className="text-gray-400 text-xs truncate">
                       {(item.email as string) || ""}
                       {activeTab === "contact" && ` — ${(item as unknown as ContactSubmission).subject}`}
+                      {activeTab === "skilltraining" && ` — ${(item.program as string) || ""}`}
+                      {activeTab === "stemforall" && ` — ${(item.interests as string) || "STEM for All"}`}
                       {activeTab === "partnership" && ` — ${(item as unknown as PartnerSubmission).type}`}
                     </p>
                   </div>
@@ -176,6 +262,12 @@ export default function AdminSubmissionsPage() {
                 {isExpanded && (
                   <div className="border-t border-gray-100 p-5 bg-gray-50/50">
                     <div className="grid sm:grid-cols-2 gap-4 text-sm mb-5">
+                      {ageFromDob((item.dob as string) || "") !== "" && (
+                        <div>
+                          <p className="text-gray-400 text-xs uppercase tracking-wider mb-0.5">Age (calculated)</p>
+                          <p className="text-gray-800 text-sm font-semibold">{ageFromDob((item.dob as string) || "")} years</p>
+                        </div>
+                      )}
                       {Object.entries(item).map(([key, val]) => {
                         if (["id", "status", "createdAt"].includes(key) || !val) return null;
                         return (
@@ -207,14 +299,28 @@ export default function AdminSubmissionsPage() {
                           ))}
                         </div>
                       )}
-                      <div className="ml-auto">
+                      <div className="ml-auto flex items-center gap-2">
                         {(item.email as string) && (
-                          <a
-                            href={`mailto:${item.email as string}`}
-                            className="inline-flex items-center gap-1 px-3 py-1.5 text-xs font-medium text-primary hover:bg-primary/5 rounded-lg transition-colors mr-2"
-                          >
-                            <ExternalLink size={11} /> Reply
-                          </a>
+                          <>
+                            <button
+                              onClick={() =>
+                                openCompose(
+                                  id,
+                                  item.email as string,
+                                  (item.name as string) || ((item as unknown as ContactSubmission).name) || ""
+                                )
+                              }
+                              className="inline-flex items-center gap-1 px-3 py-1.5 text-xs font-medium text-white bg-primary hover:bg-primary/90 rounded-lg transition-colors"
+                            >
+                              <Send size={11} /> Send email
+                            </button>
+                            <a
+                              href={`mailto:${item.email as string}`}
+                              className="inline-flex items-center gap-1 px-3 py-1.5 text-xs font-medium text-primary hover:bg-primary/5 rounded-lg transition-colors"
+                            >
+                              <ExternalLink size={11} /> Open in mail app
+                            </a>
+                          </>
                         )}
                         <button
                           onClick={() => handleDelete(id)}
@@ -224,6 +330,79 @@ export default function AdminSubmissionsPage() {
                         </button>
                       </div>
                     </div>
+
+                    {/* Sent confirmation */}
+                    {sentId === id && (
+                      <div className="mt-3 flex items-center gap-2 text-xs text-green-700 bg-green-50 border border-green-100 rounded-lg px-3 py-2">
+                        <CheckCircle2 size={14} /> Email queued and sent to {item.email as string}.
+                      </div>
+                    )}
+
+                    {/* Inline email composer */}
+                    {composeId === id && (
+                      <div className="mt-4 border border-gray-200 rounded-xl bg-white p-4 space-y-3">
+                        <div className="flex items-center justify-between">
+                          <p className="text-sm font-semibold text-gray-800 flex items-center gap-2">
+                            <Send size={13} className="text-primary" /> Compose email
+                          </p>
+                          <button onClick={closeCompose} className="text-gray-400 hover:text-gray-600">
+                            <X size={16} />
+                          </button>
+                        </div>
+                        <div>
+                          <label className="text-xs text-gray-400 uppercase tracking-wider">To</label>
+                          <input
+                            type="email"
+                            value={composeTo}
+                            onChange={(e) => setComposeTo(e.target.value)}
+                            className="w-full mt-1 px-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/30"
+                          />
+                        </div>
+                        <div>
+                          <label className="text-xs text-gray-400 uppercase tracking-wider">Subject</label>
+                          <input
+                            type="text"
+                            value={composeSubject}
+                            onChange={(e) => setComposeSubject(e.target.value)}
+                            placeholder="e.g. Your AI Foundation training application"
+                            className="w-full mt-1 px-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/30"
+                          />
+                        </div>
+                        <div>
+                          <label className="text-xs text-gray-400 uppercase tracking-wider">Message</label>
+                          <textarea
+                            value={composeBody}
+                            onChange={(e) => setComposeBody(e.target.value)}
+                            rows={8}
+                            placeholder="Write your message. Line breaks are preserved."
+                            className="w-full mt-1 px-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/30 resize-y"
+                          />
+                        </div>
+                        {composeError && (
+                          <p className="text-xs text-red-600">{composeError}</p>
+                        )}
+                        <div className="flex items-center gap-2">
+                          <button
+                            onClick={handleSend}
+                            disabled={sending}
+                            className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-primary hover:bg-primary/90 rounded-lg transition-colors disabled:opacity-50"
+                          >
+                            {sending ? <Loader2 size={13} className="animate-spin" /> : <Send size={13} />}
+                            {sending ? "Sending..." : "Send email"}
+                          </button>
+                          <button
+                            onClick={closeCompose}
+                            disabled={sending}
+                            className="px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 rounded-lg transition-colors disabled:opacity-50"
+                          >
+                            Cancel
+                          </button>
+                        </div>
+                        <p className="text-[11px] text-gray-400">
+                          Sends from noreply@haleyouthfoundation.org via the Trigger Email extension. The recipient can reply to your address.
+                        </p>
+                      </div>
+                    )}
                   </div>
                 )}
               </div>
