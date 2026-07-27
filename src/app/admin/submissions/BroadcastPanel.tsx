@@ -78,6 +78,11 @@ export default function BroadcastPanel({ audienceLabel, recipients }: Props) {
     return true;
   };
 
+  const errMsg = (e: unknown, fallback: string) => {
+    const m = e && typeof e === "object" && "message" in e ? String((e as { message: unknown }).message) : "";
+    return m ? `${fallback} (${m})` : fallback;
+  };
+
   const handleTest = async () => {
     reset();
     if (!valid()) return;
@@ -88,7 +93,7 @@ export default function BroadcastPanel({ audienceLabel, recipients }: Props) {
       setTestDone(true);
     } catch (e) {
       console.error(e);
-      setError("Test send failed. Check the address and try again.");
+      setError(errMsg(e, "Test send failed."));
     } finally {
       setTesting(false);
     }
@@ -105,7 +110,7 @@ export default function BroadcastPanel({ audienceLabel, recipients }: Props) {
       setResult({ sent: res.sent, total: res.total ?? selected.length, failed: res.failed ?? [] });
     } catch (e) {
       console.error(e);
-      setError("Broadcast failed. Please try again or check the function logs.");
+      setError(errMsg(e, "Broadcast failed."));
     } finally {
       setBroadcasting(false);
     }

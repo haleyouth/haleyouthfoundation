@@ -18,7 +18,10 @@ const BRAND = {
   ink: "#0F2A1B",
   muted: "#4A5C50",
 };
-const LOGO_URL = "https://haleyouthfoundation.org/images/logo_l.png";
+// Same-origin path so the admin preview (served from web.app) can load it
+// without a cross-origin CORS block. The actual sent email uses the absolute
+// https URL (see functions/emailTemplate.js), which email clients load fine.
+const LOGO_URL = "/images/logo_l.png";
 
 export interface EmailFields {
   subject: string;

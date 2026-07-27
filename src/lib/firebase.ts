@@ -54,6 +54,17 @@ export interface SendEmailResult {
 }
 
 async function callable<TIn, TOut>(name: string, data: TIn): Promise<TOut> {
+  // Ensure Firebase Auth has resolved and a user is present before calling, so
+  // the callable attaches the caller's ID token. Without this, a call made
+  // before auth restores from persistence is sent unauthenticated and the
+  // function rejects it with "unauthenticated".
+  await auth.authStateReady();
+  if (!auth.currentUser) {
+    throw new Error("You are not signed in. Please sign in again and retry.");
+  }
+  // Force a fresh token so an expired one never causes a silent auth failure.
+  await auth.currentUser.getIdToken(/* forceRefresh */ true);
+
   const { getFunctions, httpsCallable } = await import("firebase/functions");
   const fns = getFunctions(app, "us-central1");
   const fn = httpsCallable<TIn, TOut>(fns, name);
