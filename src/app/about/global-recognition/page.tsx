@@ -11,14 +11,14 @@ const recognitions = [
     title: "UNGA SDGs Roundtable Discussion 2025",
     org: "Journalists and Writers Foundation, New York",
     description: 'Our Chairman was invited to speak on "Youth-Led Initiatives That Build Peace & Social Cohesion" at the SDGs Roundtable in the margins of the United Nations General Assembly. This milestone amplified African youth voices on a global stage.',
-    image: "/images/events/DSC04757.jpg",
+    image: "/images/events/DSC04757.webp",
   },
   {
     icon: Award,
     title: "British Council Climate Action Grant 2025",
     org: "British Council Alumni UK",
     description: "Haleyouth Foundation won the Alumni UK Climate Action Grant for the Pad-a-Girl Sustainable Wellness project, reaching 500+ girls with reusable menstrual pad kits and climate awareness education in Northern Nigeria.",
-    image: "/images/events/Garki_IMG_0011.jpg",
+    image: "/images/events/Garki_IMG_0011.webp",
   },
   {
     icon: BookOpen,
@@ -44,7 +44,7 @@ export default function GlobalRecognitionPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center mb-20">
             <div className="relative aspect-[16/10] rounded-2xl overflow-hidden shadow-2xl">
-              <Image src="/images/events/UNGA80_a.jpg" alt="Haleyouth Foundation at UNGA" fill className="object-cover" sizes="(max-width: 1024px) 100vw, 50vw" />
+              <Image src="/images/events/UNGA80_a.webp" alt="Haleyouth Foundation at UNGA" fill className="object-cover" sizes="(max-width: 1024px) 100vw, 50vw" />
             </div>
             <div>
               <span className="text-accent font-semibold text-sm uppercase tracking-wider">Highlight</span>
@@ -59,10 +59,10 @@ export default function GlobalRecognitionPage() {
               </p>
               <div className="grid grid-cols-2 gap-4">
                 <div className="relative aspect-[4/3] rounded-lg overflow-hidden">
-                  <Image src="/images/events/UNGA80_b.jpg" alt="UNGA SDGs group photo" fill className="object-cover" sizes="200px" />
+                  <Image src="/images/events/UNGA80_b.webp" alt="UNGA SDGs group photo" fill className="object-cover" sizes="200px" />
                 </div>
                 <div className="relative aspect-[4/3] rounded-lg overflow-hidden">
-                  <Image src="/images/events/Unga80_c.jpg" alt="Receiving recognition plaque" fill className="object-cover" sizes="200px" />
+                  <Image src="/images/events/Unga80_c.webp" alt="Receiving recognition plaque" fill className="object-cover" sizes="200px" />
                 </div>
               </div>
             </div>

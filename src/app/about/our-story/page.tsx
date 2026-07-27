@@ -24,10 +24,10 @@ export default function OurStoryPage() {
 
           <div className="my-12 grid sm:grid-cols-2 gap-6">
             <div className="relative aspect-[4/3] rounded-xl overflow-hidden shadow-lg">
-              <Image src="/images/events/Back2School.jpg" alt="Back-to-School program" fill className="object-cover" sizes="(max-width: 640px) 100vw, 50vw" />
+              <Image src="/images/events/Back2School.webp" alt="Back-to-School program" fill className="object-cover" sizes="(max-width: 640px) 100vw, 50vw" />
             </div>
             <div className="relative aspect-[4/3] rounded-xl overflow-hidden shadow-lg">
-              <Image src="/images/events/Garki_IMG_0011.jpg" alt="Pad-a-Girl event" fill className="object-cover" sizes="(max-width: 640px) 100vw, 50vw" />
+              <Image src="/images/events/Garki_IMG_0011.webp" alt="Pad-a-Girl event" fill className="object-cover" sizes="(max-width: 640px) 100vw, 50vw" />
             </div>
           </div>
 

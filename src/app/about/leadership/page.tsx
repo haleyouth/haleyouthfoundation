@@ -15,7 +15,7 @@ export default function LeadershipPage() {
           <div className="max-w-4xl mx-auto bg-white rounded-2xl shadow-sm overflow-hidden mb-16">
             <div className="grid md:grid-cols-[300px_1fr]">
               <div className="relative h-64 md:h-auto">
-                <Image src="/images/events/Unga80_c.jpg" alt="Dr. Lukman Enegi Ismaila" fill className="object-cover" sizes="300px" />
+                <Image src="/images/events/Unga80_c.webp" alt="Dr. Lukman Enegi Ismaila" fill className="object-cover" sizes="300px" />
               </div>
               <div className="p-8">
                 <span className="text-primary text-sm font-semibold uppercase tracking-wider">Founder &amp; Chairman</span>

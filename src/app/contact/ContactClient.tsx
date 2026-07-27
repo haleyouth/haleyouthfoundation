@@ -5,7 +5,8 @@ import { motion } from "framer-motion";
 import PageHeader from "@/components/ui/PageHeader";
 import { SITE_CONFIG } from "@/lib/constants";
 import { submitContact } from "@/lib/submissions";
-import { MapPin, Mail, Send, CheckCircle, AlertCircle, Loader2 } from "lucide-react";
+import { logConversion } from "@/lib/firebase";
+import { MapPin, Mail, Phone, Send, CheckCircle, AlertCircle, Loader2 } from "lucide-react";
 import { FacebookIcon, XTwitterIcon, LinkedInIcon, InstagramIcon } from "@/components/ui/SocialIcons";
 
 export default function ContactClient() {
@@ -20,6 +21,7 @@ export default function ContactClient() {
     setError("");
     try {
       await submitContact(form);
+      void logConversion("contact_submitted");
       setSubmitted(true);
     } catch {
       setError("Something went wrong. Please try again or email us directly.");
@@ -121,6 +123,17 @@ export default function ContactClient() {
                       <a href={`mailto:${SITE_CONFIG.email}`} className="text-primary text-sm hover:underline">{SITE_CONFIG.email}</a>
                     </div>
                   </div>
+                  {SITE_CONFIG.phone && (
+                    <div className="flex items-start gap-3">
+                      <div className="w-10 h-10 rounded-xl bg-primary/5 flex items-center justify-center shrink-0">
+                        <Phone size={18} className="text-primary" />
+                      </div>
+                      <div>
+                        <p className="font-medium text-text-primary text-sm">Phone</p>
+                        <a href={`tel:${SITE_CONFIG.phoneHref}`} className="text-primary text-sm hover:underline">{SITE_CONFIG.phone}</a>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
 

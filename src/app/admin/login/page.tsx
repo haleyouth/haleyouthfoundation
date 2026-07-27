@@ -1,12 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import Image from "next/image";
+import Link from "next/link";
 import { LogIn, Shield, Eye, EyeOff, AlertCircle } from "lucide-react";
-
-const ADMIN_EMAIL = "main@haleyouth.org";
-const ADMIN_PASS = "Main@Admin54321";
+import { signInAdmin, authErrorMessage } from "@/lib/admin-auth";
 
 export default function AdminLoginPage() {
   const [email, setEmail] = useState("");
@@ -14,22 +12,19 @@ export default function AdminLoginPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const router = useRouter();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
     setLoading(true);
 
-    setTimeout(() => {
-      if (email === ADMIN_EMAIL && password === ADMIN_PASS) {
-        localStorage.setItem("hyf-admin-auth", "true");
-        window.location.href = "/admin/";
-      } else {
-        setError("Invalid email or password. Please try again.");
-        setLoading(false);
-      }
-    }, 800);
+    try {
+      await signInAdmin(email.trim(), password);
+      window.location.href = "/admin/";
+    } catch (err) {
+      setError(authErrorMessage(err));
+      setLoading(false);
+    }
   };
 
   return (
@@ -42,9 +37,9 @@ export default function AdminLoginPage() {
 
       <div className="bg-white rounded-2xl shadow-2xl w-full max-w-md p-8 lg:p-10 relative z-10">
         <div className="text-center mb-8">
-          <a href="/" title="Back to Haleyouth Foundation">
+          <Link href="/" title="Back to Haleyouth Foundation">
             <Image src="/images/logo_s.png" alt="Haleyouth" width={56} height={56} className="mx-auto mb-5 hover:scale-105 transition-transform" />
-          </a>
+          </Link>
           <h1 className="text-2xl font-bold text-gray-900" style={{ fontFamily: "var(--font-playfair)" }}>
             Admin Panel
           </h1>

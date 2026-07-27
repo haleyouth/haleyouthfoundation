@@ -63,7 +63,7 @@ export default function AboutPage() {
 
             <div className="relative">
               <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl">
-                <Image src="/images/events/UNGA80_a.jpg" alt="Haleyouth Foundation at UNGA" fill className="object-cover" sizes="(max-width: 1024px) 100vw, 50vw" />
+                <Image src="/images/events/UNGA80_a.webp" alt="Haleyouth Foundation at UNGA" fill className="object-cover" sizes="(max-width: 1024px) 100vw, 50vw" />
               </div>
               <div className="absolute -bottom-6 -left-6 bg-white rounded-xl p-4 shadow-lg">
                 <p className="text-3xl font-bold text-primary">2019</p>

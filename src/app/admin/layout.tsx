@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "@/components/ui/Link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
+import { watchAdmin, signOutAdmin } from "@/lib/admin-auth";
 import {
   LayoutDashboard, FileText, ImageIcon, Target, Handshake, Users,
   Mail, Settings, LogOut, Menu, X, Heart, PanelLeftClose, PanelLeftOpen,
@@ -25,12 +26,28 @@ function isLoginPage(path: string) {
   return path === "/admin/login" || path === "/admin/login/";
 }
 
+// The admin panel is only served from the Firebase Hosting domain, never from
+// the public domain. On any other host we send visitors to the public site.
+// Note: this is a convenience gate, not the security boundary. Real protection
+// is Firebase Auth (login) + firestore.rules (auth-gated writes).
+const ADMIN_HOSTS = ["haleyouth-foundation.web.app", "localhost", "127.0.0.1"];
+const PUBLIC_SITE = "https://haleyouthfoundation.org/";
+
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [collapsed, setCollapsed] = useState(false);
   const [ready, setReady] = useState(false);
   const [authenticated, setAuthenticated] = useState(false);
+  const [hostAllowed, setHostAllowed] = useState(false);
+
+  useEffect(() => {
+    if (!ADMIN_HOSTS.includes(window.location.hostname)) {
+      window.location.replace(PUBLIC_SITE);
+      return;
+    }
+    setHostAllowed(true);
+  }, []);
 
   useEffect(() => {
     const META_ID = "hyf-admin-robots";
@@ -44,22 +61,34 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   }, []);
 
   useEffect(() => {
+    if (!hostAllowed) return;
     if (isLoginPage(pathname)) {
       setReady(true);
       return;
     }
-    try {
-      const auth = localStorage.getItem("hyf-admin-auth");
-      if (auth === "true") {
+    let unsub: (() => void) | undefined;
+    let cancelled = false;
+    watchAdmin((user) => {
+      if (cancelled) return;
+      if (user) {
         setAuthenticated(true);
         setReady(true);
       } else {
         window.location.href = "/admin/login/";
       }
-    } catch {
-      window.location.href = "/admin/login/";
-    }
-  }, [pathname]);
+    }).then((u) => {
+      if (cancelled) u();
+      else unsub = u;
+    });
+    return () => {
+      cancelled = true;
+      unsub?.();
+    };
+  }, [pathname, hostAllowed]);
+
+  // Block all admin rendering until the host is confirmed allowed, so the login
+  // form never flashes on the public domain before the redirect completes.
+  if (!hostAllowed) return null;
 
   if (isLoginPage(pathname)) return <>{children}</>;
 
@@ -73,9 +102,12 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
   if (!authenticated) return null;
 
-  const handleLogout = () => {
-    localStorage.removeItem("hyf-admin-auth");
-    window.location.href = "/admin/login/";
+  const handleLogout = async () => {
+    try {
+      await signOutAdmin();
+    } finally {
+      window.location.href = "/admin/login/";
+    }
   };
 
   return (
