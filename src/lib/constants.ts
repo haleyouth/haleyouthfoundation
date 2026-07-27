@@ -41,8 +41,8 @@ export const NAV_ITEMS = [
 export const NAV_SUBMENUS: Record<string, { label: string; href: string; badge?: string }[]> = {
   "/programs": [
     { label: "All Programs", href: "/programs" },
-    { label: "Tech Skill Training", href: "/programs/tech-skill-training", badge: "New" },
-    { label: "STEM for All", href: "/programs/stem-for-all", badge: "New" },
+    { label: "Tech Skill Training", href: "/programs/tech-skill-training" },
+    { label: "STEM for All", href: "/programs/stem-for-all" },
   ],
 };
 
