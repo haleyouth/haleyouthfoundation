@@ -198,22 +198,26 @@ export async function deleteSubmission(collectionName: string, docId: string) {
 // send it through the Brevo API server-side. The Brevo key never touches the
 // browser, and the functions reject unauthenticated callers.
 
+type CcBcc = { cc?: string; bcc?: string };
+
 /** Send one branded email to a single recipient (e.g. reply to a submission). */
-export async function sendEmail(input: { to: string; subject: string; body: string; name?: string }) {
+export async function sendEmail(
+  input: EmailDesign & CcBcc & { to: string; subject: string; body: string; name?: string }
+) {
   return callSendEmail({ mode: "single", ...input });
 }
 
 /** Send a test copy to one address, exactly as recipients will receive it. */
-export async function sendTestEmail(input: { to: string; subject: string; body: string; name?: string }) {
+export async function sendTestEmail(
+  input: EmailDesign & CcBcc & { to: string; subject: string; body: string; name?: string }
+) {
   return callSendEmail({ mode: "test", ...input });
 }
 
 /** Broadcast the branded email to many recipients, one personalised send each. */
-export async function broadcastEmail(input: {
-  subject: string;
-  body: string;
-  recipients: EmailRecipient[];
-}): Promise<SendEmailResult> {
+export async function broadcastEmail(
+  input: EmailDesign & CcBcc & { subject: string; body: string; recipients: EmailRecipient[] }
+): Promise<SendEmailResult> {
   return callSendEmail({ mode: "broadcast", ...input });
 }
 

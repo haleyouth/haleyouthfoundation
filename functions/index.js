@@ -27,8 +27,21 @@ function firstName(name) {
   return (name || "").toString().trim().split(/\s+/)[0] || "";
 }
 
+// Parse a free-text address list ("a@x.com, b@y.com; c@z.com") into the array
+// shape Brevo expects, keeping only valid addresses.
+function parseAddressList(raw) {
+  if (!raw) return [];
+  return String(raw)
+    .split(/[,;]+/)
+    .map((s) => s.trim())
+    .filter((s) => EMAIL_RE.test(s))
+    .map((email) => ({ email }));
+}
+
 // Send a single transactional email through Brevo. Returns {ok} or throws.
-async function brevoSend({ apiKey, to, subject, html, text }) {
+async function brevoSend({ apiKey, to, subject, html, text, cc, bcc }) {
+  const ccList = parseAddressList(cc);
+  const bccList = parseAddressList(bcc);
   const res = await fetch("https://api.brevo.com/v3/smtp/email", {
     method: "POST",
     headers: {
@@ -40,6 +53,8 @@ async function brevoSend({ apiKey, to, subject, html, text }) {
       sender: FROM,
       replyTo: REPLY_TO,
       to: [{ email: to.email, ...(to.name ? { name: to.name } : {}) }],
+      ...(ccList.length ? { cc: ccList } : {}),
+      ...(bccList.length ? { bcc: bccList } : {}),
       subject,
       htmlContent: html,
       textContent: text,
@@ -83,6 +98,10 @@ export const sendEmail = onCall(
       ctaUrl: (d.ctaUrl || "").toString(),
     };
 
+    // Optional Cc / Bcc, applied to every send in this call.
+    const cc = (d.cc || "").toString();
+    const bcc = (d.bcc || "").toString();
+
     const apiKey = BREVO_API_KEY.value();
 
     // ---- Broadcast: many recipients ----
@@ -111,7 +130,7 @@ export const sendEmail = onCall(
       for (const r of unique) {
         try {
           const html = renderEmail({ ...design, greetingName: firstName(r.name) });
-          await brevoSend({ apiKey, to: r, subject, html, text: body });
+          await brevoSend({ apiKey, to: r, subject, html, text: body, cc, bcc });
           sent++;
         } catch (err) {
           console.error("Broadcast send failed for", r.email, err.message);
@@ -132,7 +151,7 @@ export const sendEmail = onCall(
     try {
       // Do not put a name in the To header; the address alone is correct and
       // avoids showing a sample/placeholder name as the recipient.
-      await brevoSend({ apiKey, to: { email: to }, subject, html, text: body });
+      await brevoSend({ apiKey, to: { email: to }, subject, html, text: body, cc, bcc });
     } catch (err) {
       console.error("Send failed:", err.message);
       throw new HttpsError("internal", `Email service error. ${err.message}`);

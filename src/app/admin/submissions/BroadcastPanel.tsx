@@ -40,6 +40,8 @@ export default function BroadcastPanel({ audienceLabel, recipients }: Props) {
     [recipients, excluded]
   );
 
+  const [cc, setCc] = useState("");
+  const [bcc, setBcc] = useState("");
   const [testTo, setTestTo] = useState("");
   const [testing, setTesting] = useState(false);
   const [testDone, setTestDone] = useState(false);
@@ -67,6 +69,8 @@ export default function BroadcastPanel({ audienceLabel, recipients }: Props) {
     signTitle: fields.signTitle,
     ctaLabel: fields.ctaLabel,
     ctaUrl: fields.ctaUrl,
+    cc: cc.trim() || undefined,
+    bcc: bcc.trim() || undefined,
   });
 
   const valid = () => {
@@ -195,6 +199,30 @@ export default function BroadcastPanel({ audienceLabel, recipients }: Props) {
                     className="w-full mt-1 px-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/30"
                   />
                 </div>
+
+                <div className="grid sm:grid-cols-2 gap-3">
+                  <div>
+                    <label className="text-xs text-gray-400 uppercase tracking-wider">Cc (optional)</label>
+                    <input
+                      value={cc}
+                      onChange={(e) => setCc(e.target.value)}
+                      placeholder="name@example.com, other@example.com"
+                      className="w-full mt-1 px-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/30"
+                    />
+                  </div>
+                  <div>
+                    <label className="text-xs text-gray-400 uppercase tracking-wider">Bcc (optional)</label>
+                    <input
+                      value={bcc}
+                      onChange={(e) => setBcc(e.target.value)}
+                      placeholder="hidden@example.com"
+                      className="w-full mt-1 px-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/30"
+                    />
+                  </div>
+                </div>
+                <p className="text-[11px] text-amber-700 bg-amber-50 border border-amber-100 rounded-lg px-3 py-1.5">
+                  Note: on a broadcast, any Cc/Bcc address is copied on <strong>every</strong> individual email sent. Use Bcc for a single archive address, not a list.
+                </p>
 
                 {error && (
                   <div className="flex items-center gap-2 text-xs text-red-600 bg-red-50 border border-red-100 rounded-lg px-3 py-2">

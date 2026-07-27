@@ -71,6 +71,9 @@ export default function AdminSubmissionsPage() {
   // Email composer state (keyed to the submission being emailed)
   const [composeId, setComposeId] = useState<string | null>(null);
   const [composeTo, setComposeTo] = useState("");
+  const [composeCc, setComposeCc] = useState("");
+  const [composeBcc, setComposeBcc] = useState("");
+  const [showCcBcc, setShowCcBcc] = useState(false);
   const [composeSubject, setComposeSubject] = useState("");
   const [composeBody, setComposeBody] = useState("");
   const [sending, setSending] = useState(false);
@@ -115,6 +118,9 @@ export default function AdminSubmissionsPage() {
   const openCompose = (docId: string, email: string, name: string) => {
     setComposeId(docId);
     setComposeTo(email);
+    setComposeCc("");
+    setComposeBcc("");
+    setShowCcBcc(false);
     setComposeSubject("");
     setComposeBody(name ? `Dear ${name.split(" ")[0]},\n\n` : "");
     setComposeError("");
@@ -135,7 +141,13 @@ export default function AdminSubmissionsPage() {
     setSending(true);
     setComposeError("");
     try {
-      await sendEmail({ to: composeTo, subject: composeSubject.trim(), body: composeBody });
+      await sendEmail({
+        to: composeTo,
+        subject: composeSubject.trim(),
+        body: composeBody,
+        cc: composeCc.trim() || undefined,
+        bcc: composeBcc.trim() || undefined,
+      });
       setSentId(composeId);
       setComposeId(null);
     } catch (err) {
@@ -350,7 +362,14 @@ export default function AdminSubmissionsPage() {
                           </button>
                         </div>
                         <div>
-                          <label className="text-xs text-gray-400 uppercase tracking-wider">To</label>
+                          <div className="flex items-center justify-between">
+                            <label className="text-xs text-gray-400 uppercase tracking-wider">To</label>
+                            {!showCcBcc && (
+                              <button type="button" onClick={() => setShowCcBcc(true)} className="text-xs text-primary hover:underline">
+                                + Cc / Bcc
+                              </button>
+                            )}
+                          </div>
                           <input
                             type="email"
                             value={composeTo}
@@ -358,6 +377,30 @@ export default function AdminSubmissionsPage() {
                             className="w-full mt-1 px-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/30"
                           />
                         </div>
+                        {showCcBcc && (
+                          <div className="grid sm:grid-cols-2 gap-3">
+                            <div>
+                              <label className="text-xs text-gray-400 uppercase tracking-wider">Cc</label>
+                              <input
+                                type="text"
+                                value={composeCc}
+                                onChange={(e) => setComposeCc(e.target.value)}
+                                placeholder="name@example.com, other@example.com"
+                                className="w-full mt-1 px-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/30"
+                              />
+                            </div>
+                            <div>
+                              <label className="text-xs text-gray-400 uppercase tracking-wider">Bcc</label>
+                              <input
+                                type="text"
+                                value={composeBcc}
+                                onChange={(e) => setComposeBcc(e.target.value)}
+                                placeholder="hidden@example.com"
+                                className="w-full mt-1 px-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/30"
+                              />
+                            </div>
+                          </div>
+                        )}
                         <div>
                           <label className="text-xs text-gray-400 uppercase tracking-wider">Subject</label>
                           <input

@@ -44,6 +44,8 @@ export interface SendEmailPayload extends EmailDesign {
   to?: string;                 // single / test
   name?: string;               // single / test (for "Dear X,")
   recipients?: EmailRecipient[]; // broadcast
+  cc?: string;                 // comma/semicolon-separated
+  bcc?: string;                // comma/semicolon-separated
 }
 export interface SendEmailResult {
   ok: boolean;
