@@ -43,6 +43,7 @@ export default function BroadcastPanel({ audienceLabel, recipients }: Props) {
   const [cc, setCc] = useState("");
   const [bcc, setBcc] = useState("");
   const [testTo, setTestTo] = useState("");
+  const [testName, setTestName] = useState("");
   const [testing, setTesting] = useState(false);
   const [testDone, setTestDone] = useState(false);
   const [broadcasting, setBroadcasting] = useState(false);
@@ -93,7 +94,7 @@ export default function BroadcastPanel({ audienceLabel, recipients }: Props) {
     if (!testTo.trim()) { setError("Enter a test recipient address."); return; }
     setTesting(true);
     try {
-      await sendTestEmail({ to: testTo.trim(), name: "Amina", ...designPayload() });
+      await sendTestEmail({ to: testTo.trim(), name: testName.trim() || "there", ...designPayload() });
       setTestDone(true);
     } catch (e) {
       console.error(e);
@@ -185,7 +186,7 @@ export default function BroadcastPanel({ audienceLabel, recipients }: Props) {
                 Click any highlighted area in the email to edit it — heading, greeting, message, button, and sign-off. The logo, ribbon, and footer are fixed.
               </p>
               <div className="border border-gray-200 rounded-lg overflow-hidden">
-                <EmailWysiwyg value={fields} onChange={patch} sampleName="Amina" />
+                <EmailWysiwyg value={fields} onChange={patch} sampleName={testName.trim() || "there"} />
               </div>
 
               {/* 4. Send bar: subject + test + broadcast */}
@@ -236,12 +237,17 @@ export default function BroadcastPanel({ audienceLabel, recipients }: Props) {
                 )}
 
                 <div className="flex flex-wrap items-center gap-3 pt-1">
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-2 flex-wrap">
                     <FlaskConical size={14} className="text-gray-400" />
                     <input
                       type="email" value={testTo} onChange={(e) => setTestTo(e.target.value)}
                       placeholder="test@address.com"
                       className="px-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/30 w-48"
+                    />
+                    <input
+                      type="text" value={testName} onChange={(e) => setTestName(e.target.value)}
+                      placeholder="Test as name (e.g. Sonia)"
+                      className="px-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/30 w-44"
                     />
                     <button onClick={handleTest} disabled={testing}
                       className="inline-flex items-center gap-2 px-3 py-2 text-sm font-medium text-gray-700 border border-gray-200 hover:bg-gray-100 rounded-lg transition-colors disabled:opacity-50">
