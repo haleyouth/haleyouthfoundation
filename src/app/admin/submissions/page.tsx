@@ -11,7 +11,7 @@ import {
   type PartnerSubmission,
   type NewsletterSubscription,
 } from "@/lib/submissions";
-import { Mail, Users, Handshake, Newspaper, GraduationCap, Trash2, RefreshCw, Loader2, ChevronDown, ExternalLink, Clock, Send, X, CheckCircle2 } from "lucide-react";
+import { Mail, Users, Handshake, Newspaper, GraduationCap, Trash2, RefreshCw, Loader2, ChevronDown, ExternalLink, Clock, Send, X, CheckCircle2, Download } from "lucide-react";
 import BroadcastPanel from "./BroadcastPanel";
 
 const tabs = [
@@ -115,6 +115,41 @@ export default function AdminSubmissionsPage() {
     }
   };
 
+  const [exporting, setExporting] = useState(false);
+
+  const exportXlsx = async () => {
+    const rows = (data[activeTab] || []) as Record<string, unknown>[];
+    if (rows.length === 0) return;
+    setExporting(true);
+    try {
+      const XLSX = await import("xlsx");
+      const flat = rows.map((r) => {
+        const out: Record<string, string> = {};
+        // Human-readable submitted date first.
+        out["Submitted"] = formatDate(r.createdAt as { seconds: number } | null);
+        // Calculated age for tabs that collect date of birth.
+        const age = ageFromDob((r.dob as string) || "");
+        if (age) out["Age"] = age;
+        for (const [k, v] of Object.entries(r)) {
+          if (k === "id" || k === "createdAt") continue;
+          const label = k.charAt(0).toUpperCase() + k.slice(1).replace(/([A-Z])/g, " $1").trim();
+          out[label] = v == null ? "" : String(v);
+        }
+        return out;
+      });
+      const ws = XLSX.utils.json_to_sheet(flat);
+      const wb = XLSX.utils.book_new();
+      const tabLabel = tabs.find((t) => t.key === activeTab)?.label || activeTab;
+      XLSX.utils.book_append_sheet(wb, ws, tabLabel.slice(0, 31));
+      const stamp = new Date().toISOString().split("T")[0];
+      XLSX.writeFile(wb, `HYF_${activeTab}_${stamp}.xlsx`);
+    } catch (err) {
+      console.error("Export failed:", err);
+    } finally {
+      setExporting(false);
+    }
+  };
+
   const openCompose = (docId: string, email: string, name: string) => {
     setComposeId(docId);
     setComposeTo(email);
@@ -178,13 +213,23 @@ export default function AdminSubmissionsPage() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <h2 className="text-lg font-bold text-gray-900">Submissions</h2>
-        <button
-          onClick={loadData}
-          disabled={loading}
-          className="flex items-center gap-2 px-3 py-2 text-sm text-gray-600 hover:text-primary bg-white rounded-lg border border-gray-200 hover:border-primary/30 transition-all disabled:opacity-50"
-        >
-          <RefreshCw size={14} className={loading ? "animate-spin" : ""} /> Refresh
-        </button>
+        <div className="flex items-center gap-2">
+          <button
+            onClick={exportXlsx}
+            disabled={exporting || items.length === 0}
+            title={items.length === 0 ? "No submissions to export" : `Export ${activeLabel} as .xlsx`}
+            className="flex items-center gap-2 px-3 py-2 text-sm text-gray-600 hover:text-primary bg-white rounded-lg border border-gray-200 hover:border-primary/30 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            {exporting ? <Loader2 size={14} className="animate-spin" /> : <Download size={14} />} Export .xlsx
+          </button>
+          <button
+            onClick={loadData}
+            disabled={loading}
+            className="flex items-center gap-2 px-3 py-2 text-sm text-gray-600 hover:text-primary bg-white rounded-lg border border-gray-200 hover:border-primary/30 transition-all disabled:opacity-50"
+          >
+            <RefreshCw size={14} className={loading ? "animate-spin" : ""} /> Refresh
+          </button>
+        </div>
       </div>
 
       {/* Tabs */}
